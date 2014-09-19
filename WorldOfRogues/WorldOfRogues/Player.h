@@ -1,5 +1,6 @@
 #pragma once
 #include "baseentity.h"
+
 class Player :
 	public BaseEntity
 {

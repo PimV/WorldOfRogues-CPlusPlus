@@ -78,33 +78,51 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BaseArmour.h" />
+    <ClInclude Include="BaseItem.h" />
+    <ClInclude Include="BaseWeapon.h" />
     <ClInclude Include="Boss.h" />
     <ClInclude Include="BossRoom.h" />
     <ClInclude Include="Dwarf.h" />
     <ClInclude Include="EndRoom.h" />
     <ClInclude Include="BaseEntity.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Gold.h" />
+    <ClInclude Include="Helmet.h" />
+    <ClInclude Include="Platebody.h" />
+    <ClInclude Include="Platelegs.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="BaseRoom.h" />
     <ClInclude Include="Rat.h" />
+    <ClInclude Include="Shield.h" />
     <ClInclude Include="Skeleton.h" />
     <ClInclude Include="StandardRoom.h" />
     <ClInclude Include="StartRoom.h" />
+    <ClInclude Include="Weapon.h" />
     <ClInclude Include="Zombie.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BaseArmour.cpp" />
+    <ClCompile Include="BaseItem.cpp" />
+    <ClCompile Include="BaseWeapon.cpp" />
     <ClCompile Include="Boss.cpp" />
     <ClCompile Include="BossRoom.cpp" />
     <ClCompile Include="Dwarf.cpp" />
     <ClCompile Include="EndRoom.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Gold.cpp" />
+    <ClCompile Include="Helmet.cpp" />
+    <ClCompile Include="Platebody.cpp" />
+    <ClCompile Include="Platelegs.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="BaseRoom.cpp" />
     <ClCompile Include="Rat.cpp" />
+    <ClCompile Include="Shield.cpp" />
     <ClCompile Include="Skeleton.cpp" />
     <ClCompile Include="StandardRoom.cpp" />
     <ClCompile Include="StartRoom.cpp" />
+    <ClCompile Include="Weapon.cpp" />
     <ClCompile Include="Zombie.cpp" />
   </ItemGroup>
   <ItemGroup>
