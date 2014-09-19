@@ -78,6 +78,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Boss.h" />
     <ClInclude Include="BossRoom.h" />
     <ClInclude Include="Dwarf.h" />
     <ClInclude Include="EndRoom.h" />
@@ -92,6 +93,7 @@
     <ClInclude Include="Zombie.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Boss.cpp" />
     <ClCompile Include="BossRoom.cpp" />
     <ClCompile Include="Dwarf.cpp" />
     <ClCompile Include="EndRoom.cpp" />
@@ -104,6 +106,9 @@
     <ClCompile Include="StandardRoom.cpp" />
     <ClCompile Include="StartRoom.cpp" />
     <ClCompile Include="Zombie.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="WorldOfRogues.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

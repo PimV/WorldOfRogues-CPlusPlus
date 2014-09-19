@@ -1,5 +1,5 @@
 #pragma once
-#include "BaseRoom.h"
+#include "baseroom.h"
 class EndRoom :
 	public BaseRoom
 {

@@ -60,6 +60,9 @@
     <ClInclude Include="Dwarf.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Boss.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Entity.cpp">
@@ -93,10 +96,18 @@
       <Filter>Source Files\Entities</Filter>
     </ClCompile>
     <ClCompile Include="Rat.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Entities</Filter>
     </ClCompile>
     <ClCompile Include="Dwarf.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Entities</Filter>
     </ClCompile>
+    <ClCompile Include="Boss.cpp">
+      <Filter>Source Files\Entities</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="WorldOfRogues.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>
