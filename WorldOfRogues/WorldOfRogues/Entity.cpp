@@ -1,13 +1,13 @@
-#include "Entity.h"
+#include "BaseEntity.h"
 using namespace std;
 
 
-Entity::Entity(void)
+BaseEntity::BaseEntity(void)
 {
 }
 
 
-Entity::~Entity(void)
+BaseEntity::~BaseEntity(void)
 {
 }
 

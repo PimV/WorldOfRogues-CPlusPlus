@@ -1,7 +1,7 @@
 #pragma once
-#include "entity.h"
+#include "baseentity.h"
 class Boss :
-	public Entity
+	public BaseEntity
 {
 public:
 	Boss(void);

@@ -82,7 +82,7 @@
     <ClInclude Include="BossRoom.h" />
     <ClInclude Include="Dwarf.h" />
     <ClInclude Include="EndRoom.h" />
-    <ClInclude Include="Entity.h" />
+    <ClInclude Include="BaseEntity.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="BaseRoom.h" />
