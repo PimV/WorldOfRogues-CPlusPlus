@@ -125,9 +125,6 @@
     <ClCompile Include="Weapon.cpp" />
     <ClCompile Include="Zombie.cpp" />
   </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="WorldOfRogues.rc" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
