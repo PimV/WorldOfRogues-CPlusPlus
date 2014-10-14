@@ -4,7 +4,8 @@ class StartRoom :
 	public BaseRoom
 {
 public:
-	StartRoom(void);
+	StartRoom(int row, int column, int level);
+	std::string toString();
 	virtual ~StartRoom(void);
 };
 

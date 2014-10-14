@@ -4,7 +4,8 @@ class StandardRoom :
 	public BaseRoom
 {
 public:
-	StandardRoom(void);
+	StandardRoom(int row, int column, int level);
+	std::string toString();
 	virtual ~StandardRoom(void);
 };
 

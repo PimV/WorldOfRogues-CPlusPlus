@@ -4,7 +4,8 @@ class EndRoom :
 	public BaseRoom
 {
 public:
-	EndRoom(void);
+	EndRoom(int row, int column, int level);
+	std::string toString();
 	virtual ~EndRoom(void);
 };
 
