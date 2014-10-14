@@ -100,6 +100,7 @@
     <ClInclude Include="Skeleton.h" />
     <ClInclude Include="StandardRoom.h" />
     <ClInclude Include="StartRoom.h" />
+    <ClInclude Include="View.h" />
     <ClInclude Include="Weapon.h" />
     <ClInclude Include="Zombie.h" />
   </ItemGroup>
@@ -126,6 +127,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="StandardRoom.cpp" />
     <ClCompile Include="StartRoom.cpp" />
+    <ClCompile Include="View.cpp" />
     <ClCompile Include="Weapon.cpp" />
     <ClCompile Include="Zombie.cpp" />
   </ItemGroup>
