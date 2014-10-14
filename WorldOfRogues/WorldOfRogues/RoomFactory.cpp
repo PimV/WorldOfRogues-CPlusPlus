@@ -13,7 +13,7 @@ BaseRoom* RoomFactory::createRoom(BaseRoom* prevRoom, Direction to) {
 	case 4:
 	case 5:
 	case 6:
-		br = new StandardRoom(-1,-1,-1);
+		br = new RegularRoom(-1, -1, -1);
 		break;
 	case 7: 
 		br = new BossRoom(-1,-1,-1);
@@ -22,7 +22,7 @@ BaseRoom* RoomFactory::createRoom(BaseRoom* prevRoom, Direction to) {
 		br = new EndRoom(-1,-1,-1);
 		break;
 	default:
-		br = new StandardRoom(-1,-1,-1);
+		br = new RegularRoom(-1, -1, -1);
 		break;
 	}
 

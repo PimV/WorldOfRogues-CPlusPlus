@@ -24,6 +24,9 @@ public:
 
 	virtual std::string toString();
 
+	virtual void setSymbol(char* c);
+	virtual char* getSymbol();
+
 	virtual ~BaseRoom(void);
 private:
 	BaseRoom* northRoom;
@@ -39,5 +42,7 @@ private:
 	int row;
 	int column;
 	int level;
+
+	char* symbol;
 };
 

@@ -72,9 +72,6 @@
     <ClInclude Include="EndRoom.h">
       <Filter>Header Files\Rooms</Filter>
     </ClInclude>
-    <ClInclude Include="StandardRoom.h">
-      <Filter>Header Files\Rooms</Filter>
-    </ClInclude>
     <ClInclude Include="StartRoom.h">
       <Filter>Header Files\Rooms</Filter>
     </ClInclude>
@@ -114,6 +111,9 @@
     <ClInclude Include="View.h">
       <Filter>Header Files\Main</Filter>
     </ClInclude>
+    <ClInclude Include="RegularRoom.h">
+      <Filter>Header Files\Rooms</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Player.cpp">
@@ -123,9 +123,6 @@
       <Filter>Source Files\Rooms</Filter>
     </ClCompile>
     <ClCompile Include="EndRoom.cpp">
-      <Filter>Source Files\Rooms</Filter>
-    </ClCompile>
-    <ClCompile Include="StandardRoom.cpp">
       <Filter>Source Files\Rooms</Filter>
     </ClCompile>
     <ClCompile Include="BaseRoom.cpp">
@@ -190,6 +187,9 @@
     </ClCompile>
     <ClCompile Include="View.cpp">
       <Filter>Source Files\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="RegularRoom.cpp">
+      <Filter>Source Files\Rooms</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

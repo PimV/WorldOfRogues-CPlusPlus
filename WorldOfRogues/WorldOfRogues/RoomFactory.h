@@ -1,6 +1,6 @@
 #pragma once
 #include "BaseRoom.h"
-#include "StandardRoom.h"
+#include "RegularRoom.h"
 #include "EndRoom.h"
 #include "BossRoom.h"
 #include "StartRoom.h"

@@ -4,6 +4,8 @@
 
 BossRoom::BossRoom(int row, int column, int level) : BaseRoom(row,column,level)
 {
+	this->setSymbol("B");
+
 }
 
 std::string BossRoom::toString() {

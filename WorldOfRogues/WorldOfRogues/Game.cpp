@@ -28,8 +28,12 @@ void Game::createVector()
 	}
 	RoomFactory rf;
 
-	roomVector[1][2][3] = new BaseRoom(1, 2, 3);
-	roomVector[1][3][3] = rf.createRoom(roomVector[1][2][3], Direction::East);
+	//roomVector[1][2][3] = new BaseRoom(1, 2, 3);
+	//roomVector[1][3][3] = rf.createRoom(roomVector[1][2][3], Direction::East);
+
+	roomVector[1][2][3] = new RegularRoom(1, 2, 3);
+	roomVector[1][5][4] = new EndRoom(1, 5, 4);
+	roomVector[1][3][7] = new BossRoom(1, 3, 7);
 }
 
 

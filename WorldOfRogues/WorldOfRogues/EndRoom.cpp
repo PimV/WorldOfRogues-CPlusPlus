@@ -3,6 +3,8 @@
 
 EndRoom::EndRoom(int row, int column, int level) : BaseRoom(row,column,level)
 {
+	this->setSymbol("E");
+
 }
 
 std::string EndRoom::toString() {

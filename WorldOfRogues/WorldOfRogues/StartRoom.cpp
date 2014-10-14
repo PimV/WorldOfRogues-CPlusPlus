@@ -3,6 +3,7 @@
 
 StartRoom::StartRoom(int row, int column, int level) : BaseRoom(row,column,level)
 {
+	this->setSymbol("S");
 }
 
 std::string StartRoom::toString() {

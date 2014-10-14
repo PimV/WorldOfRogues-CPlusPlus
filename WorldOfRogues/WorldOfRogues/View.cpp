@@ -1,5 +1,6 @@
 #include "View.h"
 #include "Game.h"
+#include "BaseRoom.h"
 
 View::View(Game* game)
 {
@@ -51,7 +52,7 @@ void View::receiveInput()
 			std::cout << "Unknown command: '" << input << "'.\n Type 'help' for more information.\n";
 		}
 
-		std::cout << "> ";
+		std::cout << "\n> ";
 
 		std::getline(std::cin, input);
 	}
@@ -65,9 +66,18 @@ void View::displayMap()
 	{
 		for (size_t j = 0; j < this->game->roomVector[currentLevel][i].size(); j++)
 		{
-			std::cout << "+";
+			if (this->game->roomVector[currentLevel][i][j] != nullptr)
+			{
+				BaseRoom* room = this->game->roomVector[currentLevel][i][j];
+				std::cout << " " << room->getSymbol() << " ";
+			}
+			else
+			{
+				std::cout << " . ";
+			}
 		}
-		std::cout << "\n";
+		// print doors:
+		std::cout << "\n\n";
 	}
 }
 

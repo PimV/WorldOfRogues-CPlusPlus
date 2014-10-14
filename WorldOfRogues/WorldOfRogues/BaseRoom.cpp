@@ -17,6 +17,10 @@ void BaseRoom::setColumn(int column) {
 void BaseRoom::setLevel(int level) {
 	this->level = level;
 }
+void BaseRoom::setSymbol(char* c) 
+{
+	this->symbol = c;
+}
 int BaseRoom::getRow() {
 	return this->row;
 }
@@ -25,6 +29,9 @@ int BaseRoom::getColumn() {
 }
 int BaseRoom::getLevel() {
 	return this->level;
+}
+char* BaseRoom::getSymbol() {
+	return this->symbol;
 }
 #pragma endregion
 #pragma region Rooms

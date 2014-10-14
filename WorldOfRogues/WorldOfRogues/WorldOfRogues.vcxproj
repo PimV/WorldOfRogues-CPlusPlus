@@ -98,7 +98,7 @@
     <ClInclude Include="RoomFactory.h" />
     <ClInclude Include="Shield.h" />
     <ClInclude Include="Skeleton.h" />
-    <ClInclude Include="StandardRoom.h" />
+    <ClInclude Include="RegularRoom.h" />
     <ClInclude Include="StartRoom.h" />
     <ClInclude Include="View.h" />
     <ClInclude Include="Weapon.h" />
@@ -125,7 +125,7 @@
     <ClCompile Include="Shield.cpp" />
     <ClCompile Include="Skeleton.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="StandardRoom.cpp" />
+    <ClCompile Include="RegularRoom.cpp" />
     <ClCompile Include="StartRoom.cpp" />
     <ClCompile Include="View.cpp" />
     <ClCompile Include="Weapon.cpp" />

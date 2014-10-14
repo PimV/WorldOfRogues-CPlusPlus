@@ -1,11 +1,12 @@
-#include "StandardRoom.h"
+#include "RegularRoom.h"
 
 
-StandardRoom::StandardRoom(int row, int column, int level) : BaseRoom(row,column,level)
+RegularRoom::RegularRoom(int row, int column, int level) : BaseRoom(row, column, level)
 {
+	this->setSymbol("R");
 }
 
-std::string StandardRoom::toString() {	
+std::string RegularRoom::toString() {
 	return std::string(
 		std::string("Standard Room (") +
 		std::to_string(this->getRow()) +
@@ -17,6 +18,6 @@ std::string StandardRoom::toString() {
 		);
 }
 
-StandardRoom::~StandardRoom(void)
+RegularRoom::~RegularRoom(void)
 {
 }
