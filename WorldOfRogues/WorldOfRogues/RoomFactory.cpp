@@ -59,9 +59,7 @@ BaseRoom* RoomFactory::createRoom(BaseRoom* prevRoom, Direction to) {
 		break;
 	}
 
-
-
-	std::cout << br->toString();
+	std::cout << br->toString() << "\n";
 
 	return br;
 }

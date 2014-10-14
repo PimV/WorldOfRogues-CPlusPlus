@@ -32,7 +32,7 @@ private:
 	BaseRoom* westRoom;
 
 	bool northDoor;
-	bool northDoor;
+	bool southDoor;
 	bool eastDoor;
 	bool westDoor;
 

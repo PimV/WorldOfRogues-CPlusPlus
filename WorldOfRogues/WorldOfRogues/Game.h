@@ -1,9 +1,15 @@
 #pragma once
+#include <string>
+
 class Game
 {
 public:
-	Game(void);
-	~Game(void);
+	Game();
+	~Game();
+
+private:
+	void createVector();
+	std::string input;
 };
 
 
