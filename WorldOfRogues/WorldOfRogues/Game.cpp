@@ -10,7 +10,9 @@ Game::Game()
 {
 	createVector();
 	view = new View(this);
-	view->receiveInput();
+	//view->receiveInput();
+	view->displayMap();
+	std::cin.get();
 }
 
 void Game::createVector()
@@ -28,12 +30,20 @@ void Game::createVector()
 	}
 	RoomFactory rf;
 
-	//roomVector[1][2][3] = new BaseRoom(1, 2, 3);
+
+
+	//roomVector[0][2][3] = new StartRoom(0, 2, 3);
 	//roomVector[1][3][3] = rf.createRoom(roomVector[1][2][3], Direction::East);
 
-	roomVector[1][2][3] = new RegularRoom(1, 2, 3);
-	roomVector[1][5][4] = new EndRoom(1, 5, 4);
-	roomVector[1][3][7] = new BossRoom(1, 3, 7);
+	StartRoom* sr = rf.createStartRoom(nullptr);
+	roomVector[sr->getLevel()][ sr->getRow()] [ sr->getColumn()]= sr;
+	
+	//BaseRoom* br = rf.createRoom(sr, Direction::South);
+	//roomVector[br->getLevel()][br->getRow()][br->getColumn()] = br;
+
+	//roomVector[1][2][3] = new RegularRoom(1, 2, 3);
+	//roomVector[1][5][4] = new EndRoom(1, 5, 4);
+	//roomVector[1][3][7] = new BossRoom(1, 3, 7);
 }
 
 

@@ -1,7 +1,7 @@
 #include "RegularRoom.h"
 
 
-RegularRoom::RegularRoom(int row, int column, int level) : BaseRoom(row, column, level)
+RegularRoom::RegularRoom(int level, int row, int column) : BaseRoom(level,row,column)
 {
 	this->setSymbol("R");
 }

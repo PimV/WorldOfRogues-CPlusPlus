@@ -2,9 +2,11 @@
 #include "Direction.h"
 #include <random>
 #include <iostream>
+#include <time.h>
 
 BaseRoom* RoomFactory::createRoom(BaseRoom* prevRoom, Direction to) {
 	BaseRoom* br;// = new BaseRoom(-1,-1,-1);
+
 	int randomRoomNumber = rand() % 8 + 1;
 	switch(randomRoomNumber) {
 	case 1:
@@ -25,6 +27,7 @@ BaseRoom* RoomFactory::createRoom(BaseRoom* prevRoom, Direction to) {
 		br = new RegularRoom(-1, -1, -1);
 		break;
 	}
+
 
 
 
@@ -59,7 +62,39 @@ BaseRoom* RoomFactory::createRoom(BaseRoom* prevRoom, Direction to) {
 		break;
 	}
 
-	std::cout << br->toString() << "\n";
+	std::cout << prevRoom->getColumn() << " " <<prevRoom->getRow() << std::endl;
 
+	br->generateDoors();
 	return br;
+}
+
+StartRoom* RoomFactory::createStartRoom(BaseRoom* prevRoom) {
+	int level = 0;
+	int column = 0;
+	int row = 0;
+
+	if (prevRoom == nullptr) {
+		srand(time(NULL));
+
+		level = 0;
+		column = rand() % 10;
+		row = rand() % 10;
+
+	} else {
+		level = prevRoom->getLevel() + 1;
+		column = prevRoom->getColumn();
+		row = prevRoom->getRow();
+	}
+	StartRoom* sr = new StartRoom(level, row, column);
+
+
+
+	//Generate Doors
+	sr->generateDoors();
+
+	std::cout << sr->getColumn() << " " << sr->getRow() << std::endl;
+
+	return sr;
+
+
 }

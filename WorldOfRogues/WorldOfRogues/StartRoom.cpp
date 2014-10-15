@@ -1,7 +1,7 @@
 #include "StartRoom.h"
 
 
-StartRoom::StartRoom(int row, int column, int level) : BaseRoom(row,column,level)
+StartRoom::StartRoom(int level, int row, int column) : BaseRoom(level,row,column)
 {
 	this->setSymbol("S");
 }

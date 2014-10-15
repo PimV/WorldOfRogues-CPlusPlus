@@ -10,10 +10,11 @@ public:
 	virtual ~View();
 	
 	void receiveInput();
+	void displayMap();
 private:
 	Game* game;
 	std::string input;
 
-	void displayMap();
+	
 };
 

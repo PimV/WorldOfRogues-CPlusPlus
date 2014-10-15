@@ -1,7 +1,7 @@
 #include "EndRoom.h"
 
 
-EndRoom::EndRoom(int row, int column, int level) : BaseRoom(row,column,level)
+EndRoom::EndRoom(int level, int row, int column) : BaseRoom(level,row,column)
 {
 	this->setSymbol("E");
 

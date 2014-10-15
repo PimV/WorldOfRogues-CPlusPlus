@@ -1,10 +1,16 @@
 #include "BaseRoom.h"
+#include <time.h>
 
-BaseRoom::BaseRoom(int row, int column, int level)
+BaseRoom::BaseRoom(int level, int row, int column)
 {
 	this->row = row;
 	this->column = column;
 	this->level = level;
+
+	disableEastDoor();
+	disableNorthDoor();
+	disableSouthDoor();
+	disableWestDoor();
 }
 
 #pragma region Room Properties
@@ -59,6 +65,137 @@ BaseRoom* BaseRoom::getEastRoom() {
 BaseRoom* BaseRoom::getWestRoom() {
 	return this->westRoom;
 }
+#pragma endregion
+
+#pragma region Doors
+
+void BaseRoom::generateDoors() {
+
+	srand(time(NULL));
+	for (int i = 0; i < 4; i++) {
+		int randomDoorGen = rand() % 4;
+		switch(randomDoorGen) {
+		case 0:
+			enableNorthDoor();
+			break;
+		case 1:
+			enableEastDoor();
+			break;
+		case 2:
+			enableSouthDoor();
+			break;
+		case 3:
+			enableWestDoor();
+			break;
+		}
+	}
+
+	if (row == 10) {
+		disableSouthDoor();
+	} else if (row == 0) {
+		disableNorthDoor();
+	}
+
+	if (column == 10) {
+		disableEastDoor();
+	}
+	else if (column == 0) {
+		disableWestDoor();
+	}
+
+	if (getNorthRoom() != nullptr) {
+		getNorthRoom()->enableSouthDoor();
+		enableNorthDoor();
+	}
+
+	if (getSouthRoom() != nullptr) {
+		getSouthRoom()->enableNorthDoor();
+		enableSouthDoor();
+	}
+
+	if (getWestRoom() != nullptr) {
+		getWestRoom()->enableEastDoor();
+		enableWestDoor();
+	}
+
+	if (getEastRoom() != nullptr) {
+		getEastRoom()->enableWestDoor();
+		enableEastDoor();
+	}
+
+	if (getDoorCount() == 0) {
+		generateDoors();
+	}
+}
+
+bool BaseRoom::hasNorthDoor() {
+	return this->northDoor;
+}
+
+bool BaseRoom::hasSouthDoor() {
+	return this->southDoor;
+}	
+
+bool BaseRoom::hasWestDoor() {
+	return this->westDoor;
+}
+bool BaseRoom::hasEastDoor() {
+	return this->eastDoor;
+}
+
+void BaseRoom::enableNorthDoor() {
+	this->northDoor = true;
+}
+
+void BaseRoom::enableSouthDoor() {
+	this->southDoor = true;
+}
+
+void BaseRoom::enableWestDoor() {
+	this->westDoor = true;
+}
+
+void BaseRoom::enableEastDoor() {
+	this->eastDoor = true;
+}
+
+void BaseRoom::disableNorthDoor() {
+	this->northDoor = false;
+}
+
+void BaseRoom::disableSouthDoor() {
+	this->southDoor = false;
+}
+
+void BaseRoom::disableWestDoor() {
+	this->westDoor = false;
+}
+
+void BaseRoom::disableEastDoor() {
+	this->eastDoor = false;
+}
+
+int BaseRoom::getDoorCount() {
+	int doorCount = 0;
+	if (this->northDoor) {
+		++doorCount;
+	}
+
+	if (this->southDoor) {
+		++doorCount;
+	}
+
+	if (this->eastDoor) {
+		++doorCount;
+	}
+
+	if (this->westDoor) {
+		++doorCount;
+	}
+
+	return doorCount;
+}
+
 #pragma endregion
 
 std::string BaseRoom::toString() {

@@ -2,7 +2,7 @@
 
 
 
-BossRoom::BossRoom(int row, int column, int level) : BaseRoom(row,column,level)
+BossRoom::BossRoom(int level, int row, int column) : BaseRoom(level,row,column)
 {
 	this->setSymbol("B");
 

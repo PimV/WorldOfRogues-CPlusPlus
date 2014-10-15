@@ -15,6 +15,25 @@ public:
 	BaseRoom* getEastRoom();
 	BaseRoom* getWestRoom();
 
+	void generateDoors();
+
+	bool hasNorthDoor();
+	bool hasSouthDoor();
+	bool hasEastDoor();
+	bool hasWestDoor();
+
+	void enableNorthDoor();
+	void enableSouthDoor();
+	void enableWestDoor();
+	void enableEastDoor();
+
+	void disableNorthDoor();
+	void disableSouthDoor();
+	void disableWestDoor();
+	void disableEastDoor();
+
+	int getDoorCount();
+
 	void setRow(int row);
 	void setColumn(int column);
 	void setLevel(int level);

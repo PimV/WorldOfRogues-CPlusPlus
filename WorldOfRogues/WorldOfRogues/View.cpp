@@ -61,22 +61,59 @@ void View::receiveInput()
 void View::displayMap()
 {
 	// change currentLevel
-	size_t currentLevel = 1;
+	size_t currentLevel = 0;
 	for (size_t i = 0; i < this->game->roomVector[currentLevel].size(); i++)
 	{
+		std::string northDoors = "";
+		std::string roomsAndDoors = "";
+		std::string southDoors = "";
+
 		for (size_t j = 0; j < this->game->roomVector[currentLevel][i].size(); j++)
 		{
+
 			if (this->game->roomVector[currentLevel][i][j] != nullptr)
 			{
-				std::cout << " " << this->game->roomVector[currentLevel][i][j]->getSymbol() << " ";
+				if (this->game->roomVector[currentLevel][i][j]->hasWestDoor()) {
+					roomsAndDoors += "-";
+				} else {
+					roomsAndDoors += " ";
+				}
+				roomsAndDoors += this->game->roomVector[currentLevel][i][j]->getSymbol();
+				//std::cout << this->game->roomVector[currentLevel][i][j]->getSymbol();
+				if (this->game->roomVector[currentLevel][i][j]->hasEastDoor()) {
+					roomsAndDoors += "-";
+					//std::cout << "-";
+				} else {
+					roomsAndDoors += " ";
+					//std::cout << " ";
+				}
+
+
+
+				if (this->game->roomVector[currentLevel][i][j]->hasSouthDoor()) {
+					southDoors += " | ";
+				} else {
+					southDoors += "   ";
+				}
+
+				if (this->game->roomVector[currentLevel][i][j]->hasNorthDoor()) {
+					northDoors += " | ";
+				} else {
+					northDoors += "   ";
+				}
 			}
 			else
 			{
-				std::cout << " . ";
+				northDoors += "   ";
+				southDoors += "   ";
+				roomsAndDoors += " . ";
+				//std::cout << ". ";
 			}
 		}
 		// print doors:
-		std::cout << "\n\n";
+		std::cout << northDoors << std::endl << roomsAndDoors << std::endl << southDoors << std::endl;
+		//std::cout << std::endl << southDoors << std::endl;
+
 	}
 }
 

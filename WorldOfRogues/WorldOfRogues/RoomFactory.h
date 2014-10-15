@@ -9,6 +9,7 @@ enum class Direction;
 class RoomFactory
 {
 public:
-	BaseRoom* createRoom(BaseRoom* prevRoom, Direction from);
+	BaseRoom* createRoom(BaseRoom* prevRoom, Direction to);
+	StartRoom* createStartRoom(BaseRoom* prevRoom);
 };
 
