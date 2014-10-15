@@ -68,8 +68,7 @@ void View::displayMap()
 		{
 			if (this->game->roomVector[currentLevel][i][j] != nullptr)
 			{
-				BaseRoom* room = this->game->roomVector[currentLevel][i][j];
-				std::cout << " " << room->getSymbol() << " ";
+				std::cout << " " << this->game->roomVector[currentLevel][i][j]->getSymbol() << " ";
 			}
 			else
 			{
