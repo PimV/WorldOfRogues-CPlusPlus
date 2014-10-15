@@ -1,6 +1,9 @@
 #include "View.h"
+#include "RoomFactory.h"
 #include "Game.h"
+#include "Player.h"
 #include "BaseRoom.h"
+#include "Direction.h"
 
 View::View(Game* game)
 {
@@ -14,38 +17,19 @@ void View::receiveInput()
 	{
 		if (input == "help")
 		{
-			std::cout << "Please use one of the following commands:\n";
-			std::cout << "- map\n";
-			std::cout << "- examine room\n";
-			std::cout << "- quit\n";
-			std::cout << "- enter north door\n";
-			std::cout << "- enter south door\n";
-			std::cout << "- enter east door\n";
-			std::cout << "- enter west door\n";
+			std::cout << "Please use one of the following commands:" << std::endl;
+			std::cout << "- map" << std::endl;
+			std::cout << "- examine room" << std::endl;
+			std::cout << "- quit" << std::endl;
+			std::cout << "- enter door" << std::endl;
 		}
 		else if (input == "map")
 		{
 			displayMap();
 		}
-		else if (input == "examine room")
+		else if (input == "enter door")
 		{
-			std::cout << "Show everything in this room\n";
-		}
-		else if (input == "enter north door")
-		{
-			std::cout << "Enter north door!\n";
-		}
-		else if (input == "enter south door")
-		{
-			std::cout << "Enter south door!\n";
-		}
-		else if (input == "enter east door")
-		{
-			std::cout << "Enter east door!\n";
-		}
-		else if (input == "enter west door")
-		{
-			std::cout << "Enter west door\n";
+			enterDoor();
 		}
 		else
 		{
@@ -55,6 +39,48 @@ void View::receiveInput()
 		std::cout << "\n> ";
 
 		std::getline(std::cin, input);
+	}
+}
+
+void View::enterDoor() {
+	BaseRoom* currentRoom = this->game->getPlayer()->getRoom();
+
+	BaseRoom* destinationRoom;
+	std::cout << "Possible doors: " + currentRoom->getAvailableDoorString() << std::endl;
+	std::string input2 = "";
+	std::getline(std::cin, input2);
+	if (input2 == "north") {
+		if (currentRoom->hasNorthDoor()) {
+			if (currentRoom->getNorthRoom() == nullptr) {
+				destinationRoom = this->game->rf->createRoom(currentRoom, Direction::North);
+				this->game->roomVector[destinationRoom->getLevel()][destinationRoom->getRow()][destinationRoom->getColumn()] = destinationRoom;
+			} 
+			this->game->getPlayer()->setRoom(currentRoom->getNorthRoom());
+		}
+	} else if (input2 == "east") {
+		if (currentRoom->hasEastDoor()) {
+			if (currentRoom->getEastRoom() == nullptr) {
+				destinationRoom = this->game->rf->createRoom(currentRoom, Direction::East);
+				this->game->roomVector[destinationRoom->getLevel()][destinationRoom->getRow()][destinationRoom->getColumn()] = destinationRoom;
+			} 
+			this->game->getPlayer()->setRoom(currentRoom->getEastRoom());
+		}
+	} else if (input2 == "south") {
+		if (currentRoom->hasSouthDoor()) {
+			if (currentRoom->getSouthRoom() == nullptr) {
+				destinationRoom = this->game->rf->createRoom(currentRoom, Direction::South);
+				this->game->roomVector[destinationRoom->getLevel()][destinationRoom->getRow()][destinationRoom->getColumn()] = destinationRoom;
+			} 
+			this->game->getPlayer()->setRoom(currentRoom->getSouthRoom());
+		}
+	} else if (input2 == "west") {
+		if (currentRoom->hasWestDoor()) {
+			if (currentRoom->getWestRoom() == nullptr) {
+				destinationRoom = this->game->rf->createRoom(currentRoom, Direction::West);
+				this->game->roomVector[destinationRoom->getLevel()][destinationRoom->getRow()][destinationRoom->getColumn()] = destinationRoom;
+			} 
+			this->game->getPlayer()->setRoom(currentRoom->getWestRoom());
+		}
 	}
 }
 

@@ -3,6 +3,12 @@
 #include <random>
 #include <iostream>
 #include <time.h>
+RoomFactory::RoomFactory(void)
+{
+}
+RoomFactory::~RoomFactory(void)
+{
+}
 
 BaseRoom* RoomFactory::createRoom(BaseRoom* prevRoom, Direction to) {
 	BaseRoom* br;// = new BaseRoom(-1,-1,-1);
@@ -38,6 +44,7 @@ BaseRoom* RoomFactory::createRoom(BaseRoom* prevRoom, Direction to) {
 		br->setRow(prevRoom->getRow() - 1);
 
 		br->setSouthRoom(prevRoom);
+		prevRoom->setNorthRoom(br);
 		break;
 	case Direction::South:
 		br->setColumn(prevRoom->getColumn());
@@ -45,6 +52,7 @@ BaseRoom* RoomFactory::createRoom(BaseRoom* prevRoom, Direction to) {
 		br->setRow(prevRoom->getRow() + 1);
 
 		br->setNorthRoom(prevRoom);
+		prevRoom->setSouthRoom(br);
 		break;
 	case Direction::West:
 		br->setColumn(prevRoom->getColumn() - 1);
@@ -52,6 +60,7 @@ BaseRoom* RoomFactory::createRoom(BaseRoom* prevRoom, Direction to) {
 		br->setRow(prevRoom->getRow());
 
 		br->setEastRoom(prevRoom);
+		prevRoom->setWestRoom(br);
 		break;
 	case Direction::East:
 		br->setColumn(prevRoom->getColumn() + 1);
@@ -59,6 +68,7 @@ BaseRoom* RoomFactory::createRoom(BaseRoom* prevRoom, Direction to) {
 		br->setRow(prevRoom->getRow());
 
 		br->setWestRoom(prevRoom);
+		prevRoom->setEastRoom(br);
 		break;
 	}
 

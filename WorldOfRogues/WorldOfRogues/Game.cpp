@@ -2,6 +2,7 @@
 #include "BaseRoom.h"
 #include "RoomFactory.h"
 #include "Direction.h"
+#include "Player.h"
 
 #include <iostream>
 
@@ -10,9 +11,9 @@ Game::Game()
 {
 	createVector();
 	view = new View(this);
-	//view->receiveInput();
-	view->displayMap();
-	std::cin.get();
+	view->receiveInput();
+	//view->displayMap();
+	//std::cin.get();
 }
 
 void Game::createVector()
@@ -28,16 +29,22 @@ void Game::createVector()
 			roomVector[a][b].resize(depth);
 		}
 	}
-	RoomFactory rf;
+	rf = new RoomFactory();
 
 
 
 	//roomVector[0][2][3] = new StartRoom(0, 2, 3);
 	//roomVector[1][3][3] = rf.createRoom(roomVector[1][2][3], Direction::East);
 
-	StartRoom* sr = rf.createStartRoom(nullptr);
+	this->player = new Player();
+
+	StartRoom* sr = rf->createStartRoom(nullptr);
 	roomVector[sr->getLevel()][ sr->getRow()] [ sr->getColumn()]= sr;
-	
+
+	player->setRoom(sr);
+
+
+
 	//BaseRoom* br = rf.createRoom(sr, Direction::South);
 	//roomVector[br->getLevel()][br->getRow()][br->getColumn()] = br;
 
@@ -46,6 +53,9 @@ void Game::createVector()
 	//roomVector[1][3][7] = new BossRoom(1, 3, 7);
 }
 
+Player* Game::getPlayer() {
+	return this->player;
+}
 
 
 Game::~Game(void)

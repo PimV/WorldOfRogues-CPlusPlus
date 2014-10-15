@@ -10,7 +10,10 @@ public:
 	virtual ~View();
 	
 	void receiveInput();
+
+	//Play functions
 	void displayMap();
+	void enterDoor();
 private:
 	Game* game;
 	std::string input;

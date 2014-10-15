@@ -33,6 +33,7 @@ public:
 	void disableEastDoor();
 
 	int getDoorCount();
+	std::string getAvailableDoorString();
 
 	void setRow(int row);
 	void setColumn(int column);

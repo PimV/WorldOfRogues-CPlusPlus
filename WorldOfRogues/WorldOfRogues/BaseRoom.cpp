@@ -196,6 +196,30 @@ int BaseRoom::getDoorCount() {
 	return doorCount;
 }
 
+std::string BaseRoom::getAvailableDoorString() {
+	std::string doors = "(";
+	if (this->hasNorthDoor()) {
+		doors += "north,";
+	}
+
+	if (this->southDoor) {
+		doors += "south,";
+	}
+
+	if (this->eastDoor) {
+		doors += "east,";
+	}
+
+	if (this->westDoor) {
+		doors += "west,";
+	}
+
+	doors = doors.substr(0, doors.length()-1);
+
+	doors += ")";
+	return doors;
+}
+
 #pragma endregion
 
 std::string BaseRoom::toString() {
