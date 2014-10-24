@@ -97,8 +97,6 @@ StartRoom* RoomFactory::createStartRoom(BaseRoom* prevRoom) {
 	}
 	StartRoom* sr = new StartRoom(level, row, column);
 
-
-
 	//Generate Doors
 	sr->generateDoors();
 

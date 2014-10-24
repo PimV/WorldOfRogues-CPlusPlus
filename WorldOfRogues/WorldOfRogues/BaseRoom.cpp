@@ -76,16 +76,16 @@ void BaseRoom::generateDoors() {
 		int randomDoorGen = rand() % 4;
 		switch(randomDoorGen) {
 		case 0:
-			enableNorthDoor();
+			if (this->row != 0) enableNorthDoor();
 			break;
 		case 1:
-			enableEastDoor();
+			if (this->column != 9) enableEastDoor();
 			break;
 		case 2:
-			enableSouthDoor();
+			if (this->row != 9) enableSouthDoor();
 			break;
 		case 3:
-			enableWestDoor();
+			if (this->column != 0) enableWestDoor();
 			break;
 		}
 	}
