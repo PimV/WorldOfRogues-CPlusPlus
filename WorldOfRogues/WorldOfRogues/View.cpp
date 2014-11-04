@@ -69,19 +69,19 @@ void View::receiveInput()
 		else if (Game::Instance()->getPlayer()->getRoom()->toString() == std::string("endroom") && input == "ascend") {
 			BaseRoom* newRoom = Game::Instance()->getRoomVector()
 				->at(Game::Instance()->getPlayer()->getRoom()->getLevel() + 1)
-				.at(Game::Instance()->getPlayer()->getRoom()->getColumn())
-				.at(Game::Instance()->getPlayer()->getRoom()->getRow());
+.at(Game::Instance()->getPlayer()->getRoom()->getColumn())
+.at(Game::Instance()->getPlayer()->getRoom()->getRow());
 
-			if (newRoom == nullptr) {
-				std::cout << "Creating new start room" << std::endl;
-				newRoom = Game::Instance()->getRoomFactory()->createStartRoom(Game::Instance()->getPlayer()->getRoom());
-				Game::Instance()->getRoomVector()
-					->at(Game::Instance()->getPlayer()->getRoom()->getLevel() + 1)
-					.at(Game::Instance()->getPlayer()->getRoom()->getColumn())
-					.at(Game::Instance()->getPlayer()->getRoom()->getRow()) = newRoom;
-			}
+if (newRoom == nullptr) {
+	std::cout << "Creating new start room" << std::endl;
+	newRoom = Game::Instance()->getRoomFactory()->createStartRoom(Game::Instance()->getPlayer()->getRoom());
+	Game::Instance()->getRoomVector()
+		->at(Game::Instance()->getPlayer()->getRoom()->getLevel() + 1)
+		.at(Game::Instance()->getPlayer()->getRoom()->getColumn())
+		.at(Game::Instance()->getPlayer()->getRoom()->getRow()) = newRoom;
+}
 
-			Game::Instance()->getPlayer()->setRoom(newRoom);
+Game::Instance()->getPlayer()->setRoom(newRoom);
 		}
 		else
 		{
@@ -111,42 +111,49 @@ void View::enterDoor(std::string prefix, std::string input) {
 				Game::Instance()->getRoomFactory()->fixDoors(destinationRoom);
 				Game::Instance()->getRoomVector()->at(destinationRoom->getLevel()).at(destinationRoom->getRow()).at(destinationRoom->getColumn()) = destinationRoom;
 
-			} 
+			}
 			this->game->getPlayer()->setRoom(currentRoom->getNorthRoom());
-		} else {
+		}
+		else {
 			wrongDirection = true;
 		}
-	} else if (direction == "east") {
+	}
+	else if (direction == "east") {
 		if (currentRoom->hasEastDoor()) {
 			if (currentRoom->getEastRoom() == nullptr) {
 				destinationRoom = Game::Instance()->getRoomFactory()->createRoom(currentRoom, Direction::East);
 				Game::Instance()->getRoomFactory()->fixDoors(destinationRoom);
 				Game::Instance()->getRoomVector()->at(destinationRoom->getLevel()).at(destinationRoom->getRow()).at(destinationRoom->getColumn()) = destinationRoom;
-			} 
+			}
 			this->game->getPlayer()->setRoom(currentRoom->getEastRoom());
-		} else {
+		}
+		else {
 			wrongDirection = true;
 		}
-	} else if (direction == "south") {
+	}
+	else if (direction == "south") {
 		if (currentRoom->hasSouthDoor()) {
 			if (currentRoom->getSouthRoom() == nullptr) {
 				destinationRoom = Game::Instance()->getRoomFactory()->createRoom(currentRoom, Direction::South);
 				Game::Instance()->getRoomFactory()->fixDoors(destinationRoom);
 				Game::Instance()->getRoomVector()->at(destinationRoom->getLevel()).at(destinationRoom->getRow()).at(destinationRoom->getColumn()) = destinationRoom;
-			} 
+			}
 			this->game->getPlayer()->setRoom(currentRoom->getSouthRoom());
-		} else {
+		}
+		else {
 			wrongDirection = true;
 		}
-	} else if (direction == "west") {
+	}
+	else if (direction == "west") {
 		if (currentRoom->hasWestDoor()) {
 			if (currentRoom->getWestRoom() == nullptr) {
 				destinationRoom = Game::Instance()->getRoomFactory()->createRoom(currentRoom, Direction::West);
 				Game::Instance()->getRoomFactory()->fixDoors(destinationRoom);
 				Game::Instance()->getRoomVector()->at(destinationRoom->getLevel()).at(destinationRoom->getRow()).at(destinationRoom->getColumn()) = destinationRoom;
-			} 
+			}
 			this->game->getPlayer()->setRoom(currentRoom->getWestRoom());
-		} else {
+		}
+		else {
 			wrongDirection = true;
 		}
 	}
@@ -156,7 +163,7 @@ void View::enterDoor(std::string prefix, std::string input) {
 
 	if (wrongDirection) {
 		std::cout << "You keep searching for a door in the " << direction << ", but failed to find one." << std::endl;
-	} 
+	}
 	displayMap();
 }
 
@@ -164,14 +171,22 @@ void View::displayMap()
 {
 	// change currentLevel
 	size_t currentLevel = Game::Instance()->getPlayer()->getRoom()->getLevel();
+
+	std::cout << std::endl << "Level " << currentLevel << std::endl;
+	for (size_t i = 0; i < Game::Instance()->getRoomVector()->at(currentLevel).size(); i++)
+	{
+		(i == Game::Instance()->getPlayer()->getRoom()->getColumn()) ? std::cout << " * " : std::cout << "   ";
+	}
+
+	std::cout << std::endl;
 	for (size_t i = 0; i < Game::Instance()->getRoomVector()->at(currentLevel).size(); i++)
 	{
 		std::string northDoors = "";
 		std::string roomsAndDoors = "";
 		std::string southDoors = "";
+		std::string currentRow = "";
 		for (size_t j = 0; j < Game::Instance()->getRoomVector()->at(currentLevel).at(i).size(); j++)
 		{
-
 			if (Game::Instance()->getRoomVector()->at(currentLevel).at(i).at(j) != nullptr)
 			{
 				if (Game::Instance()->getRoomVector()->at(currentLevel).at(i).at(j)->hasWestDoor()) {
@@ -189,8 +204,6 @@ void View::displayMap()
 					//std::cout << " ";
 				}
 
-
-
 				if (Game::Instance()->getRoomVector()->at(currentLevel).at(i).at(j)->hasSouthDoor()) {
 					southDoors += " | ";
 				} else {
@@ -202,6 +215,11 @@ void View::displayMap()
 				} else {
 					northDoors += "   ";
 				}
+
+				if (Game::Instance()->getPlayer()->getRoom()->getRow() == Game::Instance()->getRoomVector()->at(currentLevel).at(i).at(j)->getRow()) 
+				{
+					currentRow = "*";
+				}
 			}
 			else
 			{
@@ -212,7 +230,7 @@ void View::displayMap()
 			}
 		}
 		// print doors:
-		std::cout << northDoors << std::endl << roomsAndDoors << std::endl << southDoors << std::endl;
+		std::cout << northDoors << std::endl << roomsAndDoors << currentRow << std::endl << southDoors << std::endl;
 		//std::cout << std::endl << southDoors << std::endl;
 
 	}
