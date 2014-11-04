@@ -197,37 +197,41 @@ void View::displayMap()
 		{
 			if (Game::Instance()->getRoomVector()->at(currentLevel).at(i).at(j) != nullptr)
 			{
-				if (Game::Instance()->getRoomVector()->at(currentLevel).at(i).at(j)->hasWestDoor()) {
-					roomsAndDoors += "-";
-				} else {
-					roomsAndDoors += " ";
-				}
-				roomsAndDoors += Game::Instance()->getRoomVector()->at(currentLevel).at(i).at(j)->getSymbol();
-				//std::cout << this->game->roomVector[currentLevel][i][j]->getSymbol();
-				if (Game::Instance()->getRoomVector()->at(currentLevel).at(i).at(j)->hasEastDoor()) {
-					roomsAndDoors += "-";
-					//std::cout << "-";
-				} else {
-					roomsAndDoors += " ";
-					//std::cout << " ";
-				}
+				BaseRoom* currentRoom = Game::Instance()->getRoomVector()->at(currentLevel).at(i).at(j);
 
-				if (Game::Instance()->getRoomVector()->at(currentLevel).at(i).at(j)->hasSouthDoor()) {
-					southDoors += " | ";
-				} else {
-					southDoors += "   ";
-				}
+				//if (currentRoom->hasWestDoor()) {
+				//	roomsAndDoors += "-";
+				//} else {
+				//	roomsAndDoors += " ";
+				//}
+				//roomsAndDoors += currentRoom->getSymbol();
+				////std::cout << this->game->roomVector[currentLevel][i][j]->getSymbol();
+				//if (currentRoom->hasEastDoor()) {
+				//	roomsAndDoors += "-";
+				//	//std::cout << "-";
+				//} else {
+				//	roomsAndDoors += " ";
+				//	//std::cout << " ";
+				//}
 
-				if (Game::Instance()->getRoomVector()->at(currentLevel).at(i).at(j)->hasNorthDoor()) {
-					northDoors += " | ";
-				} else {
-					northDoors += "   ";
-				}
+				//if (currentRoom->hasSouthDoor()) {
+				//	southDoors += " | ";
+				//} else {
+				//	southDoors += "   ";
+				//}
 
-				if (Game::Instance()->getPlayer()->getRoom()->getRow() == Game::Instance()->getRoomVector()->at(currentLevel).at(i).at(j)->getRow()) 
-				{
-					currentRow = "*";
-				}
+				//if (currentRoom->hasNorthDoor()) {
+				//	northDoors += " | ";
+				//} else {
+				//	northDoors += "   ";
+				//}
+
+				(currentRoom->hasWestDoor()) ? roomsAndDoors += "-" : roomsAndDoors += " ";
+				roomsAndDoors += currentRoom->getSymbol();
+				(currentRoom->hasEastDoor()) ? roomsAndDoors += "-" : roomsAndDoors += " ";
+				(currentRoom->hasSouthDoor()) ? southDoors += " | " : southDoors += "   ";
+				(currentRoom->hasNorthDoor()) ? northDoors += " | " : northDoors += "   ";
+				(Game::Instance()->getPlayer()->getRoom()->getRow() == currentRoom->getRow()) ? currentRow = "*" : currentRow = "";
 			}
 			else
 			{
