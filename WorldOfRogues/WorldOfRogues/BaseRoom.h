@@ -15,7 +15,7 @@ public:
 	BaseRoom* getEastRoom();
 	BaseRoom* getWestRoom();
 
-	void generateDoors();
+	virtual void generateDoors();
 
 	bool hasNorthDoor();
 	bool hasSouthDoor();

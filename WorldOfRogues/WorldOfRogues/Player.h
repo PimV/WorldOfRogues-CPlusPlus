@@ -6,6 +6,13 @@ class Player :
 {
 public:
 	Player(void);
+	void setMaxLevelVisited(int maxLevelVisited);
+	int getMaxLevelVisited();
+	
+
 	virtual ~Player(void);
+
+private:
+	int maxLevelVisited;
 };
 

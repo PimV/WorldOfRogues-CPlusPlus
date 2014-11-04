@@ -13,7 +13,7 @@ public:
 
 	//Play functions
 	void displayMap();
-	void enterDoor();
+	void enterDoor(std::string prefix, std::string input);
 private:
 	Game* game;
 	std::string input;

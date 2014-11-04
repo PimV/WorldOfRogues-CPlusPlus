@@ -14,15 +14,32 @@ class Game
 public:
 	Game();
 	Player* getPlayer();
+	void createVector();
+	std::vector<std::vector<std::vector<BaseRoom*>>>* getRoomVector();
+	RoomFactory* getRoomFactory();
+
+	bool hasEnd(int level);
+
+	int getRoomCount();
+
+
 	~Game();
-	std::vector<std::vector<std::vector<BaseRoom*> > > roomVector;
-	RoomFactory* rf;
+
+
+	static Game* Instance() {
+		return &game_singleton;
+	};
+
 
 private:
+	int currentLevel;
+	int endRoomsFound;
 	Player* player;
 	View *view;
-	void createVector();
+	RoomFactory* roomFactory;
+	std::vector<std::vector<std::vector<BaseRoom*>>> roomVector;
 	void displayMap();
+	static Game game_singleton;
 };
 
 

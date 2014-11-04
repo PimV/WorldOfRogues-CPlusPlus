@@ -6,14 +6,23 @@
 
 #include <iostream>
 
+Game Game::game_singleton;
 
 Game::Game()
 {
 	createVector();
+
+	roomFactory = new RoomFactory();
+	this->player = new Player();
+
 	view = new View(this);
+
+	StartRoom* sr = roomFactory->createStartRoom(nullptr);
+	roomVector.at(sr->getLevel()).at(sr->getRow()).at(sr->getColumn()) = sr;
+	player->setRoom(sr);
+
+
 	view->receiveInput();
-	//view->displayMap();
-	//std::cin.get();
 }
 
 void Game::createVector()
@@ -29,35 +38,63 @@ void Game::createVector()
 			roomVector[a][b].resize(depth);
 		}
 	}
-	rf = new RoomFactory();
-
-
-
-	//roomVector[0][2][3] = new StartRoom(0, 2, 3);
-	//roomVector[1][3][3] = rf.createRoom(roomVector[1][2][3], Direction::East);
-
-	this->player = new Player();
-
-	StartRoom* sr = rf->createStartRoom(nullptr);
-	roomVector[sr->getLevel()][ sr->getRow()] [ sr->getColumn()]= sr;
-
-	player->setRoom(sr);
-
-
-
-	//BaseRoom* br = rf.createRoom(sr, Direction::South);
-	//roomVector[br->getLevel()][br->getRow()][br->getColumn()] = br;
-
-	//roomVector[1][2][3] = new RegularRoom(1, 2, 3);
-	//roomVector[1][5][4] = new EndRoom(1, 5, 4);
-	//roomVector[1][3][7] = new BossRoom(1, 3, 7);
 }
 
 Player* Game::getPlayer() {
 	return this->player;
 }
 
+std::vector<std::vector<std::vector<BaseRoom*>>>* Game::getRoomVector() {
+	return &roomVector;
+}
+
+RoomFactory* Game::getRoomFactory() {
+	return roomFactory;
+}
+
+bool Game::hasEnd(int level) {
+	for (size_t i = 0; i < Game::Instance()->getRoomVector()->at(level).size(); i++)
+	{
+		for (size_t j = 0; j < Game::Instance()->getRoomVector()->at(level).at(i).size(); j++)
+		{
+			BaseRoom* br = Game::Instance()->getRoomVector()->at(level).at(i).at(j);
+			if (br != nullptr && br->toString() == std::string("endroom"))
+			{
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+
+int Game::getRoomCount() {
+	int count = 0;
+	int currentLevel = 0;
+	if (this->getPlayer()->getRoom() != nullptr) {
+		currentLevel = this->getPlayer()->getRoom()->getLevel();
+	}
+	for (size_t i = 0; i < Game::Instance()->getRoomVector()->at(currentLevel).size(); i++)
+	{
+		for (size_t j = 0; j < Game::Instance()->getRoomVector()->at(currentLevel).at(i).size(); j++)
+		{
+			if (Game::Instance()->getRoomVector()->at(currentLevel).at(i).at(j) != nullptr)
+			{
+				std::cout << "ROOM FOUND" << std::endl;
+				count++;
+			}
+		}
+	}
+	if (count == 0) {
+		count = 1;
+	}
+
+	return count;
+}
+
+
 
 Game::~Game(void)
 {
+	delete roomFactory;
 }

@@ -13,6 +13,8 @@ View::View(Game* game)
 
 void View::receiveInput()
 {
+	std::string enterPrefix = "enter door ";
+
 	while (input != "quit")
 	{
 		if (input == "help")
@@ -22,14 +24,64 @@ void View::receiveInput()
 			std::cout << "- examine room" << std::endl;
 			std::cout << "- quit" << std::endl;
 			std::cout << "- enter door" << std::endl;
+			std::cout << "- current_level" << std::endl;
+			if (Game::Instance()->getPlayer()->getRoom()->toString() == std::string("endroom")) {
+				if (Game::Instance()->getPlayer()->getRoom()->getLevel() > 0) {
+					std::cout << "- descend" << std::endl;
+				}
+				if (Game::Instance()->getPlayer()->getRoom()->getLevel() < 3) { // max level
+					std::cout << "- ascend" << std::endl;
+				}
+			}
+
+			if (Game::Instance()->getPlayer()->getRoom()->toString() == std::string("startroom")) {
+				if (Game::Instance()->getPlayer()->getRoom()->getLevel() > 0) {
+					std::cout << "- descend" << std::endl;
+				}
+				if (Game::Instance()->getPlayer()->getRoom()->getLevel() < 3) { // max level
+					std::cout << "- ascend" << std::endl;
+				}
+			}
+		}
+		else if (input == "current_level") {
+			std::cout << "You are now on level: " << Game::Instance()->getPlayer()->getRoom()->getLevel() << std::endl;
 		}
 		else if (input == "map")
 		{
 			displayMap();
 		}
-		else if (input == "enter door")
+		else if (input.substr(0, enterPrefix.size()) == enterPrefix)
 		{
-			enterDoor();
+			enterDoor(enterPrefix, input);
+		}
+		else if (Game::Instance()->getPlayer()->getRoom()->toString() == std::string("endroom") && input == "descend") {
+			BaseRoom* newRoom = Game::Instance()->getRoomVector()
+				->at(Game::Instance()->getPlayer()->getRoom()->getLevel() - 1)
+				.at(Game::Instance()->getPlayer()->getRoom()->getColumn())
+				.at(Game::Instance()->getPlayer()->getRoom()->getRow());
+
+			if (newRoom == nullptr) {
+				std::cout << "SHOULD NOT HAPPEN" << std::endl;
+			}
+
+			Game::Instance()->getPlayer()->setRoom(newRoom);
+		}
+		else if (Game::Instance()->getPlayer()->getRoom()->toString() == std::string("endroom") && input == "ascend") {
+			BaseRoom* newRoom = Game::Instance()->getRoomVector()
+				->at(Game::Instance()->getPlayer()->getRoom()->getLevel() + 1)
+				.at(Game::Instance()->getPlayer()->getRoom()->getColumn())
+				.at(Game::Instance()->getPlayer()->getRoom()->getRow());
+
+			if (newRoom == nullptr) {
+				std::cout << "Creating new start room" << std::endl;
+				newRoom = Game::Instance()->getRoomFactory()->createStartRoom(Game::Instance()->getPlayer()->getRoom());
+				Game::Instance()->getRoomVector()
+					->at(Game::Instance()->getPlayer()->getRoom()->getLevel() + 1)
+					.at(Game::Instance()->getPlayer()->getRoom()->getColumn())
+					.at(Game::Instance()->getPlayer()->getRoom()->getRow()) = newRoom;
+			}
+
+			Game::Instance()->getPlayer()->setRoom(newRoom);
 		}
 		else
 		{
@@ -42,71 +94,94 @@ void View::receiveInput()
 	}
 }
 
-void View::enterDoor() {
-	BaseRoom* currentRoom = this->game->getPlayer()->getRoom();
+void View::enterDoor(std::string prefix, std::string input) {
+	std::string direction = input.substr(prefix.size(), input.size());
 
-	BaseRoom* destinationRoom;
-	std::cout << "Possible doors: " + currentRoom->getAvailableDoorString() << std::endl;
-	std::string input2 = "";
-	std::getline(std::cin, input2);
-	if (input2 == "north") {
+	BaseRoom* currentRoom = this->game->getPlayer()->getRoom();
+	BaseRoom* destinationRoom = nullptr;
+
+	Game::Instance()->getRoomFactory()->fixDoors(currentRoom);
+
+	bool wrongDirection = false;
+
+	if (direction == "north") {
 		if (currentRoom->hasNorthDoor()) {
 			if (currentRoom->getNorthRoom() == nullptr) {
-				destinationRoom = this->game->rf->createRoom(currentRoom, Direction::North);
-				this->game->roomVector[destinationRoom->getLevel()][destinationRoom->getRow()][destinationRoom->getColumn()] = destinationRoom;
+				destinationRoom = Game::Instance()->getRoomFactory()->createRoom(currentRoom, Direction::North);
+				Game::Instance()->getRoomFactory()->fixDoors(destinationRoom);
+				Game::Instance()->getRoomVector()->at(destinationRoom->getLevel()).at(destinationRoom->getRow()).at(destinationRoom->getColumn()) = destinationRoom;
+
 			} 
 			this->game->getPlayer()->setRoom(currentRoom->getNorthRoom());
+		} else {
+			wrongDirection = true;
 		}
-	} else if (input2 == "east") {
+	} else if (direction == "east") {
 		if (currentRoom->hasEastDoor()) {
 			if (currentRoom->getEastRoom() == nullptr) {
-				destinationRoom = this->game->rf->createRoom(currentRoom, Direction::East);
-				this->game->roomVector[destinationRoom->getLevel()][destinationRoom->getRow()][destinationRoom->getColumn()] = destinationRoom;
+				destinationRoom = Game::Instance()->getRoomFactory()->createRoom(currentRoom, Direction::East);
+				Game::Instance()->getRoomFactory()->fixDoors(destinationRoom);
+				Game::Instance()->getRoomVector()->at(destinationRoom->getLevel()).at(destinationRoom->getRow()).at(destinationRoom->getColumn()) = destinationRoom;
 			} 
 			this->game->getPlayer()->setRoom(currentRoom->getEastRoom());
+		} else {
+			wrongDirection = true;
 		}
-	} else if (input2 == "south") {
+	} else if (direction == "south") {
 		if (currentRoom->hasSouthDoor()) {
 			if (currentRoom->getSouthRoom() == nullptr) {
-				destinationRoom = this->game->rf->createRoom(currentRoom, Direction::South);
-				this->game->roomVector[destinationRoom->getLevel()][destinationRoom->getRow()][destinationRoom->getColumn()] = destinationRoom;
+				destinationRoom = Game::Instance()->getRoomFactory()->createRoom(currentRoom, Direction::South);
+				Game::Instance()->getRoomFactory()->fixDoors(destinationRoom);
+				Game::Instance()->getRoomVector()->at(destinationRoom->getLevel()).at(destinationRoom->getRow()).at(destinationRoom->getColumn()) = destinationRoom;
 			} 
 			this->game->getPlayer()->setRoom(currentRoom->getSouthRoom());
+		} else {
+			wrongDirection = true;
 		}
-	} else if (input2 == "west") {
+	} else if (direction == "west") {
 		if (currentRoom->hasWestDoor()) {
 			if (currentRoom->getWestRoom() == nullptr) {
-				destinationRoom = this->game->rf->createRoom(currentRoom, Direction::West);
-				this->game->roomVector[destinationRoom->getLevel()][destinationRoom->getRow()][destinationRoom->getColumn()] = destinationRoom;
+				destinationRoom = Game::Instance()->getRoomFactory()->createRoom(currentRoom, Direction::West);
+				Game::Instance()->getRoomFactory()->fixDoors(destinationRoom);
+				Game::Instance()->getRoomVector()->at(destinationRoom->getLevel()).at(destinationRoom->getRow()).at(destinationRoom->getColumn()) = destinationRoom;
 			} 
 			this->game->getPlayer()->setRoom(currentRoom->getWestRoom());
+		} else {
+			wrongDirection = true;
 		}
 	}
+
+	Game::Instance()->getRoomFactory()->fixDoors(destinationRoom);
+	Game::Instance()->getRoomFactory()->fixDoors(currentRoom);
+
+	if (wrongDirection) {
+		std::cout << "You keep searching for a door in the " << direction << ", but failed to find one." << std::endl;
+	} 
+	displayMap();
 }
 
 void View::displayMap()
 {
 	// change currentLevel
-	size_t currentLevel = 0;
-	for (size_t i = 0; i < this->game->roomVector[currentLevel].size(); i++)
+	size_t currentLevel = Game::Instance()->getPlayer()->getRoom()->getLevel();
+	for (size_t i = 0; i < Game::Instance()->getRoomVector()->at(currentLevel).size(); i++)
 	{
 		std::string northDoors = "";
 		std::string roomsAndDoors = "";
 		std::string southDoors = "";
-
-		for (size_t j = 0; j < this->game->roomVector[currentLevel][i].size(); j++)
+		for (size_t j = 0; j < Game::Instance()->getRoomVector()->at(currentLevel).at(i).size(); j++)
 		{
 
-			if (this->game->roomVector[currentLevel][i][j] != nullptr)
+			if (Game::Instance()->getRoomVector()->at(currentLevel).at(i).at(j) != nullptr)
 			{
-				if (this->game->roomVector[currentLevel][i][j]->hasWestDoor()) {
+				if (Game::Instance()->getRoomVector()->at(currentLevel).at(i).at(j)->hasWestDoor()) {
 					roomsAndDoors += "-";
 				} else {
 					roomsAndDoors += " ";
 				}
-				roomsAndDoors += this->game->roomVector[currentLevel][i][j]->getSymbol();
+				roomsAndDoors += Game::Instance()->getRoomVector()->at(currentLevel).at(i).at(j)->getSymbol();
 				//std::cout << this->game->roomVector[currentLevel][i][j]->getSymbol();
-				if (this->game->roomVector[currentLevel][i][j]->hasEastDoor()) {
+				if (Game::Instance()->getRoomVector()->at(currentLevel).at(i).at(j)->hasEastDoor()) {
 					roomsAndDoors += "-";
 					//std::cout << "-";
 				} else {
@@ -116,13 +191,13 @@ void View::displayMap()
 
 
 
-				if (this->game->roomVector[currentLevel][i][j]->hasSouthDoor()) {
+				if (Game::Instance()->getRoomVector()->at(currentLevel).at(i).at(j)->hasSouthDoor()) {
 					southDoors += " | ";
 				} else {
 					southDoors += "   ";
 				}
 
-				if (this->game->roomVector[currentLevel][i][j]->hasNorthDoor()) {
+				if (Game::Instance()->getRoomVector()->at(currentLevel).at(i).at(j)->hasNorthDoor()) {
 					northDoors += " | ";
 				} else {
 					northDoors += "   ";

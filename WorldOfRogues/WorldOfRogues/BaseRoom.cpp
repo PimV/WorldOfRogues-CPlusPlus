@@ -1,5 +1,7 @@
 #include "BaseRoom.h"
 #include <time.h>
+#include "Game.h"
+
 
 BaseRoom::BaseRoom(int level, int row, int column)
 {
@@ -70,9 +72,9 @@ BaseRoom* BaseRoom::getWestRoom() {
 #pragma region Doors
 
 void BaseRoom::generateDoors() {
-
 	srand(time(NULL));
-	for (int i = 0; i < 4; i++) {
+	int loopCount = (2*(4 + Game::Instance()->getRoomCount())) / (Game::Instance()->getRoomCount());
+	for (int i = 0; i < loopCount; i++) {
 		int randomDoorGen = rand() % 4;
 		switch(randomDoorGen) {
 		case 0:

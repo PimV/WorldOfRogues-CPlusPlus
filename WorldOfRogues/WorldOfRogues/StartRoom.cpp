@@ -7,7 +7,8 @@ StartRoom::StartRoom(int level, int row, int column) : BaseRoom(level,row,column
 }
 
 std::string StartRoom::toString() {
-	return std::string(
+	return std::string("startroom");
+	/*return std::string(
 		std::string("Start Room (") +
 		std::to_string(this->getRow()) +
 		std::string(",") +
@@ -15,7 +16,7 @@ std::string StartRoom::toString() {
 		std::string(",") +
 		std::to_string(this->getLevel()) + 
 		std::string(")")
-		);
+		);*/
 }
 
 StartRoom::~StartRoom(void)
