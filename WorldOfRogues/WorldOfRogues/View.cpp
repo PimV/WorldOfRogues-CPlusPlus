@@ -29,7 +29,7 @@ void View::receiveInput()
 				if (Game::Instance()->getPlayer()->getRoom()->getLevel() > 0) {
 					std::cout << "- descend" << std::endl;
 				}
-				if (Game::Instance()->getPlayer()->getRoom()->getLevel() < 3) { // max level
+				if (Game::Instance()->getPlayer()->getRoom()->getLevel() < 3) { // max level in tower
 					std::cout << "- ascend" << std::endl;
 				}
 			}
@@ -38,7 +38,7 @@ void View::receiveInput()
 				if (Game::Instance()->getPlayer()->getRoom()->getLevel() > 0) {
 					std::cout << "- descend" << std::endl;
 				}
-				if (Game::Instance()->getPlayer()->getRoom()->getLevel() < 3) { // max level
+				if (Game::Instance()->getPlayer()->getRoom()->getLevel() < Game::Instance()->getPlayer()->getMaxLevelVisited()) { 
 					std::cout << "- ascend" << std::endl;
 				}
 			}
@@ -54,34 +54,40 @@ void View::receiveInput()
 		{
 			enterDoor(enterPrefix, input);
 		}
-		else if (Game::Instance()->getPlayer()->getRoom()->toString() == std::string("endroom") && input == "descend") {
-			BaseRoom* newRoom = Game::Instance()->getRoomVector()
-				->at(Game::Instance()->getPlayer()->getRoom()->getLevel() - 1)
-				.at(Game::Instance()->getPlayer()->getRoom()->getColumn())
-				.at(Game::Instance()->getPlayer()->getRoom()->getRow());
+		else if((Game::Instance()->getPlayer()->getRoom()->toString() == std::string("startroom") ||
+			Game::Instance()->getPlayer()->getRoom()->toString() == std::string("endroom")) 
+			&& input == "descend") {
+				BaseRoom* newRoom = Game::Instance()->getRoomVector()
+					->at(Game::Instance()->getPlayer()->getRoom()->getLevel() - 1)
+					.at(Game::Instance()->getPlayer()->getRoom()->getRow())
+					.at(Game::Instance()->getPlayer()->getRoom()->getColumn());
 
-			if (newRoom == nullptr) {
-				std::cout << "SHOULD NOT HAPPEN" << std::endl;
-			}
+				if (newRoom == nullptr) {
+					std::cout << "SHOULD NOT HAPPEN" << std::endl;
+				}
 
-			Game::Instance()->getPlayer()->setRoom(newRoom);
+				Game::Instance()->getPlayer()->setRoom(newRoom);
+
 		}
-		else if (Game::Instance()->getPlayer()->getRoom()->toString() == std::string("endroom") && input == "ascend") {
-			BaseRoom* newRoom = Game::Instance()->getRoomVector()
-				->at(Game::Instance()->getPlayer()->getRoom()->getLevel() + 1)
-				.at(Game::Instance()->getPlayer()->getRoom()->getColumn())
-				.at(Game::Instance()->getPlayer()->getRoom()->getRow());
-
-			if (newRoom == nullptr) {
-				std::cout << "Creating new start room" << std::endl;
-				newRoom = Game::Instance()->getRoomFactory()->createStartRoom(Game::Instance()->getPlayer()->getRoom());
-				Game::Instance()->getRoomVector()
+		else if ((Game::Instance()->getPlayer()->getRoom()->toString() == std::string("startroom") ||
+			Game::Instance()->getPlayer()->getRoom()->toString() == std::string("endroom")) 
+			&& input == "ascend") {
+				BaseRoom* newRoom = Game::Instance()->getRoomVector()
 					->at(Game::Instance()->getPlayer()->getRoom()->getLevel() + 1)
-					.at(Game::Instance()->getPlayer()->getRoom()->getColumn())
-					.at(Game::Instance()->getPlayer()->getRoom()->getRow()) = newRoom;
-			}
+					.at(Game::Instance()->getPlayer()->getRoom()->getRow())
+					.at(Game::Instance()->getPlayer()->getRoom()->getColumn());
 
-			Game::Instance()->getPlayer()->setRoom(newRoom);
+				if (newRoom == nullptr) {
+					std::cout << "Creating new start room" << std::endl;
+					newRoom = Game::Instance()->getRoomFactory()->createStartRoom(Game::Instance()->getPlayer()->getRoom());
+					Game::Instance()->getRoomVector()
+						->at(Game::Instance()->getPlayer()->getRoom()->getLevel() + 1)
+						.at(Game::Instance()->getPlayer()->getRoom()->getRow())
+						.at(Game::Instance()->getPlayer()->getRoom()->getColumn()) = newRoom;
+				}
+
+				Game::Instance()->getPlayer()->setRoom(newRoom);
+				Game::Instance()->getPlayer()->setMaxLevelVisited(newRoom->getLevel());
 		}
 		else
 		{

@@ -111,7 +111,6 @@ StartRoom* RoomFactory::createStartRoom(BaseRoom* prevRoom) {
 		level = 0;
 		column = rand() % 10;
 		row = rand() % 10;
-
 	} else {
 		level = prevRoom->getLevel() + 1;
 		column = prevRoom->getColumn();
