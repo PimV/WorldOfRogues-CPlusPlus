@@ -1,6 +1,7 @@
 #pragma once
 #include <string>
-#include "BaseRoom.h"
+
+class BaseRoom;
 
 class BaseEntity
 {
@@ -8,6 +9,9 @@ public:
 	BaseEntity(void);
 	void setRoom(BaseRoom* room);
 	BaseRoom* getRoom();
+	
+	void setLevel(int level);
+
 	virtual ~BaseEntity(void);
 
 protected:

@@ -15,6 +15,11 @@ BaseRoom* BaseEntity::getRoom() {
 	return this->room;
 }
 
+void BaseEntity::setLevel(int level)
+{
+	this->level = level;
+}
+
 BaseEntity::~BaseEntity(void)
 {
 }

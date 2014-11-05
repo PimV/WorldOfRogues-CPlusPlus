@@ -12,7 +12,7 @@ public:
 	EntityFactory();
 	virtual ~EntityFactory();
 
-	std::vector<BaseEntity*> createEntitiesForRoom(BaseRoom *br);
+	std::vector<BaseEntity*> createEntitiesForRoom();
 private:
 	BaseEntity* createEntity(EntityTypes et);
 };

@@ -20,7 +20,7 @@ EntityFactory::~EntityFactory()
 {
 }
 
-std::vector<BaseEntity*> EntityFactory::createEntitiesForRoom(BaseRoom *br)
+std::vector<BaseEntity*> EntityFactory::createEntitiesForRoom()
 {
 	std::vector<BaseEntity*> entityArray;
 
@@ -37,7 +37,6 @@ std::vector<BaseEntity*> EntityFactory::createEntitiesForRoom(BaseRoom *br)
 	{
 		std::uniform_int_distribution<int> dist2(1, 5);
 		int randomEntitySpawn = dist2(dre);
-		std::cout << "Random entity spawn [" << randomEntitySpawn << "]" << std::endl;
 
 		std::cout << "Created: ";
 		switch (randomEntitySpawn)
@@ -72,31 +71,12 @@ std::vector<BaseEntity*> EntityFactory::createEntitiesForRoom(BaseRoom *br)
 	// random entity level
 	for (BaseEntity *e : entityArray)
 	{
-		// change: between current player level - 2 & +3
-		std::uniform_int_distribution<int> dist3(1, 5);
+		std::uniform_int_distribution<int> dist3(-3, 3);
 		int randomEntityLevel = dist3(dre);
 		std::cout << "Random entity level [" << randomEntityLevel << "]" << std::endl;
 
-		switch (randomEntityLevel)
-		{
-		case 1:
-			//e->setLevel(1);
-			break;
-		case 2:
-			//e->setLevel(2);
-			break;
-		case 3:
-			//e->setLevel(3);
-			break;
-		case 4:
-			//e->setLevel(4);
-			break;
-		case 5:
-			//e->setLevel(5);
-			break;
-		default:
-			break;
-		}
+		// change: (CurrentPlayer->getLevel() + randomEntityLevel);
+		e->setLevel(randomEntityLevel);
 	}
 
 	return entityArray;
@@ -125,6 +105,7 @@ BaseEntity* EntityFactory::createEntity(EntityTypes et)
 		return new Player();
 		break;
 	default:
+		return nullptr;
 		break;
 	}
 }

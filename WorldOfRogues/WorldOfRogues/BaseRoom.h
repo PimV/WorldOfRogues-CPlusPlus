@@ -1,6 +1,10 @@
 #pragma once
+#include "BaseEntity.h"
+
 #include <iostream>
 #include <string>
+#include <vector>
+
 class BaseRoom
 {
 public:
@@ -42,6 +46,8 @@ public:
 	int getColumn();
 	int getLevel();
 
+	void setEnemies(std::vector<BaseEntity*> enemies);
+
 	virtual std::string toString();
 
 	virtual void setSymbol(char* c);
@@ -62,6 +68,8 @@ private:
 	int row;
 	int column;
 	int level;
+
+	std::vector<BaseEntity*> enemies;
 
 	char* symbol;
 };

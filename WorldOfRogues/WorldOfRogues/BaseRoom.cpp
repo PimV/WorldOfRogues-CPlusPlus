@@ -2,7 +2,6 @@
 #include <time.h>
 #include "Game.h"
 
-
 BaseRoom::BaseRoom(int level, int row, int column)
 {
 	this->row = row;
@@ -42,6 +41,7 @@ char* BaseRoom::getSymbol() {
 	return this->symbol;
 }
 #pragma endregion
+
 #pragma region Rooms
 void BaseRoom::setNorthRoom(BaseRoom* room) {
 	this->northRoom = room;
@@ -223,6 +223,12 @@ std::string BaseRoom::getAvailableDoorString() {
 }
 
 #pragma endregion
+
+void BaseRoom::setEnemies(std::vector<BaseEntity*> enemies)
+{
+	this->enemies = enemies;
+}
+
 
 std::string BaseRoom::toString() {
 	return std::string(
