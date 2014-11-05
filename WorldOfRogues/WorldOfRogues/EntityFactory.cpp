@@ -6,6 +6,7 @@
 #include "Skeleton.h"
 #include "Zombie.h"
 #include "Boss.h"
+#include "Player.h"
 
 #include <random>
 
@@ -121,7 +122,7 @@ BaseEntity* EntityFactory::createEntity(EntityTypes et)
 		return new Boss();
 		break;
 	case EntityTypes::Player:
-		///
+		return new Player();
 		break;
 	default:
 		break;
