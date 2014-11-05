@@ -71,7 +71,7 @@ std::vector<BaseEntity*> EntityFactory::createEntitiesForRoom()
 	// random entity level
 	for (BaseEntity *e : entityArray)
 	{
-		std::uniform_int_distribution<int> dist3(-3, 3);
+		std::uniform_int_distribution<int> dist3(1, 5);
 		int randomEntityLevel = dist3(dre);
 		std::cout << "Random entity level [" << randomEntityLevel << "]" << std::endl;
 
