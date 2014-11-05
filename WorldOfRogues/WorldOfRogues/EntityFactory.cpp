@@ -39,19 +39,19 @@ std::vector<BaseEntity*> EntityFactory::createEntitiesForRoom(BaseRoom *br)
 		switch (randomEntitySpawn)
 		{
 		case 1:
-			entityArray.push_back(new Rat());
+			entityArray.push_back(createEntity(EntityTypes::Rat));
 			break;
 		case 2:
-			entityArray.push_back(new Dwarf());
+			entityArray.push_back(createEntity(EntityTypes::Skeleton));
 			break;
 		case 3:
-			entityArray.push_back(new Skeleton());
+			entityArray.push_back(createEntity(EntityTypes::Zombie));
 			break;
 		case 4:
-			entityArray.push_back(new Zombie());
+			entityArray.push_back(createEntity(EntityTypes::Dwarf));
 			break;
 		case 5:
-			entityArray.push_back(new Boss());
+			entityArray.push_back(createEntity(EntityTypes::Boss));
 			break;
 		default:
 			break;
@@ -90,7 +90,29 @@ std::vector<BaseEntity*> EntityFactory::createEntitiesForRoom(BaseRoom *br)
 	return entityArray;
 }
 
-BaseEntity* EntityFactory::createEntity()
+BaseEntity* EntityFactory::createEntity(EntityTypes et)
 {
-	return new BaseEntity;
+	switch (et)
+	{
+	case EntityTypes::Rat:
+		return new Rat();
+		break;
+	case EntityTypes::Zombie:
+		return new Zombie();
+		break;
+	case EntityTypes::Skeleton:
+		return new Skeleton();
+		break;
+	case EntityTypes::Dwarf:
+		return new Dwarf();
+		break;
+	case EntityTypes::Boss:
+		return new Boss();
+		break;
+	case EntityTypes::Player:
+		///
+		break;
+	default:
+		break;
+	}
 }

@@ -1,6 +1,8 @@
 #pragma once
 #include "BaseRoom.h"
 #include "BaseEntity.h"
+#include "EntityTypes.h"
+
 #include <vector>
 #include <iostream>
 
@@ -12,6 +14,6 @@ public:
 
 	std::vector<BaseEntity*> createEntitiesForRoom(BaseRoom *br);
 private:
-	BaseEntity* createEntity();
+	BaseEntity* createEntity(EntityTypes et);
 };
 

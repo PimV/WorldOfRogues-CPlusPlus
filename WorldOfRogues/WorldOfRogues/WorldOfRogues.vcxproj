@@ -88,6 +88,7 @@
     <ClInclude Include="EndRoom.h" />
     <ClInclude Include="BaseEntity.h" />
     <ClInclude Include="EntityFactory.h" />
+    <ClInclude Include="EntityTypes.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Gold.h" />
     <ClInclude Include="Helmet.h" />
