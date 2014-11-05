@@ -20,6 +20,11 @@ void BaseEntity::setLevel(int level)
 	this->level = level;
 }
 
+int BaseEntity::getLevel()
+{
+	return this->level;
+}
+
 BaseEntity::~BaseEntity(void)
 {
 }

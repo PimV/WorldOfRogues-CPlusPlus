@@ -11,6 +11,7 @@ public:
 	BaseRoom* getRoom();
 	
 	void setLevel(int level);
+	int getLevel();
 
 	virtual ~BaseEntity(void);
 
