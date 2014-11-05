@@ -87,6 +87,7 @@
     <ClInclude Include="Dwarf.h" />
     <ClInclude Include="EndRoom.h" />
     <ClInclude Include="BaseEntity.h" />
+    <ClInclude Include="EntityFactory.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Gold.h" />
     <ClInclude Include="Helmet.h" />
@@ -113,6 +114,7 @@
     <ClCompile Include="Dwarf.cpp" />
     <ClCompile Include="EndRoom.cpp" />
     <ClCompile Include="BaseEntity.cpp" />
+    <ClCompile Include="EntityFactory.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Gold.cpp" />
     <ClCompile Include="Helmet.cpp" />
