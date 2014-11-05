@@ -117,8 +117,8 @@
     <ClInclude Include="EntityFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="EntityTypes.h">
-      <Filter>Header Files\Rooms</Filter>
+    <ClInclude Include="EntityType.h">
+      <Filter>Header Files\Entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

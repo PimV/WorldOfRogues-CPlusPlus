@@ -1,6 +1,6 @@
 #pragma once
 
-enum class EntityTypes
+enum class EntityType
 {
 	Rat = 0,
 	Zombie,

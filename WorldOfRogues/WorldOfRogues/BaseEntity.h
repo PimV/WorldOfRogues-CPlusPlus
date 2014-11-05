@@ -1,4 +1,6 @@
 #pragma once
+#include "EntityType.h"
+
 #include <string>
 
 class BaseRoom;
@@ -13,8 +15,9 @@ public:
 	void setLevel(int level);
 	int getLevel();
 
-	virtual ~BaseEntity(void);
+	virtual std::string toString() = 0;
 
+	virtual ~BaseEntity(void);
 protected:
 	std::string Name;
 	int level;

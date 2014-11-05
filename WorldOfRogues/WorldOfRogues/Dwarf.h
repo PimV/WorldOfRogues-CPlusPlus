@@ -5,6 +5,7 @@ class Dwarf :
 {
 public:
 	Dwarf(void);
+	std::string toString();
 	virtual ~Dwarf(void);
 };
 

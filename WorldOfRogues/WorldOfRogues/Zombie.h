@@ -5,6 +5,8 @@ class Zombie :
 {
 public:
 	Zombie(void);
+	std::string toString();
+
 	virtual ~Zombie(void);
 };
 
