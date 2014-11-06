@@ -12,6 +12,9 @@ BaseEntity::BaseEntity(void)
 }
 
 void BaseEntity::setRoom(BaseRoom* room) {
+
+	room->trapPlayer(this);
+
 	this->room = room;
 }
 
@@ -38,7 +41,7 @@ BaseEquipment* BaseEntity::getEquipment() {
 void BaseEntity::setLevel(int level)
 {
 	this->level = level;
-	this->setMaxHitpoints( * this->getLevel());
+	this->setMaxHitpoints(this->getMaxHitpoints() + (50-this->getLevel()) * this->getLevel());
 }
 
 int BaseEntity::getLevel()
@@ -115,5 +118,11 @@ void BaseEntity::setName(std::string name) {
 
 BaseEntity::~BaseEntity(void)
 {
+	delete this->equipment;
+	this->equipment = nullptr;
+
+
+	delete this->inventory;
+	this->inventory = nullptr;
 }
 

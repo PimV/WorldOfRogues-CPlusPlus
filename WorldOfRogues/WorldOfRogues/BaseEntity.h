@@ -27,7 +27,7 @@ public:
 	void setMaxHitpoints(int maxHitpoints);
 	int getMaxHitpoints();
 
-	void setHitpoints(int hitpoints);
+	virtual void setHitpoints(int hitpoints);
 	int getHitpoints();
 
 	void setExperience(int experience);

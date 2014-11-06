@@ -122,7 +122,6 @@ void View::receiveInput()
 					.at(Game::Instance()->getPlayer()->getRoom()->getColumn());
 
 				if (newRoom == nullptr) {
-					std::cout << "Creating new start room" << std::endl;
 					newRoom = Game::Instance()->getRoomFactory()->createStartRoom(Game::Instance()->getPlayer()->getRoom());
 					Game::Instance()->getRoomVector()
 						->at(Game::Instance()->getPlayer()->getRoom()->getLevel() + 1)
@@ -132,16 +131,30 @@ void View::receiveInput()
 
 				Game::Instance()->getPlayer()->setRoom(newRoom);
 				Game::Instance()->getPlayer()->setMaxLevelVisited(newRoom->getLevel());
-
 		}
 		else
 		{
 			std::cout << "Unknown command: '" << input << "'.\n Type 'help' for more information.\n";
 		}
 
-		std::cout << "\n> ";
+		std::cout << "> ";
 
 		std::getline(std::cin, input);
+	}
+}
+
+void View::gameOver() {
+	std::string input2 = "";
+	while (input2 != "restart" || input2 != "quit")
+	{
+		if (input2 == "restart") {
+			Game::Instance()->init();
+		} else if (input2 == "quit") {
+
+		}
+
+
+		std::getline(std::cin, input2);
 	}
 }
 
@@ -277,7 +290,7 @@ void View::enterDoor(std::string prefix, std::string input) {
 	if (wrongDirection) {
 		std::cout << "You keep searching for a door in the " << direction << ", but failed to find one." << std::endl;
 	}
-	displayMap();
+
 }
 
 void View::displayMap()

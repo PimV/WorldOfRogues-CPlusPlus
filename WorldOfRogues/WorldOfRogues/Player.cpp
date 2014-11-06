@@ -8,14 +8,15 @@
 #include "Platelegs.h"
 #include "Shield.h"
 #include "Helmet.h"
+#include "Game.h"
 
 Player::Player(void)
 {
 	this->setEntityType(EntityType::Player);
 	this->setName("Player");
 
-	this->setInventory(new Player_Inventory());
-	this->setEquipment(new Player_Equipment());
+	this->setInventory(new BaseInventory());
+	this->setEquipment(new BaseEquipment());
 
 	//BasePotion* xpPot = new BasePotion();
 	//xpPot->setExperience(150);
@@ -31,7 +32,13 @@ Player::Player(void)
 
 }
 
-
+void Player::setHitpoints(int hitpoints) {
+	if (hitpoints <= 0) {
+		Game::Instance()->gameOver();
+	} else {
+		BaseEntity::setHitpoints(hitpoints);
+	}
+}
 
 void Player::setMaxLevelVisited(int maxLevelVisited) {
 	if (maxLevelVisited > this->maxLevelVisited) {
@@ -47,7 +54,7 @@ std::string Player::toString() {
 	std::string player_statistics = "";
 	player_statistics.append("Level: \t\t\t" + std::to_string(this->getLevel()) + "\n");
 	player_statistics.append("Experience: \t\t" + std::to_string(this->getExperience()) + "\\" + std::to_string(this->getLevel() * 100) +  "\n");
-	player_statistics.append("Hitpoints: \t\t" + std::to_string(this->getHitpoints()) + "\n");
+	player_statistics.append("Hitpoints: \t\t" + std::to_string(this->getHitpoints()) + "\\" + std::to_string(this->getMaxHitpoints()) +  "\n");
 	player_statistics.append("Armour rating: \t\t" + std::to_string(this->getEquipment()->getArmourRating()) + "\n");
 	player_statistics.append("Offense rating: \t" + std::to_string(this->getEquipment()->getOffenseRating()) + "\n");
 
@@ -58,6 +65,6 @@ std::string Player::toString() {
 
 Player::~Player(void)
 {
-	delete this->getEquipment();
-	delete this->getInventory();
+	//delete this->getEquipment();
+	//delete this->getInventory();
 }

@@ -37,6 +37,11 @@ public:
 	void disableWestDoor();
 	void disableEastDoor();
 
+	bool hasTrap();
+	void enableTrap();
+	void disableTrap();
+	bool trapPlayer(BaseEntity* player);
+
 	int getDoorCount();
 	std::string getAvailableDoorString();
 
@@ -49,9 +54,12 @@ public:
 
 	void setEnemies(std::vector<BaseEntity*> enemies);
 	void setItems(std::vector<BaseItem*> items);
-	
+
 	std::vector<BaseEntity*> getEnemies();
 	std::vector<BaseItem*> getItems();
+
+	void setDescription(std::string description);
+	std::string getDescription();
 
 	virtual std::string toString();
 
@@ -70,12 +78,17 @@ private:
 	bool eastDoor;
 	bool westDoor;
 
+	bool trapped;
+	bool trapFound;
+
 	int row;
 	int column;
 	int level;
 
 	std::vector<BaseEntity*> enemies;
 	std::vector<BaseItem*> items;
+
+	std::string description;
 
 	char* symbol;
 };

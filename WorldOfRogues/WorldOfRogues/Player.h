@@ -9,6 +9,8 @@ public:
 	void setMaxLevelVisited(int maxLevelVisited);
 	int getMaxLevelVisited();
 
+	void setHitpoints(int hitpoints) override;
+
 	std::string toString();
 
 	virtual ~Player(void);

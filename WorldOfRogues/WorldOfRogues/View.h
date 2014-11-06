@@ -11,6 +11,8 @@ public:
 
 	void receiveInput();
 
+	void gameOver();
+
 	//Play functions
 	void displayMap();
 	void displayInventory();

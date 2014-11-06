@@ -168,4 +168,9 @@ int BaseEquipment::getOffenseRating() {
 
 BaseEquipment::~BaseEquipment(void)
 {
+	delete this->weapon;
+	delete this->helmet;
+	delete this->platebody;
+	delete this->platelegs;
+	delete this->shield;
 }

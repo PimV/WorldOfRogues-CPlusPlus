@@ -70,5 +70,8 @@ std::string BaseInventory::toString() {
 
 BaseInventory::~BaseInventory(void)
 {
-	this->items.clear();
+	for(auto itr = items.begin(); itr != items.end(); itr++)
+	{
+		delete itr->second;
+	}
 }
