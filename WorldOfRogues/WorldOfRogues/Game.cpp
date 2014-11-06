@@ -1,3 +1,4 @@
+
 #include "Game.h"
 #include "BaseRoom.h"
 #include "RoomFactory.h"
@@ -19,8 +20,7 @@ void Game::cleanup() {
 	delete this->player;
 	delete this->view;
 
-	for(auto itr = this->roomVector.begin(); itr != this->roomVector.end(); itr++)
-	{
+	for(auto itr = this->roomVector.begin(); itr != this->roomVector.end(); itr++)	{
 		itr = this->roomVector.erase(itr);
 	}
 
@@ -119,5 +119,6 @@ int Game::getRoomCount() {
 
 Game::~Game(void)
 {
-	delete roomFactory;
+	cleanup();
+	delete this;
 }

@@ -42,7 +42,6 @@ void View::receiveInput()
 			std::cout << "- inventory" << std::endl;
 			std::cout << "- use [item]" << std::endl;
 			std::cout << "- unequip [equipment_item]" << std::endl;
-			std::cout << "- addhelm" << std::endl;
 			std::cout << "- take [item_number]" << std::endl;
 			if (Game::Instance()->getPlayer()->getRoom()->getSymbol() == "E") {
 				if (Game::Instance()->getPlayer()->getRoom()->getLevel() > 0) {
@@ -75,9 +74,6 @@ void View::receiveInput()
 		else if (input == "inventory") {
 			displayInventory();
 		}
-		else if (input == "addhelm") {
-			Game::Instance()->getPlayer()->getInventory()->addItem(new Helmet(),-1);
-		} 
 		else if (input == "examine room") {
 			displayCurrentRoom();
 		}

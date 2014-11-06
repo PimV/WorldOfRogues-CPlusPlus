@@ -322,4 +322,13 @@ std::string BaseRoom::toString() {
 
 BaseRoom::~BaseRoom(void)
 {
+	for(auto itr = items.begin(); itr != items.end(); itr++)
+	{
+		delete *itr;
+	}
+
+	for(auto itr2 = enemies.begin(); itr2 != enemies.end(); itr2++)
+	{
+		delete *itr2;
+	}
 }

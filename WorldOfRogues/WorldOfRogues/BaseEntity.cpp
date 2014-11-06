@@ -118,6 +118,8 @@ void BaseEntity::setName(std::string name) {
 
 BaseEntity::~BaseEntity(void)
 {
+	delete this->room;
+
 	delete this->equipment;
 	this->equipment = nullptr;
 

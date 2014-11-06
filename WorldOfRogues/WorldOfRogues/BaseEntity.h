@@ -57,7 +57,5 @@ private:
 	//Inventory
 	BaseEquipment* equipment;
 	BaseInventory* inventory;
-
-private:
 };
 
