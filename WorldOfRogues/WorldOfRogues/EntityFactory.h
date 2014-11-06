@@ -1,5 +1,4 @@
 #pragma once
-#include "BaseRoom.h"
 #include "BaseEntity.h"
 #include "EntityType.h"
 

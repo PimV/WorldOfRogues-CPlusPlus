@@ -91,9 +91,8 @@ BaseRoom* RoomFactory::createRoom(BaseRoom* prevRoom, Direction to) {
 	br->generateDoors();
 
 	std::cout << "Generating enemies: " << std::endl;
-	br->setEnemies(EntityFactory::createEntitiesForRoom());
+	br->setEnemies(EntityFactory::createRandomEntities());
 	br->setItems(ItemFactory::createRandomItems());
-	
 
 	return br;
 }

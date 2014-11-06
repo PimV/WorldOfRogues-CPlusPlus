@@ -9,7 +9,7 @@ class ItemFactory
 public:
 	virtual ~ItemFactory();
 	
-	static BaseItem* createItem(std::string *item);
+	static BaseItem* createItem(std::string item);
 	static std::vector<BaseItem*> createRandomItems();
 private:
 };

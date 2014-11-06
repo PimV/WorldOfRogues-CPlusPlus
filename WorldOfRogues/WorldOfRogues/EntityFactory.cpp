@@ -10,12 +10,6 @@
 
 #include <random>
 
-
-EntityFactory::EntityFactory()
-{
-}
-
-
 EntityFactory::~EntityFactory()
 {
 }

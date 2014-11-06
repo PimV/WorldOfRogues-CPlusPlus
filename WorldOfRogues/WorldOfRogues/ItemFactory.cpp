@@ -1,8 +1,5 @@
 #include "ItemFactory.h"
-
 #include <random>
-
-
 
 ItemFactory::~ItemFactory()
 {
@@ -26,9 +23,9 @@ std::vector<BaseItem*> ItemFactory::createRandomItems()
 		std::uniform_int_distribution<int> dist2(1, 5);
 		int randomItemSpawn = dist2(dre);
 
-		std::cout << "Created: ";
-		switch (randomItemSpawn)
-		{
+		//std::cout << "Created: ";
+		//switch (randomItemSpawn)
+		//{
 		//case 1:
 		//	std::cout << "Dragon Helmet ";
 		//	itemsArray.push_back(createEntity(EntityType::Rat));
@@ -51,10 +48,10 @@ std::vector<BaseItem*> ItemFactory::createRandomItems()
 		//	break;
 		//default:
 		//	break;
-		}
+		//}
 
 	//	std::cout << std::endl;
-	//}
+	}
 
 	//// random entity level
 	//for (BaseEntity *e : entityArray)
@@ -70,7 +67,7 @@ std::vector<BaseItem*> ItemFactory::createRandomItems()
 	return itemsArray;
 }
 
-BaseItem* ItemFactory::createItem(std::string *item)
+BaseItem* ItemFactory::createItem(std::string item)
 {
 	/*switch (et)
 	{
