@@ -27,7 +27,7 @@ std::vector<BaseItem*> ItemFactory::createRandomItems()
 	// random items
 	for (size_t i = 0; i < amountOfItems; i++)
 	{
-		std::uniform_int_distribution<int> dist2(0, 20);
+		std::uniform_int_distribution<int> dist2(0, 30);
 		int randomItemSpawn = dist2(dre);
 
 		if (randomItemSpawn >= 0 && randomItemSpawn <= 8) {
