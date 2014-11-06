@@ -123,6 +123,9 @@
     <ClInclude Include="ItemFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ItemType.h">
+      <Filter>Header Files\Items</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Player.cpp">
