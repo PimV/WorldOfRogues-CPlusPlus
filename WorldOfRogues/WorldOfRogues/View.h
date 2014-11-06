@@ -25,7 +25,7 @@ public:
 private:
 	Game* game;
 	std::string input;
-
+	void displayIntroMessage();
 
 };
 
