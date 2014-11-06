@@ -5,7 +5,6 @@ class RegularRoom :
 {
 public:
 	RegularRoom(int row, int column, int level);
-	std::string toString();
 	virtual ~RegularRoom(void);
 };
 

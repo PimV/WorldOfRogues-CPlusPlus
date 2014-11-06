@@ -3,13 +3,12 @@
 
 Skeleton::Skeleton(void)
 {
+	this->setEntityType(EntityType::Skeleton);
+	this->setName("Zombie");
 }
 
 std::string Skeleton::toString() {
-	return std::string(
-		std::string("Skeleton L") +
-		std::to_string(this->getLevel())
-		);
+	return this->getName();
 }
 
 
