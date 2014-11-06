@@ -16,6 +16,7 @@ public:
 	void displayInventory();
 	void displayEquipment();
 	void displayPlayerStatistics();
+	void displayCurrentRoom();
 
 	//Actions
 	void enterDoor(std::string prefix, std::string input);

@@ -32,6 +32,9 @@ public:
 
 	std::string toString();
 
+	int getArmourRating();
+	int getOffenseRating();
+
 	~BaseEquipment(void);
 
 private:

@@ -6,6 +6,8 @@ class Platelegs :
 {
 public:
 	Platelegs(void);
+	int getArmourRating();
+	void setArmourRating(int rating);
 	void use(Player* player);
 	std::string toString();
 	virtual ~Platelegs(void);

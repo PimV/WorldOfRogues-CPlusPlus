@@ -1,6 +1,8 @@
 #pragma once
 #include "Player.h"
 #include <string>
+class BaseInventory;
+class BaseEquipment;
 class BaseItem
 {
 public:

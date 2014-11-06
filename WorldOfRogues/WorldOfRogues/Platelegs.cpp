@@ -1,8 +1,18 @@
 #include "Platelegs.h"
 #include <string>
+#include "BaseInventory.h"
+#include "BaseEquipment.h"
 
 Platelegs::Platelegs(void)
 {
+}
+
+void Platelegs::setArmourRating(int rating) {
+	this->armourRating = rating;
+}
+
+int Platelegs::getArmourRating() {
+	return this->armourRating;
 }
 
 void Platelegs::use(Player* player) {

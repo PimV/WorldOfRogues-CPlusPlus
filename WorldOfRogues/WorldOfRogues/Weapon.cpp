@@ -1,7 +1,7 @@
 #include "Weapon.h"
-#include "Player_Equipment.h"
-#include "Player_Inventory.h"
 #include <string>
+#include "BaseInventory.h"
+#include "BaseEquipment.h"
 
 Weapon::Weapon(void)
 {

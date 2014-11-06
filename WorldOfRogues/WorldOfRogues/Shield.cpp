@@ -1,10 +1,18 @@
 #include "Shield.h"
-#include "Player_Equipment.h"
-#include "Player_Inventory.h"
 #include <string>
+#include "BaseInventory.h"
+#include "BaseEquipment.h"
 
 Shield::Shield(void)
 {
+}
+
+void Shield::setArmourRating(int rating) {
+	this->armourRating = rating;
+}
+
+int Shield::getArmourRating() {
+	return this->armourRating;
 }
 
 void Shield::use(Player* player) {

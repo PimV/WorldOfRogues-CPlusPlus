@@ -4,14 +4,24 @@
 #include <string>
 
 class BaseRoom;
-
+class BaseInventory;
+class BaseEquipment;
 class BaseEntity
 {
 public:
 	BaseEntity(void);
 	void setRoom(BaseRoom* room);
 	BaseRoom* getRoom();
-	
+
+	void setEquipment(BaseEquipment* equipment);
+	BaseEquipment* getEquipment();
+
+	void setInventory(BaseInventory* inventory);
+	BaseInventory* getInventory();
+
+	void setHitpoints(int hitpoints);
+	int getHitpoints();
+
 	void setLevel(int level);
 	int getLevel();
 
@@ -25,6 +35,8 @@ protected:
 	int attackpoints;
 	BaseRoom* room;
 	//Inventory
+	BaseEquipment* equipment;
+	BaseInventory* inventory;
 
 private:
 };

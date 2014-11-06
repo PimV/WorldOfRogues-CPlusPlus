@@ -1,10 +1,19 @@
 #include "Helmet.h"
-#include "Player_Equipment.h"
-#include "Player_Inventory.h"
+#include "BaseInventory.h"
+#include "BaseEquipment.h"
 #include <string>
 
 Helmet::Helmet(void)
 {
+	this->setArmourRating(5);
+}
+
+void Helmet::setArmourRating(int rating) {
+	this->armourRating = rating;
+}
+
+int Helmet::getArmourRating() {
+	return this->armourRating;
 }
 
 void Helmet::use(Player* player) {

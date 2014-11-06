@@ -127,6 +127,43 @@ std::string BaseEquipment::toString() {
 	return equipment.c_str();
 }
 
+int BaseEquipment::getArmourRating() {
+	int rating = 0;
+	if (this->hasShield()) {
+		rating += this->getShield()->getArmourRating();
+	} 
+	if (this->hasHelmet()) {
+		rating += this->getHelmet()->getArmourRating();
+	} 
+	if (this->hasPlatelegs()) {
+		rating += this->getPlatelegs()->getArmourRating();
+	} 
+	if (this->hasPlatebody()) {
+		rating += this->getPlatebody()->getArmourRating();
+	}
+	return rating;
+}
+
+int BaseEquipment::getOffenseRating() {
+	int rating = 0;
+	if (this->hasShield()) {
+		rating += this->getShield()->getOffenseRating();
+	} 
+	if (this->hasHelmet()) {
+		rating += this->getHelmet()->getOffenseRating();
+	} 
+	if (this->hasPlatelegs()) {
+		rating += this->getPlatelegs()->getOffenseRating();
+	} 
+	if (this->hasPlatebody()) {
+		rating += this->getPlatebody()->getOffenseRating();
+	}
+	if (this->hasWeapon()) {
+		rating += this->getWeapon()->getOffenseRating();
+	}
+	return rating;
+}
+
 BaseEquipment::~BaseEquipment(void)
 {
 }

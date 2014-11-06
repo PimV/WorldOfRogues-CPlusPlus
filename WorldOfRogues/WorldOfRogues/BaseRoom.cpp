@@ -229,17 +229,21 @@ void BaseRoom::setEnemies(std::vector<BaseEntity*> enemies)
 	this->enemies = enemies;
 }
 
+std::vector<BaseEntity*> BaseRoom::getEnemies() {
+	return this->enemies;
+}
+
 
 std::string BaseRoom::toString() {
-	return std::string(
-		std::string("Base Room (") +
-		std::to_string(this->getRow()) +
-		std::string(",") +
-		std::to_string(this->getColumn()) + 
-		std::string(",") +
-		std::to_string(this->getLevel()) + 
-		std::string(")")
-		);
+	std::string currentRoom = "";
+	if (this->enemies.size() > 0) {
+		currentRoom.append("Enemies: \n");
+		for(BaseEntity* e : this->enemies) {
+			currentRoom.append("\t" + e->toString() + "(" + std::to_string(e->getLevel()) + ") \n");
+		}
+	}
+	return currentRoom;
+
 }
 
 BaseRoom::~BaseRoom(void)

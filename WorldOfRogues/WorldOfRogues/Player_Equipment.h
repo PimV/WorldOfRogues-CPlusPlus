@@ -6,7 +6,7 @@ class Player_Equipment :
 public:
 
 
-	void getArmourRating();
+	int getArmourRating();
 
 	Player_Equipment(void);
 	virtual ~Player_Equipment(void);

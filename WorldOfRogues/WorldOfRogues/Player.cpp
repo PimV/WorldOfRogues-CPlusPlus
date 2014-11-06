@@ -8,21 +8,7 @@ Player::Player(void)
 	this->equipment = new Player_Equipment();
 }
 
-void Player::setInventory(Player_Inventory* inventory) {
-	this->inventory = inventory;
-}
 
-Player_Inventory* Player::getInventory() {
-	return this->inventory;
-}
-
-void Player::setEquipment(Player_Equipment* equipment) {
-	this->equipment = equipment;
-}
-
-Player_Equipment* Player::getEquipment() {
-	return this->equipment;
-}
 
 void Player::setMaxLevelVisited(int maxLevelVisited) {
 	if (maxLevelVisited > this->maxLevelVisited) {
@@ -35,10 +21,10 @@ int Player::getMaxLevelVisited() {
 }
 
 std::string Player::toString() {
-	return std::string(
-		std::string("Player L") +
-		std::to_string(this->getLevel())
-		);
+	std::string player_statistics = "";
+	player_statistics.append("Level: \t\t\t" + std::to_string(this->getLevel()) + "\n");
+	player_statistics.append("Armour rating: \t\t" + std::to_string(this->getEquipment()->getArmourRating()) + "\n");
+	return player_statistics;
 }
 
 
