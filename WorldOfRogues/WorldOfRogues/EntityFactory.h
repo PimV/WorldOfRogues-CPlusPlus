@@ -13,6 +13,7 @@ public:
 	static std::string generateName(BaseEntity* entity);
 	static std::vector<BaseEntity*> createRandomEntities();
 	static BaseEntity* createEntity(EntityType et);
+	static BaseEntity* createEntity(EntityType et, int level);
 private:
 };
 

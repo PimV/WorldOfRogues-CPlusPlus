@@ -50,6 +50,7 @@ BaseRoom* RoomFactory::createRoom(BaseRoom* prevRoom, Direction to) {
 		break;
 	case 20: 
 		br = new EndRoom(-1,-1,-1);
+		br->addEnemy(EntityFactory::createEntity(EntityType::Boss, Game::Instance()->getPlayer()->getLevel() + 2));
 		break;
 	default:
 		br = new RegularRoom(-1, -1, -1);
@@ -102,8 +103,8 @@ BaseRoom* RoomFactory::createRoom(BaseRoom* prevRoom, Direction to) {
 
 	br->generateDoors();
 
-	br->setEnemies(EntityFactory::createRandomEntities());
-	br->setItems(ItemFactory::createRandomItems());
+	br->addEnemies(EntityFactory::createRandomEntities());
+	br->addItems(ItemFactory::createRandomItems());
 
 	br->setDescription(generateDescription(br));
 

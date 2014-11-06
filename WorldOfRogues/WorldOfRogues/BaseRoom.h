@@ -52,7 +52,12 @@ public:
 	int getColumn();
 	int getLevel();
 
+	void addEnemy(BaseEntity* entity);
+	void addEnemies(std::vector<BaseEntity*> enemies);
 	void setEnemies(std::vector<BaseEntity*> enemies);
+
+	void addItem(BaseItem* item);
+	void addItems(std::vector<BaseItem*> items);
 	void setItems(std::vector<BaseItem*> items);
 
 	std::vector<BaseEntity*> getEnemies();

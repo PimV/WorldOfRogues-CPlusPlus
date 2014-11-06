@@ -71,6 +71,14 @@ std::vector<BaseEntity*> EntityFactory::createRandomEntities()
 	}
 
 	return entityArray;
+
+}
+
+BaseEntity* EntityFactory::createEntity(EntityType et, int level)
+{
+	BaseEntity* baseEntity = createEntity(et);
+	baseEntity->setLevel(level);
+	return baseEntity;
 }
 
 BaseEntity* EntityFactory::createEntity(EntityType et)
@@ -104,7 +112,7 @@ BaseEntity* EntityFactory::createEntity(EntityType et)
 std::string EntityFactory::generateName(BaseEntity* entity) {
 	std::string name = "";
 
-	switch( entity->getLevel() - Game::Instance()->getPlayer()->getLevel()) {
+	switch (entity->getLevel() - Game::Instance()->getPlayer()->getLevel()) {
 	case -5:
 	case -4:
 	case -3:

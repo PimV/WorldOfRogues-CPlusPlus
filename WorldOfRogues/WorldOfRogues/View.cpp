@@ -17,6 +17,9 @@
 View::View(Game* game)
 {
 	this->game = game;
+
+	displayIntroMessage();
+
 	input = "help";
 }
 
@@ -344,13 +347,13 @@ void View::displayMap()
 	// change currentLevel
 	size_t currentLevel = Game::Instance()->getPlayer()->getRoom()->getLevel();
 
-	std::cout << std::endl << "Level " << currentLevel << std::endl;
+	std::cout << std::endl;
+
 	for (size_t i = 0; i < Game::Instance()->getRoomVector()->at(currentLevel).size(); i++)
 	{
 		(i == Game::Instance()->getPlayer()->getRoom()->getColumn()) ? std::cout << " * " : std::cout << "   ";
 	}
 
-	std::cout << std::endl;
 	for (size_t i = 0; i < Game::Instance()->getRoomVector()->at(currentLevel).size(); i++)
 	{
 		std::string northDoors = "";
@@ -380,9 +383,16 @@ void View::displayMap()
 		}
 		// print doors:
 		std::cout << northDoors << std::endl << roomsAndDoors << currentRow << std::endl << southDoors << std::endl;
+
 		//std::cout << std::endl << southDoors << std::endl;
 
 	}
+	std::cout << std::endl << "Level " << currentLevel << std::endl;
+	std::cout << "Information: " << std::endl 
+			<< "R - Regular Room" << std::endl 
+			<< "B - Boss room" << std::endl 
+			<< "E - End room" << std::endl 
+			<< "S - Start room" << std::endl;
 }
 
 void View::displayEquipment() {
@@ -407,6 +417,15 @@ void View::displayCurrentRoom() {
 	std::cout << Game::Instance()->getPlayer()->getRoom()->toString() << std::endl;
 }
 
+void View::displayIntroMessage()
+{
+	std::cout << "Welcome to the World of Rogues!" << std::endl << std::endl ;
+	std::cout << "Your on a quest to slay the demon that resides at the top of the tower. ";
+	std::cout << "On your way to the top you shall encounter many obstacles that will prevent you from reaching your goal. ";
+	std::cout << "Make sure to collect all the items along the way and equip them before entering battle." << std::endl << std::endl;
+
+	std::cout << "You have been given a map that will help guide you through the tower. However, the map will only display the rooms you've been in and which doors you can enter." << std::endl << std::endl;
+}
 
 
 View::~View()
