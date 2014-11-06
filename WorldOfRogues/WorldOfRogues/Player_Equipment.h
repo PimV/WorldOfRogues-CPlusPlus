@@ -1,7 +1,7 @@
 #pragma once
-#include "BaseInventory.h"
+#include "BaseEquipment.h"
 class Player_Equipment :
-	public BaseInventory
+	public BaseEquipment
 {
 public:
 

@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "BaseRoom.h"
 #include "Direction.h"
+#include "Player_Equipment.h"
 
 View::View(Game* game)
 {
@@ -25,6 +26,7 @@ void View::receiveInput()
 			std::cout << "- quit" << std::endl;
 			std::cout << "- enter door" << std::endl;
 			std::cout << "- current_level" << std::endl;
+			std::cout << "- equipment" << std::endl;
 			if (Game::Instance()->getPlayer()->getRoom()->toString() == std::string("endroom")) {
 				if (Game::Instance()->getPlayer()->getRoom()->getLevel() > 0) {
 					std::cout << "- descend" << std::endl;
@@ -49,6 +51,9 @@ void View::receiveInput()
 		else if (input == "map")
 		{
 			displayMap();
+		}
+		else if (input == "equipment") {
+			displayEquipment();
 		}
 		else if (input.substr(0, enterPrefix.size()) == enterPrefix)
 		{
@@ -199,33 +204,6 @@ void View::displayMap()
 			{
 				BaseRoom* currentRoom = Game::Instance()->getRoomVector()->at(currentLevel).at(i).at(j);
 
-				//if (currentRoom->hasWestDoor()) {
-				//	roomsAndDoors += "-";
-				//} else {
-				//	roomsAndDoors += " ";
-				//}
-				//roomsAndDoors += currentRoom->getSymbol();
-				////std::cout << this->game->roomVector[currentLevel][i][j]->getSymbol();
-				//if (currentRoom->hasEastDoor()) {
-				//	roomsAndDoors += "-";
-				//	//std::cout << "-";
-				//} else {
-				//	roomsAndDoors += " ";
-				//	//std::cout << " ";
-				//}
-
-				//if (currentRoom->hasSouthDoor()) {
-				//	southDoors += " | ";
-				//} else {
-				//	southDoors += "   ";
-				//}
-
-				//if (currentRoom->hasNorthDoor()) {
-				//	northDoors += " | ";
-				//} else {
-				//	northDoors += "   ";
-				//}
-
 				(currentRoom->hasWestDoor()) ? roomsAndDoors += "-" : roomsAndDoors += " ";
 				roomsAndDoors += currentRoom->getSymbol();
 				(currentRoom->hasEastDoor()) ? roomsAndDoors += "-" : roomsAndDoors += " ";
@@ -246,6 +224,10 @@ void View::displayMap()
 		//std::cout << std::endl << southDoors << std::endl;
 
 	}
+}
+
+void View::displayEquipment() {
+	std::cout << Game::Instance()->getPlayer()->getEquipment()->toString() << std::endl;
 }
 
 

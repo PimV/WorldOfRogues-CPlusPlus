@@ -51,9 +51,32 @@ Weapon* BaseEquipment::getWeapon() {
 }
 
 std::string BaseEquipment::toString() {
-	std::string equipment = "\t\t\t";
+	std::string helmetString = "none";
+	if (this->getHelmet() != nullptr) {
+		helmetString = this->getHelmet()->toString();
+	}
 
-	return equipment;
+	std::string platebodyString = "none";
+	if (this->getPlatebody() != nullptr) {
+		platebodyString = this->getPlatebody()->toString();
+	}
+	std::string platelegsString = "none";
+	if (this->getPlatelegs() != nullptr) {
+		platelegsString = this->getPlatelegs()->toString();
+	}
+	std::string shieldString = "none";
+	if (this->getShield() != nullptr) {
+		shieldString = this->getShield()->toString();
+	}
+	std::string weaponString = "none";
+	if (this->getWeapon() != nullptr) {
+		weaponString = this->getWeapon()->toString();
+	}
+	std::string equipment ="";
+	equipment.append("\t" + helmetString + "\t\t\n");
+	equipment.append(weaponString + "\t" + platebodyString + "\t" + shieldString + "\n");
+	equipment.append("\t" + platelegsString + "\t\t\n");
+	return equipment.c_str();
 }
 
 BaseEquipment::~BaseEquipment(void)

@@ -6,6 +6,7 @@ class Weapon :
 {
 public:
 	Weapon(void);
+	std::string toString();
 	virtual ~Weapon(void);
 };
 

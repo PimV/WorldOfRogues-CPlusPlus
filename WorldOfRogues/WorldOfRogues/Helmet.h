@@ -6,6 +6,7 @@ class Helmet :
 {
 public:
 	Helmet(void);
+	std::string toString();
 	virtual ~Helmet(void);
 };
 

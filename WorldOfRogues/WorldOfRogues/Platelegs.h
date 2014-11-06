@@ -6,6 +6,7 @@ class Platelegs :
 {
 public:
 	Platelegs(void);
+	std::string toString();
 	virtual ~Platelegs(void);
 };
 

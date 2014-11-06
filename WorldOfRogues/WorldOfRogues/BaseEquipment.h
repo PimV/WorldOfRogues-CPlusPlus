@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 class Helmet;
 class Platebody;
 class Platelegs;
