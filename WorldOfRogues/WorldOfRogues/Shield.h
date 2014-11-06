@@ -6,6 +6,7 @@ class Shield :
 {
 public:
 	Shield(void);
+	void use(Player* player);
 	std::string toString();
 	virtual ~Shield(void);
 };

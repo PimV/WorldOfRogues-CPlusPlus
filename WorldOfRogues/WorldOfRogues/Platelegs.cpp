@@ -5,9 +5,11 @@ Platelegs::Platelegs(void)
 {
 }
 
+void Platelegs::use(Player* player) {
 
+}
 std::string Platelegs::toString() {
-	return "platelegs";
+	return std::string("platelegs");
 }
 
 Platelegs::~Platelegs(void)

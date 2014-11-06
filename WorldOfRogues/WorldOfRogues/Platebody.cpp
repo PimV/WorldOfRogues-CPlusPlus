@@ -5,8 +5,12 @@ Platebody::Platebody(void)
 {
 }
 
+void Platebody::use(Player* player) {
+
+}
+
 std::string Platebody::toString() {
-	return "platebody";
+	return std::string("platebody");
 }
 
 Platebody::~Platebody(void)

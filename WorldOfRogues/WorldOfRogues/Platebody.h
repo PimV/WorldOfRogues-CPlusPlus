@@ -6,6 +6,7 @@ class Platebody :
 {
 public:
 	Platebody(void);
+	void use(Player* player);
 	std::string toString();
 	virtual ~Platebody(void);
 };

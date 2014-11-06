@@ -5,6 +5,13 @@
 #include "BaseRoom.h"
 #include "Direction.h"
 #include "Player_Equipment.h"
+#include "Player_Inventory.h"
+#include "BaseItem.h"
+#include "Weapon.h"
+#include "Shield.h"
+#include "Platebody.h"
+#include "Platelegs.h"
+#include "Helmet.h"
 
 View::View(Game* game)
 {
@@ -15,6 +22,8 @@ View::View(Game* game)
 void View::receiveInput()
 {
 	std::string enterPrefix = "enter door ";
+	std::string usePrefix = "use ";
+	std::string unequipPrefix = "unequip ";
 
 	while (input != "quit")
 	{
@@ -27,6 +36,11 @@ void View::receiveInput()
 			std::cout << "- enter door" << std::endl;
 			std::cout << "- current_level" << std::endl;
 			std::cout << "- equipment" << std::endl;
+			std::cout << "- player_stats" << std::endl;
+			std::cout << "- inventory" << std::endl;
+			std::cout << "- use [item]" << std::endl;
+			std::cout << "- unequip [equipment_item]" << std::endl;
+			std::cout << "- addhelm" << std::endl;
 			if (Game::Instance()->getPlayer()->getRoom()->toString() == std::string("endroom")) {
 				if (Game::Instance()->getPlayer()->getRoom()->getLevel() > 0) {
 					std::cout << "- descend" << std::endl;
@@ -54,6 +68,24 @@ void View::receiveInput()
 		}
 		else if (input == "equipment") {
 			displayEquipment();
+		}
+		else if (input == "inventory") {
+			displayInventory();
+		}
+		else if (input == "addhelm") {
+			Game::Instance()->getPlayer()->getInventory()->addItem(new Helmet());
+		} 
+		else if (input == "search") {
+
+		}
+		else if (input == "player_stats") {
+			displayPlayerStatistics();
+		}
+		else if (input.substr(0, usePrefix.size()) == usePrefix) {
+			useItem(usePrefix, input);
+		}
+		else if (input.substr(0, unequipPrefix.size()) == unequipPrefix) {
+			unequipItem(unequipPrefix, input);
 		}
 		else if (input.substr(0, enterPrefix.size()) == enterPrefix)
 		{
@@ -104,6 +136,41 @@ void View::receiveInput()
 		std::cout << "\n> ";
 
 		std::getline(std::cin, input);
+	}
+}
+
+void View::unequipItem(std::string prefix, std::string input) {
+	std::string item = input.substr(prefix.size(), input.size());
+	std::string itemFound = Game::Instance()->getPlayer()->getEquipment()->hasItem(item);
+
+	if (itemFound == "weapon") {
+		Game::Instance()->getPlayer()->getInventory()->addItem(dynamic_cast<BaseItem*>(Game::Instance()->getPlayer()->getEquipment()->getWeapon()));
+		Game::Instance()->getPlayer()->getEquipment()->setWeapon(nullptr);
+	} else if (itemFound == "shield") {
+		Game::Instance()->getPlayer()->getInventory()->addItem(dynamic_cast<BaseItem*>(Game::Instance()->getPlayer()->getEquipment()->getShield()));
+		Game::Instance()->getPlayer()->getEquipment()->setShield(nullptr);
+	} else if (itemFound == "platebody") {
+		Game::Instance()->getPlayer()->getInventory()->addItem(dynamic_cast<BaseItem*>(Game::Instance()->getPlayer()->getEquipment()->getPlatebody()));
+		Game::Instance()->getPlayer()->getEquipment()->setPlatebody(nullptr);
+	} else if (itemFound == "platelegs") {
+		Game::Instance()->getPlayer()->getInventory()->addItem(dynamic_cast<BaseItem*>(Game::Instance()->getPlayer()->getEquipment()->getPlatelegs()));
+		Game::Instance()->getPlayer()->getEquipment()->setPlatelegs(nullptr);
+	} else if (itemFound == "helmet") {
+		Game::Instance()->getPlayer()->getInventory()->addItem(dynamic_cast<BaseItem*>(Game::Instance()->getPlayer()->getEquipment()->getHelmet()));
+		Game::Instance()->getPlayer()->getEquipment()->setHelmet(nullptr);
+	} else if (itemFound == "false") {
+		std::cout << "You are currently not wearing a(n) " << item << "." << std::endl;
+	}
+
+}
+
+void View::useItem(std::string prefix, std::string input) {
+	std::string item = input.substr(prefix.size(), input.size());
+
+	if (Game::Instance()->getPlayer()->getInventory()->hasItem(item)) {
+		Game::Instance()->getPlayer()->getInventory()->getItem(item)->use(Game::Instance()->getPlayer());
+	} else {
+		std::cout << "Item not found in inventory" << std::endl;
 	}
 }
 
@@ -229,6 +296,15 @@ void View::displayMap()
 void View::displayEquipment() {
 	std::cout << Game::Instance()->getPlayer()->getEquipment()->toString() << std::endl;
 }
+
+void View::displayInventory() {
+	std::cout << Game::Instance()->getPlayer()->getInventory()->toString() << std::endl;
+}
+
+void View::displayPlayerStatistics() {
+
+}
+
 
 
 View::~View()

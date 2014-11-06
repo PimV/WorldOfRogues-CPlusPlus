@@ -10,6 +10,8 @@ class BaseEquipment
 public:
 	BaseEquipment(void);
 
+	std::string hasItem(std::string itemString);
+
 	void setHelmet(Helmet* helmet);
 	void setPlatebody(Platebody* platebody);
 	void setPlatelegs(Platelegs* platelegs);
@@ -21,6 +23,12 @@ public:
 	Platelegs* getPlatelegs();
 	Shield* getShield();
 	Weapon* getWeapon();
+
+	bool hasHelmet();
+	bool hasPlatebody();
+	bool hasPlatelegs();
+	bool hasShield();
+	bool hasWeapon();
 
 	std::string toString();
 

@@ -10,6 +10,22 @@ BaseEquipment::BaseEquipment(void)
 {
 }
 
+std::string BaseEquipment::hasItem(std::string itemString) {
+	if(this->hasWeapon() && itemString == this->weapon->toString()) {
+		return "weapon";
+	} else if (this->hasShield() && itemString == this->shield->toString()) {
+		return "shield";
+	} else if (this->hasHelmet() && itemString == this->helmet->toString()) {
+		return "helmet";
+	} else if (this->hasPlatelegs() && itemString == this->platelegs->toString()) {
+		return "platelegs";
+	} else if (this->hasPlatebody() && itemString == this->platebody->toString()) {
+		return "platebody";
+	} else {
+		return "false";
+	}
+}
+
 void BaseEquipment::setHelmet(Helmet* helmet) {
 	this->helmet = helmet;
 }
@@ -48,6 +64,38 @@ Shield* BaseEquipment::getShield() {
 
 Weapon* BaseEquipment::getWeapon() {
 	return this->weapon;
+}
+
+bool BaseEquipment::hasHelmet() {
+	if (this->helmet != nullptr) {
+		return true;
+	}
+	return false;
+}
+
+bool BaseEquipment::hasPlatebody() {
+	if (this->platebody != nullptr) {
+		return true;
+	}
+	return false;
+}
+bool BaseEquipment::hasPlatelegs() {
+	if (this->platelegs != nullptr) {
+		return true;
+	}
+	return false;
+}
+bool BaseEquipment::hasShield() {
+	if (this->shield != nullptr) {
+		return true;
+	}
+	return false;
+}
+bool BaseEquipment::hasWeapon() {
+	if (this->weapon != nullptr) {
+		return true;
+	}
+	return false;
 }
 
 std::string BaseEquipment::toString() {
