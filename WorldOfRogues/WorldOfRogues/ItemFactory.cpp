@@ -27,85 +27,136 @@ std::vector<BaseItem*> ItemFactory::createRandomItems()
 	// random items
 	for (size_t i = 0; i < amountOfItems; i++)
 	{
-		std::uniform_int_distribution<int> dist2(1, 5);
+		std::uniform_int_distribution<int> dist2(0, 30);
 		int randomItemSpawn = dist2(dre);
 
-		//std::cout << "Created: ";
-		switch (randomItemSpawn)
-		{
-		case 1:
-			itemsArray.push_back(createItem(ItemType::Sword));
-			break;
-		case 2:
-			itemsArray.push_back(createItem(ItemType::Shield));
-			break;
-		case 3:
-			itemsArray.push_back(createItem(ItemType::Helmet));
-			break;
-		case 4:
-			itemsArray.push_back(createItem(ItemType::Platebody));
-			break;
-		case 5:
-			itemsArray.push_back(createItem(ItemType::Platelegs));
-			break;
-		default:
-			break;
+		if (randomItemSpawn >= 0 && randomItemSpawn <= 8) {
+			itemsArray.push_back(createItem(static_cast<WeaponType>(randomItemSpawn)));
 		}
-
-		std::cout << std::endl;
+		else if (randomItemSpawn >= 9 && randomItemSpawn <= 20) {
+			itemsArray.push_back(createItem(static_cast<ArmourType>(randomItemSpawn)));
+		}
 	}
-
-	//// random entity level
-	//for (BaseEntity *e : entityArray)
-	//{
-	//	std::uniform_int_distribution<int> dist3(1, 5);
-	//	int randomEntityLevel = dist3(dre);
-	//	std::cout << "Random entity level [" << randomEntityLevel << "]" << std::endl;
-
-	//	// change: (CurrentPlayer->getLevel() + randomEntityLevel);
-	//	e->setLevel(randomEntityLevel);
-	//}
-
 	return itemsArray;
 }
 
-BaseItem* ItemFactory::createItem(ItemType it)
+BaseItem* ItemFactory::createItem(WeaponType weaponType)
 {
-	BaseItem* item;
+	Weapon *item = new Weapon();
 
-	switch (it)
+	switch (weaponType)
 	{
-	case ItemType::Sword:
-		item = new Weapon();
+	case WeaponType::Dagger:
 		item->Name = "The Ripper";
-		dynamic_cast<Weapon*>(item)->attackpoints = 10;
-		break;
-	case ItemType::Shield:
-		item = new Shield();
-		item->Name = "Mirror Shield";
-		dynamic_cast<Shield*>(item)->defencepoints = 10;
-		break;
-	case ItemType::Helmet:
-		item = new Helmet();
-		item->Name = "Highmage Mask";
-		dynamic_cast<Helmet*>(item)->defencepoints = 10;
-		break;
-	case ItemType::Platebody:
-		item = new Platebody();
-		item->Name = "Steel armour";
-		dynamic_cast<Platebody*>(item)->defencepoints = 10;
-		break;
-	case ItemType::Platelegs:
-		item = new Platelegs();
-		item->Name = "Iron legs";
-		dynamic_cast<Platelegs*>(item)->defencepoints = 10;
-		break;
+		item->attackpoints = 1;
+		return item;
+	case WeaponType::Sword:
+		item->Name = "The Slicer";
+		item->attackpoints = 2;
+		return item;
+	case WeaponType::Axe:
+		item->Name = "The Chopper";
+		item->attackpoints = 3;
+		return item;
+	case WeaponType::Hammer:
+		item->Name = "The Squasher";
+		item->attackpoints = 4;
+		return item;
+	case WeaponType::Spear:
+		item->Name = "The Stabber";
+		item->attackpoints = 5;
+		return item;
+	case WeaponType::Mace:
+		item->Name = "The Stunner";
+		item->attackpoints = 6;
+		return item;
+	case WeaponType::Longsword:
+		item->Name = "The Executer";
+		item->attackpoints = 7;
+		return item;
+	case WeaponType::Battleaxe:
+		item->Name = "The Cleaver";
+		item->attackpoints = 8;
+		return item;
+	case WeaponType::Greatsword:
+		item->Name = "The Destroyer";
+		item->attackpoints = 9;
+		return item;
 	default:
 		return nullptr;
 		break;
 	}
+}
 
-	return item;
+BaseItem* ItemFactory::createItem(ArmourType armourType)
+{
+	BaseArmour* item;
 
+	switch (armourType)
+	{
+	case ArmourType::IronHelmet:
+		item = new Helmet();
+		item->Name = item_strings[(int)armourType];
+		item->defencepoints = 1;
+		return item;
+	case ArmourType::SteelHelmet:
+		item = new Helmet();
+		item->Name = item_strings[(int)armourType];
+		item->defencepoints = 2;
+		return item;
+	case ArmourType::MithrilHelmet:
+		item = new Helmet();
+		item->Name = item_strings[(int)armourType];
+		item->defencepoints = 3;
+		return item;
+	case ArmourType::IronLegs:
+		item = new Platelegs();
+		item->Name = item_strings[(int)armourType];
+		item->defencepoints = 1;
+		return item;
+	case ArmourType::SteelLegs:
+		item = new Platelegs();
+		item->Name = item_strings[(int)armourType];
+		item->defencepoints = 2;
+		return item;
+	case ArmourType::MithrilLegs:
+		item = new Platelegs();
+		item->Name = item_strings[(int)armourType];
+		item->defencepoints = 3;
+		return item;
+	case ArmourType::IronBody:
+		item = new Platebody();
+		item->Name = item_strings[(int)armourType];
+		item->defencepoints = 1;
+		return item;
+	case ArmourType::SteelBody:
+		item = new Platebody();
+		item->Name = item_strings[(int)armourType];
+		item->defencepoints = 2;
+		return item;
+	case ArmourType::MithrilBody:
+		item = new Platebody();
+		item->Name = item_strings[(int)armourType];
+		item->defencepoints = 3;
+		return item;
+	case ArmourType::IronShield:
+		item = new Shield();
+		item->Name = item_strings[(int)armourType];
+		item->defencepoints = 1;
+		return item;
+	case ArmourType::SteelShield:
+		item = new Shield();
+		item->Name = item_strings[(int)armourType];
+		item->defencepoints = 2;
+		return item;
+	case ArmourType::MithrilShield:
+		item = new Shield();
+		item->Name = item_strings[(int)armourType];
+		item->defencepoints = 3;
+		return item;
+	default:
+		return nullptr;
+		break;
+	}
 
 }

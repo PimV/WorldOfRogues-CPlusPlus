@@ -34,7 +34,7 @@ std::vector<BaseEntity*> EntityFactory::createRandomEntities()
 	// random mobs
 	for (size_t i = 0; i < amountOfEntities; i++)
 	{
-		std::uniform_int_distribution<int> dist2(1, 5);
+		std::uniform_int_distribution<int> dist2(1, 8);
 		int randomEntitySpawn = dist2(dre);
 
 		switch (randomEntitySpawn)
@@ -50,9 +50,6 @@ std::vector<BaseEntity*> EntityFactory::createRandomEntities()
 			break;
 		case 4:
 			entityArray.push_back(createEntity(EntityType::Dwarf));
-			break;
-		case 5:
-			entityArray.push_back(createEntity(EntityType::Boss));
 			break;
 		default:
 			break;
