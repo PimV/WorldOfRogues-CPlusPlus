@@ -44,65 +44,54 @@ std::vector<BaseItem*> ItemFactory::createRandomItems()
 
 BaseItem* ItemFactory::createItem(WeaponType weaponType)
 {
-	BaseItem* item;
+	Weapon *item = new Weapon();
 
 	switch (weaponType)
 	{
 	case WeaponType::Dagger:
-		item = new Weapon();
 		item->Name = "The Ripper";
-		dynamic_cast<Weapon*>(item)->attackpoints = 1;
-		break;
+		item->attackpoints = 1;
+		return item;
 	case WeaponType::Sword:
-		item = new Weapon();
 		item->Name = "The Slicer";
-		dynamic_cast<Weapon*>(item)->attackpoints = 2;
-		break;
+		item->attackpoints = 2;
+		return item;
 	case WeaponType::Axe:
-		item = new Weapon();
 		item->Name = "The Chopper";
-		dynamic_cast<Weapon*>(item)->attackpoints = 3;
-		break;
+		item->attackpoints = 3;
+		return item;
 	case WeaponType::Hammer:
-		item = new Weapon();
 		item->Name = "The Squasher";
-		dynamic_cast<Weapon*>(item)->attackpoints = 4;
-		break;
+		item->attackpoints = 4;
+		return item;
 	case WeaponType::Spear:
-		item = new Weapon();
 		item->Name = "The Stabber";
-		dynamic_cast<Weapon*>(item)->attackpoints = 5;
-		break;
+		item->attackpoints = 5;
+		return item;
 	case WeaponType::Mace:
-		item = new Weapon();
 		item->Name = "The Stunner";
-		dynamic_cast<Weapon*>(item)->attackpoints = 6;
-		break;
+		item->attackpoints = 6;
+		return item;
 	case WeaponType::Longsword:
-		item = new Weapon();
 		item->Name = "The Executer";
-		dynamic_cast<Weapon*>(item)->attackpoints = 7;
-		break;
+		item->attackpoints = 7;
+		return item;
 	case WeaponType::Battleaxe:
-		item = new Weapon();
 		item->Name = "The Cleaver";
-		dynamic_cast<Weapon*>(item)->attackpoints = 8;
-		break;
+		item->attackpoints = 8;
+		return item;
 	case WeaponType::Greatsword:
-		item = new Weapon();
 		item->Name = "The Destroyer";
-		dynamic_cast<Weapon*>(item)->attackpoints = 8;
-		break;
+		item->attackpoints = 9;
+		return item;
 	default:
 		break;
 	}
-
-	return item;
 }
 
 BaseItem* ItemFactory::createItem(ArmourType armourType)
 {
-	BaseItem* item;
+	BaseArmour* item;
 
 	item->Name = armour_strings[(int)armourType];
 
@@ -110,52 +99,52 @@ BaseItem* ItemFactory::createItem(ArmourType armourType)
 	{
 	case ArmourType::IronHelmet:
 		item = new Helmet();
-		dynamic_cast<Helmet*>(item)->defencepoints = 1;
-		break;
+		item->defencepoints = 1;
+		return item;
 	case ArmourType::SteelHelmet:
 		item = new Helmet();
-		dynamic_cast<Helmet*>(item)->defencepoints = 2;
-		break;
+		item->defencepoints = 2;
+		return item;
 	case ArmourType::MithrilHelmet:
 		item = new Helmet();
-		dynamic_cast<Helmet*>(item)->defencepoints = 3;
-		break;
+		item->defencepoints = 3;
+		return item;
 	case ArmourType::IronLegs:
 		item = new Platelegs();
-		dynamic_cast<Platelegs*>(item)->defencepoints = 1;
-		break;
+		item->defencepoints = 1;
+		return item;
 	case ArmourType::SteelLegs:
 		item = new Platelegs();
-		dynamic_cast<Platelegs*>(item)->defencepoints = 2;
-		break;
+		item->defencepoints = 2;
+		return item;
 	case ArmourType::MithrilLegs:
 		item = new Platelegs();
-		dynamic_cast<Platelegs*>(item)->defencepoints = 3;
-		break;
+		item->defencepoints = 3;
+		return item;
 	case ArmourType::IronBody:
 		item = new Platebody();
-		dynamic_cast<Platebody*>(item)->defencepoints = 1;
-		break;
+		item->defencepoints = 1;
+		return item;
 	case ArmourType::SteelBody:
 		item = new Platebody();
-		dynamic_cast<Platebody*>(item)->defencepoints = 2;
-		break;
+		item->defencepoints = 2;
+		return item;
 	case ArmourType::MithrilBody:
 		item = new Platebody();
-		dynamic_cast<Platebody*>(item)->defencepoints = 3;
-		break;
+		item->defencepoints = 3;
+		return item;
 	case ArmourType::IronShield:
 		item = new Shield();
-		dynamic_cast<Shield*>(item)->defencepoints = 1;
-		break;
+		item->defencepoints = 1;
+		return item;
 	case ArmourType::SteelShield:
 		item = new Shield();
-		dynamic_cast<Shield*>(item)->defencepoints = 2;
-		break;
+		item->defencepoints = 2;
+		return item;
 	case ArmourType::MithrilShield:
 		item = new Shield();
-		dynamic_cast<Shield*>(item)->defencepoints = 3;
-		break;
+		item->defencepoints = 3;
+		return item;
 	default:
 		break;
 	}
