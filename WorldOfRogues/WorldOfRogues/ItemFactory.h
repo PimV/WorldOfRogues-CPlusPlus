@@ -10,7 +10,8 @@ class ItemFactory
 public:
 	virtual ~ItemFactory();
 	
-	static BaseItem* createItem(ItemType it);
+	static BaseItem* createItem(WeaponType weaponType);
+	static BaseItem* createItem(ArmourType armourType);
 	static std::vector<BaseItem*> createRandomItems();
 private:
 };
