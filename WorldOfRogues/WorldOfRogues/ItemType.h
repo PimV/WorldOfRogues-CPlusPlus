@@ -13,7 +13,23 @@ enum class WeaponType
 	Greatsword,
 };
 
-static const char* weapon_strings[] = {
+enum class ArmourType
+{
+	IronHelmet = 9,
+	SteelHelmet,
+	MithrilHelmet,
+	IronLegs,
+	SteelLegs,
+	MithrilLegs,
+	IronBody,
+	SteelBody,
+	MithrilBody,
+	IronShield,
+	SteelShield,
+	MithrilShield
+};
+
+static const char* item_strings[] = {
 	"Dagger",
 	"Sword",
 	"Axe",
@@ -23,25 +39,6 @@ static const char* weapon_strings[] = {
 	"Longsword",
 	"Battleaxe",
 	"Greatsword",
-};
-
-enum class ArmourType
-{
-	IronHelmet = 9,
-	SteelHelmet = 10,
-	MithrilHelmet = 11,
-	IronLegs = 12,
-	SteelLegs = 13,
-	MithrilLegs = 14,
-	IronBody = 15,
-	SteelBody = 16,
-	MithrilBody = 17,
-	IronShield = 18,
-	SteelShield = 19,
-	MithrilShield = 20
-};
-
-static const char* armour_strings[] = {
 	"Iron Helmet",
 	"Steel Helmet",
 	"Mithril Helmet",

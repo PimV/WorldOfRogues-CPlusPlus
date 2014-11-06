@@ -36,8 +36,6 @@ std::vector<BaseItem*> ItemFactory::createRandomItems()
 		else if (randomItemSpawn >= 9 && randomItemSpawn <= 20) {
 			itemsArray.push_back(createItem(static_cast<ArmourType>(randomItemSpawn)));
 		}
-
-		std::cout << std::endl;
 	}
 	return itemsArray;
 }
@@ -98,62 +96,62 @@ BaseItem* ItemFactory::createItem(ArmourType armourType)
 	{
 	case ArmourType::IronHelmet:
 		item = new Helmet();
-		item->Name = armour_strings[(int)armourType];
+		item->Name = item_strings[(int)armourType];
 		item->defencepoints = 1;
 		return item;
 	case ArmourType::SteelHelmet:
 		item = new Helmet();
-		item->Name = armour_strings[(int)armourType];
+		item->Name = item_strings[(int)armourType];
 		item->defencepoints = 2;
 		return item;
 	case ArmourType::MithrilHelmet:
 		item = new Helmet();
-		item->Name = armour_strings[(int)armourType];
+		item->Name = item_strings[(int)armourType];
 		item->defencepoints = 3;
 		return item;
 	case ArmourType::IronLegs:
 		item = new Platelegs();
-		item->Name = armour_strings[(int)armourType];
+		item->Name = item_strings[(int)armourType];
 		item->defencepoints = 1;
 		return item;
 	case ArmourType::SteelLegs:
 		item = new Platelegs();
-		item->Name = armour_strings[(int)armourType];
+		item->Name = item_strings[(int)armourType];
 		item->defencepoints = 2;
 		return item;
 	case ArmourType::MithrilLegs:
 		item = new Platelegs();
-		item->Name = armour_strings[(int)armourType];
+		item->Name = item_strings[(int)armourType];
 		item->defencepoints = 3;
 		return item;
 	case ArmourType::IronBody:
 		item = new Platebody();
-		item->Name = armour_strings[(int)armourType];
+		item->Name = item_strings[(int)armourType];
 		item->defencepoints = 1;
 		return item;
 	case ArmourType::SteelBody:
 		item = new Platebody();
-		item->Name = armour_strings[(int)armourType];
+		item->Name = item_strings[(int)armourType];
 		item->defencepoints = 2;
 		return item;
 	case ArmourType::MithrilBody:
 		item = new Platebody();
-		item->Name = armour_strings[(int)armourType];
+		item->Name = item_strings[(int)armourType];
 		item->defencepoints = 3;
 		return item;
 	case ArmourType::IronShield:
 		item = new Shield();
-		item->Name = armour_strings[(int)armourType];
+		item->Name = item_strings[(int)armourType];
 		item->defencepoints = 1;
 		return item;
 	case ArmourType::SteelShield:
 		item = new Shield();
-		item->Name = armour_strings[(int)armourType];
+		item->Name = item_strings[(int)armourType];
 		item->defencepoints = 2;
 		return item;
 	case ArmourType::MithrilShield:
 		item = new Shield();
-		item->Name = armour_strings[(int)armourType];
+		item->Name = item_strings[(int)armourType];
 		item->defencepoints = 3;
 		return item;
 	default:
