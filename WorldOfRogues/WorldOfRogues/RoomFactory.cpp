@@ -42,7 +42,8 @@ BaseRoom* RoomFactory::createRoom(BaseRoom* prevRoom, Direction to) {
 		/*	br = new RegularRoom(-1, -1, -1);
 		break;*/
 	case 19: 
-		/*	br = new BossRoom(-1,-1,-1);
+		/*br = new BossRoom(-1,-1,-1);
+		br->addEnemy(EntityFactory::createEntity(EntityType::Boss, Game::Instance()->getPlayer()->getLevel() + 2));
 		break;*/
 	case 20: 
 		br = new EndRoom(-1,-1,-1);

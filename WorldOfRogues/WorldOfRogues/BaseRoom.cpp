@@ -1,6 +1,7 @@
 #include "BaseRoom.h"
 #include <time.h>
 #include "Game.h"
+#include <vector>
 
 BaseRoom::BaseRoom(int level, int row, int column)
 {
@@ -263,7 +264,6 @@ void BaseRoom::addItem(BaseItem* item)
 {
 	this->items.push_back(item);
 }
-
 
 
 std::string BaseRoom::toString() {
