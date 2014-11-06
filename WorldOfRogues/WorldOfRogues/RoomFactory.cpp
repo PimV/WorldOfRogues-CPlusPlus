@@ -90,13 +90,13 @@ BaseRoom* RoomFactory::createRoom(BaseRoom* prevRoom, Direction to) {
 
 	br->generateDoors();
 
-	std::cout << "Generating enemies: " << std::endl;
 	br->setEnemies(EntityFactory::createRandomEntities());
 	br->setItems(ItemFactory::createRandomItems());
 
+	std::cout << "Items in room:" << std::endl;
 	for (BaseItem* item : br->getItems())
 	{
-		item->toString();
+		std::cout << "\t" << item->toString() << std::endl;
 	}
 
 	return br;

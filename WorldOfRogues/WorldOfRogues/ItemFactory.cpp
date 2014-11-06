@@ -1,5 +1,4 @@
 #include "ItemFactory.h"
-#include "ItemType.h"
 
 #include "Weapon.h"
 #include "Shield.h"
@@ -48,11 +47,11 @@ std::vector<BaseItem*> ItemFactory::createRandomItems()
 			break;
 		case 4:
 			std::cout << "Plate armour ";
-			itemsArray.push_back(createItem(ItemType::PlateArmour));
+			itemsArray.push_back(createItem(ItemType::Platebody));
 			break;
 		case 5:
 			std::cout << "Plate legs ";
-			itemsArray.push_back(createItem(ItemType::PlateLegs));
+			itemsArray.push_back(createItem(ItemType::Platelegs));
 			break;
 		default:
 			break;
@@ -77,25 +76,41 @@ std::vector<BaseItem*> ItemFactory::createRandomItems()
 
 BaseItem* ItemFactory::createItem(ItemType it)
 {
+	BaseItem* item;
+
 	switch (it)
 	{
 	case ItemType::Sword:
-		return new Weapon();
+		item = new Weapon();
+		item->Name = "The Ripper";
+		dynamic_cast<Weapon*>(item)->attackpoints = 10;
 		break;
 	case ItemType::Shield:
-		return new Shield();
+		item = new Shield();
+		item->Name = "Mirror Shield";
+		dynamic_cast<Shield*>(item)->defencepoints = 10;
 		break;
 	case ItemType::Helmet:
-		return new Helmet();
+		item = new Helmet();
+		item->Name = "Highmage Mask";
+		dynamic_cast<Helmet*>(item)->defencepoints = 10;
 		break;
-	case ItemType::PlateArmour:
-		return new Platebody();
+	case ItemType::Platebody:
+		item = new Platebody();
+		item->Name = "Steel armour";
+		dynamic_cast<Platebody*>(item)->defencepoints = 10;
 		break;
-	case ItemType::PlateLegs:
-		return new Platelegs();
+	case ItemType::Platelegs:
+		item = new Platelegs();
+		item->Name = "Iron legs";
+		dynamic_cast<Platelegs*>(item)->defencepoints = 10;
 		break;
 	default:
 		return nullptr;
 		break;
 	}
+
+	return item;
+
+
 }

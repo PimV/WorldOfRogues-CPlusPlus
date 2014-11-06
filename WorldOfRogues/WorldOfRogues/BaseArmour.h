@@ -9,7 +9,8 @@ public:
 	virtual ~BaseArmour(void);
 
 	std::string toString();
-protected:
 	int defencepoints;
+
+protected:
 };
 

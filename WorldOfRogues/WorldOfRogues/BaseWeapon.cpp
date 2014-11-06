@@ -15,7 +15,7 @@ std::string BaseWeapon::toString()
 	return std::string(
 		std::string("") +
 		std::string(this->Name) +
-		std::string(" ") +
+		std::string(" with ") +
 		std::to_string(this->attackpoints) +
 		std::string(" defence points.")
 		);

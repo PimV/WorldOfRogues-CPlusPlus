@@ -9,7 +9,8 @@ public:
 	virtual ~BaseWeapon(void);
 
 	std::string toString();
-protected:
 	int attackpoints;
+
+protected:
 };
 

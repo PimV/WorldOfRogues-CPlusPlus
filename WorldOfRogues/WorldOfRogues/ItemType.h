@@ -5,8 +5,8 @@ enum class ItemType
 	Sword = 0,
 	Shield,
 	Helmet,
-	PlateArmour,
-	PlateLegs
+	Platebody,
+	Platelegs
 };
 
 static const char* item_strings[] = {
