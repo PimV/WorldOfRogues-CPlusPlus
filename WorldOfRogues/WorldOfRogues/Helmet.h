@@ -7,5 +7,6 @@ class Helmet :
 public:
 	Helmet(void);
 	virtual ~Helmet(void);
+
 };
 

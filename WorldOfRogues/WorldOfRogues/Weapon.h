@@ -7,5 +7,6 @@ class Weapon :
 public:
 	Weapon(void);
 	virtual ~Weapon(void);
+
 };
 

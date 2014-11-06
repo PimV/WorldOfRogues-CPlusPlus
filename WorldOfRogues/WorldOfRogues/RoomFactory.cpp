@@ -94,6 +94,11 @@ BaseRoom* RoomFactory::createRoom(BaseRoom* prevRoom, Direction to) {
 	br->setEnemies(EntityFactory::createRandomEntities());
 	br->setItems(ItemFactory::createRandomItems());
 
+	for (BaseItem* item : br->getItems())
+	{
+		item->toString();
+	}
+
 	return br;
 }
 

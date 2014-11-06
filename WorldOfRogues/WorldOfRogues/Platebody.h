@@ -7,5 +7,6 @@ class Platebody :
 public:
 	Platebody(void);
 	virtual ~Platebody(void);
+
 };
 

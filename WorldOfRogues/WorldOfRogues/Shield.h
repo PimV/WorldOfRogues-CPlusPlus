@@ -7,5 +7,6 @@ class Shield :
 public:
 	Shield(void);
 	virtual ~Shield(void);
+
 };
 
