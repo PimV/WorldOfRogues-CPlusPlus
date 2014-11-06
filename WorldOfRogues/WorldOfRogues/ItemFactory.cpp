@@ -69,7 +69,7 @@ std::vector<BaseItem*> ItemFactory::createRandomItems()
 	return itemsArray;
 }
 
-BaseItem* ItemFactory::createItem(ItemType it)
+BaseItem* ItemFactory::createItem(WeaponType weaponType)
 {
 	BaseItem* item;
 
@@ -105,7 +105,87 @@ BaseItem* ItemFactory::createItem(ItemType it)
 		break;
 	}
 
+	switch (weaponType)
+	{
+	case WeaponType::Dagger:
+		item = new Weapon();
+		item->Name = "The Ripper";
+		dynamic_cast<Weapon*>(item)->attackpoints = 1;
+		break;
+	case WeaponType::Sword:
+		item = new Weapon();
+		item->Name = "The Slicer";
+		dynamic_cast<Weapon*>(item)->attackpoints = 2;
+		break;
+	case WeaponType::Axe:
+		item = new Weapon();
+		item->Name = "The Chopper";
+		dynamic_cast<Weapon*>(item)->attackpoints = 3;
+		break;
+	case WeaponType::Hammer:
+		item = new Weapon();
+		item->Name = "The Squasher";
+		dynamic_cast<Weapon*>(item)->attackpoints = 4;
+		break;
+	case WeaponType::Spear:
+		item = new Weapon();
+		item->Name = "The Stabber";
+		dynamic_cast<Weapon*>(item)->attackpoints = 5;
+		break;
+	case WeaponType::Mace:
+		item = new Weapon();
+		item->Name = "The Stunner";
+		dynamic_cast<Weapon*>(item)->attackpoints = 6;
+		break;
+	case WeaponType::Longsword:
+		item = new Weapon();
+		item->Name = "The Executer";
+		dynamic_cast<Weapon*>(item)->attackpoints = 7;
+		break;
+	case WeaponType::Battleaxe:
+		item = new Weapon();
+		item->Name = "The Cleaver";
+		dynamic_cast<Weapon*>(item)->attackpoints = 8;
+		break;
+	case WeaponType::Greatsword:
+		item = new Weapon();
+		item->Name = "The Destroyer";
+		dynamic_cast<Weapon*>(item)->attackpoints = 8;
+		break;
+	default:
+		break;
+	}
+
 	return item;
+}
 
+BaseItem* ItemFactory::createItem(ArmourType armourType)
+{
+	BaseItem* item;
 
+	switch (armourType)
+	{
+	case ArmourType::IronHelmet:
+		break;
+	case ArmourType::SteelHelmet:
+		break;
+	case ArmourType::MithrilHelmet:
+		break;
+	case ArmourType::IronLegs:
+		break;
+	case ArmourType::SteelLegs:
+		break;
+	case ArmourType::MithrilLegs:
+		break;
+	case ArmourType::IronBody:
+		break;
+	case ArmourType::SteelBody:
+		break;
+	case ArmourType::MithrilBody:
+		break;
+	default:
+		break;
+	}
+
+	return item;
 }

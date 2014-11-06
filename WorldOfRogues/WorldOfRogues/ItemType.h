@@ -1,18 +1,51 @@
 #pragma once
 
-enum class ItemType 
+enum class WeaponType
 {
-	Sword = 0,
-	Shield,
-	Helmet,
-	Platebody,
-	Platelegs
+	Dagger = 0,
+	Sword,
+	Axe,
+	Hammer,
+	Spear,
+	Mace,
+	Longsword,
+	Battleaxe,
+	Greatsword,
 };
 
-static const char* item_strings[] = {
+static const char* weapon_strings[] = {
+	"Dagger",
 	"Sword",
-	"Shield",
-	"Helmet",
-	"Platebody",
-	"Platelegs"
+	"Axe",
+	"Hammer",
+	"Spear",
+	"Mace",
+	"Longsword",
+	"Battleaxe",
+	"Greatsword",
+};
+
+enum class ArmourType
+{
+	IronHelmet = 0,
+	SteelHelmet,
+	MithrilHelmet,
+	IronLegs,
+	SteelLegs,
+	MithrilLegs,
+	IronBody,
+	SteelBody,
+	MithrilBody
+};
+
+static const char* armour_strings[] = {
+	"Iron Helmet",
+	"Steel Helmet",
+	"Mithril Helmet",
+	"Iron Legs",
+	"Steel Legs",
+	"Mithril Legs",
+	"Iron Body",
+	"Steel Body",
+	"Mithril Body"
 };
