@@ -1,5 +1,5 @@
 #pragma once
-#include "ItemType.h"
+#include "BaseItem.h"
 
 #include <vector>
 #include <iostream>
@@ -10,8 +10,8 @@ public:
 	ItemFactory();
 	virtual ~ItemFactory();
 
-	//std::vector<BaseEntity*> createEntitiesForRoom();
+	std::vector<BaseItem*> createRandomItems();
 private:
-	//BaseEntity* createEntity(EntityType et);
+	BaseItem* createItem(std::string *item);
 };
 
