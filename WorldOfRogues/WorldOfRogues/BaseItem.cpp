@@ -20,6 +20,14 @@ void BaseItem::setCount(int count) {
 	}
 }
 
+void BaseItem::setName(std::string name) {
+	this->name = name;
+}
+
+std::string BaseItem::getName() {
+	return this->name;
+}
+
 
 BaseItem::~BaseItem(void)
 {
@@ -27,5 +35,5 @@ BaseItem::~BaseItem(void)
 
 std::string BaseItem::toString()
 {
-	return std::string(this->Name);
+	return this->getName();
 }

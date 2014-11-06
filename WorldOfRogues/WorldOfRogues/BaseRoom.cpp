@@ -257,8 +257,10 @@ std::string BaseRoom::toString() {
 
 	if (this->items.size() > 0) {
 		currentRoom.append("Items: \n");
+		int itemSelectionNumber = 1;
 		for(BaseItem* e : this->items) {
-			currentRoom.append("\t" + e->toString() + "[" + std::to_string(e->getCount()) + "] \n");
+			currentRoom.append("\t" + std::to_string(itemSelectionNumber) + ". " + e->toString() + "[" + std::to_string(e->getCount()) + "] \n");
+			itemSelectionNumber++;
 		}
 	}
 	return currentRoom;

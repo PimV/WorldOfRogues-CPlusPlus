@@ -6,7 +6,10 @@ enum class ItemType
 	Shield,
 	Helmet,
 	Platebody,
-	Platelegs
+	Platelegs,
+	HealthPotion,
+	ManaPotion,
+	ExperiencePotion
 };
 
 static const char* item_strings[] = {
@@ -14,5 +17,8 @@ static const char* item_strings[] = {
 	"Shield",
 	"Helmet",
 	"Platebody",
-	"Platelegs"
+	"Platelegs",
+	"Health Potion",
+	"Mana Potion",
+	"Experience Potion"
 };

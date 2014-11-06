@@ -81,6 +81,7 @@
     <ClInclude Include="BaseArmour.h" />
     <ClInclude Include="BaseEquipment.h" />
     <ClInclude Include="BaseItem.h" />
+    <ClInclude Include="BasePotion.h" />
     <ClInclude Include="BaseWeapon.h" />
     <ClInclude Include="Boss.h" />
     <ClInclude Include="BossRoom.h" />
@@ -90,8 +91,10 @@
     <ClInclude Include="BaseEntity.h" />
     <ClInclude Include="EntityFactory.h" />
     <ClInclude Include="EntityType.h" />
+    <ClInclude Include="ExperiencePotion.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Gold.h" />
+    <ClInclude Include="HealthPotion.h" />
     <ClInclude Include="Helmet.h" />
     <ClInclude Include="BaseInventory.h" />
     <ClInclude Include="ItemFactory.h" />
@@ -116,6 +119,7 @@
     <ClCompile Include="BaseArmour.cpp" />
     <ClCompile Include="BaseEquipment.cpp" />
     <ClCompile Include="BaseItem.cpp" />
+    <ClCompile Include="BasePotion.cpp" />
     <ClCompile Include="BaseWeapon.cpp" />
     <ClCompile Include="Boss.cpp" />
     <ClCompile Include="BossRoom.cpp" />
@@ -123,8 +127,10 @@
     <ClCompile Include="EndRoom.cpp" />
     <ClCompile Include="BaseEntity.cpp" />
     <ClCompile Include="EntityFactory.cpp" />
+    <ClCompile Include="ExperiencePotion.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Gold.cpp" />
+    <ClCompile Include="HealthPotion.cpp" />
     <ClCompile Include="Helmet.cpp" />
     <ClCompile Include="BaseInventory.cpp" />
     <ClCompile Include="ItemFactory.cpp" />

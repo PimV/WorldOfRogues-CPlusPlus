@@ -12,6 +12,7 @@
 #include "Platebody.h"
 #include "Platelegs.h"
 #include "Helmet.h"
+#include <algorithm>
 
 View::View(Game* game)
 {
@@ -24,6 +25,7 @@ void View::receiveInput()
 	std::string enterPrefix = "enter door ";
 	std::string usePrefix = "use ";
 	std::string unequipPrefix = "unequip ";
+	std::string takePrefix = "take ";
 
 	while (input != "quit")
 	{
@@ -41,6 +43,7 @@ void View::receiveInput()
 			std::cout << "- use [item]" << std::endl;
 			std::cout << "- unequip [equipment_item]" << std::endl;
 			std::cout << "- addhelm" << std::endl;
+			std::cout << "- take [item_number]" << std::endl;
 			if (Game::Instance()->getPlayer()->getRoom()->getSymbol() == "E") {
 				if (Game::Instance()->getPlayer()->getRoom()->getLevel() > 0) {
 					std::cout << "- descend" << std::endl;
@@ -83,6 +86,9 @@ void View::receiveInput()
 		}
 		else if (input.substr(0, usePrefix.size()) == usePrefix) {
 			useItem(usePrefix, input);
+		}
+		else if (input.substr(0, takePrefix.size()) == takePrefix) {
+			takeItem(takePrefix, input);
 		}
 		else if (input.substr(0, unequipPrefix.size()) == unequipPrefix) {
 			unequipItem(unequipPrefix, input);
@@ -177,6 +183,27 @@ void View::useItem(std::string prefix, std::string input) {
 		std::cout << "Used item: " << item << std::endl;
 	} else {
 		std::cout << "Item not found in inventory" << std::endl;
+	}
+}
+
+void View::takeItem(std::string prefix, std::string input) {
+	std::string item_number = input.substr(prefix.size(), input.size());
+	int item_number_value = atoi(item_number.c_str()) - 1;
+	if (item_number_value >= 0 && item_number_value < Game::Instance()->getPlayer()->getRoom()->getItems().size()) {
+		BaseItem* item = Game::Instance()->getPlayer()->getRoom()->getItems().at(item_number_value);
+		if (item != nullptr) {
+			std::cout << "Taking item: " << Game::Instance()->getPlayer()->getRoom()->getItems().at(item_number_value)->toString() << std::endl;
+			//Add to inventory
+			Game::Instance()->getPlayer()->getInventory()->addItem(item);
+
+			//Remove from items in room
+			std::vector<BaseItem*>& vec = Game::Instance()->getPlayer()->getRoom()->getItems();
+			vec.erase(std::remove(vec.begin(), vec.end(), item), vec.end());
+			Game::Instance()->getPlayer()->getRoom()->setItems(vec);
+
+		}
+	} else {
+		std::cout << "Invalid item number given. Type 'examine room' to check the items again." << std::endl;
 	}
 }
 

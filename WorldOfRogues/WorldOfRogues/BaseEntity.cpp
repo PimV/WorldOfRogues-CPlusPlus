@@ -38,11 +38,27 @@ BaseEquipment* BaseEntity::getEquipment() {
 void BaseEntity::setLevel(int level)
 {
 	this->level = level;
+	this->setMaxHitpoints( * this->getLevel());
 }
 
 int BaseEntity::getLevel()
 {
+	if (this->level < 1) {
+		this->level = 1;
+	}
 	return this->level;
+}
+
+int BaseEntity::getXpTillNextLevel() {
+	return this->getLevel() * 100 - this->getExperience();
+}
+
+int BaseEntity::getMaxHitpoints() {
+	return this->maxHitpoints;
+}
+
+void BaseEntity::setMaxHitpoints(int maxHitpoints) {
+	this->maxHitpoints = maxHitpoints;
 }
 
 int BaseEntity::getHitpoints() {
@@ -50,6 +66,9 @@ int BaseEntity::getHitpoints() {
 }
 
 void BaseEntity::setHitpoints(int hitpoints) {
+	if (hitpoints > this->getMaxHitpoints()) {
+		this->hitpoints = this->getMaxHitpoints();
+	}
 	this->hitpoints = hitpoints;
 }
 
@@ -58,11 +77,19 @@ int BaseEntity::getExperience() {
 }
 
 void BaseEntity::setExperience(int experience) {
+	//Keep levelling till experience is up
+	while (experience > getXpTillNextLevel()) {
+		experience = experience - this->getLevel() * 100;
+		this->setLevel(this->getLevel() + 1);
+		this->experience = experience;
+		std::cout << "Congratulations! You have just levelled up to level " << this->getLevel() << std::endl;
+	}
+
 	this->experience = experience;
 }
 
 int BaseEntity::getAttackPoints() {
-	return this->attackpoints;
+	return this->attackpoints * (2*this->getLevel());
 }
 
 void BaseEntity::setAttackPoints(int attackpoints) {

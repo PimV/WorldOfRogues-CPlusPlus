@@ -22,6 +22,11 @@ public:
 	void setName(std::string name);
 	std::string getName();
 
+	int getXpTillNextLevel();
+
+	void setMaxHitpoints(int maxHitpoints);
+	int getMaxHitpoints();
+
 	void setHitpoints(int hitpoints);
 	int getHitpoints();
 
@@ -43,6 +48,7 @@ public:
 private:
 	std::string name;
 	int level;
+	int maxHitpoints;
 	int hitpoints;
 	int experience;
 	int attackpoints;

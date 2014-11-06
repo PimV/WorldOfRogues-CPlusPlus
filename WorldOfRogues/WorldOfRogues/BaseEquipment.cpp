@@ -121,9 +121,11 @@ std::string BaseEquipment::toString() {
 		weaponString = this->getWeapon()->toString();
 	}
 	std::string equipment ="";
-	equipment.append("\t" + helmetString + "\t\t\n");
-	equipment.append(weaponString + "\t" + platebodyString + "\t" + shieldString + "\n");
-	equipment.append("\t" + platelegsString + "\t\t\n");
+	equipment.append("Helmet: " + helmetString + "\n");
+	equipment.append("Platebody: " + platebodyString + "\n");
+	equipment.append("Platelegs: " + platelegsString + "\n");
+	equipment.append("Shield: " + shieldString + "\n");
+	equipment.append("Weapon: " + weaponString + "\n");
 	return equipment.c_str();
 }
 

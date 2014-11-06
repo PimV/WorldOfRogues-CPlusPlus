@@ -15,8 +15,11 @@ public:
 	virtual void use(Player* player) = 0;
 	virtual ~BaseItem(void);
 	
+	void setName(std::string name);
+	std::string getName();
+
 	virtual std::string toString();
-	std::string Name;
+	std::string name;
 	int count;
 
 protected:

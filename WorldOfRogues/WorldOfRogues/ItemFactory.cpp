@@ -6,6 +6,10 @@
 #include "Platebody.h"
 #include "Helmet.h"
 
+#include "HealthPotion.h"
+//#include "ManaPotion.h"
+#include "ExperiencePotion.h"
+
 #include <random>
 
 ItemFactory::~ItemFactory()
@@ -27,7 +31,7 @@ std::vector<BaseItem*> ItemFactory::createRandomItems()
 	// random items
 	for (size_t i = 0; i < amountOfItems; i++)
 	{
-		std::uniform_int_distribution<int> dist2(1, 5);
+		std::uniform_int_distribution<int> dist2(1, 8);
 		int randomItemSpawn = dist2(dre);
 
 		//std::cout << "Created: ";
@@ -48,64 +52,85 @@ std::vector<BaseItem*> ItemFactory::createRandomItems()
 		case 5:
 			itemsArray.push_back(createItem(ItemType::Platelegs));
 			break;
+		case 6:
+			itemsArray.push_back(createItem(ItemType::HealthPotion));
+			break;
+		case 7:
+			itemsArray.push_back(createItem(ItemType::ManaPotion));
+			break;
+		case 8:
+			itemsArray.push_back(createItem(ItemType::ExperiencePotion));
+			break;
 		default:
 			break;
 		}
-
-		std::cout << std::endl;
 	}
-
-	//// random entity level
-	//for (BaseEntity *e : entityArray)
-	//{
-	//	std::uniform_int_distribution<int> dist3(1, 5);
-	//	int randomEntityLevel = dist3(dre);
-	//	std::cout << "Random entity level [" << randomEntityLevel << "]" << std::endl;
-
-	//	// change: (CurrentPlayer->getLevel() + randomEntityLevel);
-	//	e->setLevel(randomEntityLevel);
-	//}
 
 	return itemsArray;
 }
 
 BaseItem* ItemFactory::createItem(ItemType it)
 {
-	BaseItem* item;
+	//BaseItem* item;
 
 	switch (it)
 	{
-	case ItemType::Sword:
-		item = new Weapon();
-		item->Name = "The Ripper";
-		dynamic_cast<Weapon*>(item)->attackpoints = 10;
-		break;
+	case ItemType::Sword: 
+		{
+			Weapon* item = new Weapon();
+			item->name = "The Ripper";
+			item->attackpoints = 10;
+			return item;
+		} 
 	case ItemType::Shield:
-		item = new Shield();
-		item->Name = "Mirror Shield";
-		dynamic_cast<Shield*>(item)->defencepoints = 10;
-		break;
+		{
+			Shield* item = new Shield();
+			item->name = "Mirror Shield";
+			item->defencepoints = 10;
+			return item;
+		}
 	case ItemType::Helmet:
-		item = new Helmet();
-		item->Name = "Highmage Mask";
-		dynamic_cast<Helmet*>(item)->defencepoints = 10;
-		break;
+		{
+			Helmet* item = new Helmet();
+			item->name = "Highmage Mask";
+			item->defencepoints = 10;
+			return item;
+		}
 	case ItemType::Platebody:
-		item = new Platebody();
-		item->Name = "Steel armour";
-		dynamic_cast<Platebody*>(item)->defencepoints = 10;
-		break;
+		{
+			Platebody* item = new Platebody();
+			item->name = "Steel armour";
+			item->defencepoints = 10;
+			return item;
+		}
 	case ItemType::Platelegs:
-		item = new Platelegs();
-		item->Name = "Iron legs";
-		dynamic_cast<Platelegs*>(item)->defencepoints = 10;
-		break;
+		{
+			Platelegs* item = new Platelegs();
+			item->name = "Iron legs";
+			item->defencepoints = 10;
+			return item;
+		}
+	case ItemType::HealthPotion: 
+		{
+			HealthPotion* item = new HealthPotion();
+			return item;
+		}
+	case ItemType::ManaPotion:
+		{
+			//ManaPotion* item = new ManaPotion();
+			//return item;
+			//break;
+		}
+	case ItemType::ExperiencePotion: 
+		{
+			ExperiencePotion* item = new ExperiencePotion();
+			return item;
+
+		}
 	default:
 		return nullptr;
 		break;
 	}
-
-	return item;
 
 
 }

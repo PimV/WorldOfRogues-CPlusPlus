@@ -23,10 +23,6 @@ void Platelegs::use(Player* player) {
 	player->getInventory()->removeItem(this,1);
 }
 
-//std::string Platelegs::toString() {
-//	return std::string("platelegs");
-//}
-
 Platelegs::~Platelegs(void)
 {
 }
