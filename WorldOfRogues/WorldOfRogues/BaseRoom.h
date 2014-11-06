@@ -58,6 +58,8 @@ public:
 	std::vector<BaseEntity*> getEnemies();
 	std::vector<BaseItem*> getItems();
 
+	bool hasEnemies();
+
 	void setDescription(std::string description);
 	std::string getDescription();
 

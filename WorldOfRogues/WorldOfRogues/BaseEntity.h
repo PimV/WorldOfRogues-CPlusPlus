@@ -36,8 +36,13 @@ public:
 	void setLevel(int level);
 	int getLevel();
 
+	void setAgility(int agility);
+	int getAgility();
+
 	void setAttackPoints(int attackPoints);
 	int getAttackPoints();
+
+	int attack(BaseEntity* entity);
 
 	void setEntityType(EntityType type);
 	EntityType getEntityType();
@@ -50,6 +55,7 @@ private:
 	int level;
 	int maxHitpoints;
 	int hitpoints;
+	int agility;
 	int experience;
 	int attackpoints;
 	BaseRoom* room;

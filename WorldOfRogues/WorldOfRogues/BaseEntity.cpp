@@ -2,13 +2,46 @@
 #include "BaseRoom.h"
 #include "BaseInventory.h"
 #include "BaseEquipment.h"
+#include <random>
 using namespace std;
 
 
 BaseEntity::BaseEntity(void)
 {
+	this->attackpoints = 1;
+	this->agility = 1;
 	this->setInventory(new BaseInventory());
 	this->setEquipment(new BaseEquipment());
+}
+
+int BaseEntity::attack(BaseEntity* entity) {
+	std::random_device dev;
+	std::default_random_engine dre(dev());
+	std::uniform_int_distribution<int> dist1(this->getAgility(), 50);
+	int hitChance = dist1(dre);
+	int healthLeft = entity->getHitpoints();
+	if (hitChance > 10) {
+		healthLeft -= this->getAttackPoints();
+
+		entity->setHitpoints(healthLeft);
+	}
+
+	if (entity->getHitpoints() <= 0) {
+		this->setExperience(this->getExperience() + entity->getExperience());
+
+		for(auto it = entity->getInventory()->getItems()->begin(); it != entity->getInventory()->getItems()->end(); ++it) {
+			this->getInventory()->addItem(it->second);
+		}
+	}
+	return healthLeft;
+}
+
+void BaseEntity::setAgility(int agility) {
+	this->agility = agility;
+}
+
+int BaseEntity::getAgility() {
+	return this->agility;
 }
 
 void BaseEntity::setRoom(BaseRoom* room) {
@@ -41,7 +74,6 @@ BaseEquipment* BaseEntity::getEquipment() {
 void BaseEntity::setLevel(int level)
 {
 	this->level = level;
-	this->setMaxHitpoints(this->getMaxHitpoints() + (50-this->getLevel()) * this->getLevel());
 }
 
 int BaseEntity::getLevel()
@@ -85,6 +117,8 @@ void BaseEntity::setExperience(int experience) {
 		experience = experience - this->getLevel() * 100;
 		this->setLevel(this->getLevel() + 1);
 		this->experience = experience;
+		this->setMaxHitpoints(this->getMaxHitpoints() + 10);
+		this->agility = this->getLevel();
 		std::cout << "Congratulations! You have just levelled up to level " << this->getLevel() << std::endl;
 	}
 
@@ -92,7 +126,7 @@ void BaseEntity::setExperience(int experience) {
 }
 
 int BaseEntity::getAttackPoints() {
-	return this->attackpoints * (2*this->getLevel());
+	return this->attackpoints * (2*this->getLevel()) + this->getEquipment()->getOffenseRating();
 }
 
 void BaseEntity::setAttackPoints(int attackpoints) {

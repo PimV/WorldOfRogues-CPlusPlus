@@ -30,6 +30,8 @@ Player::Player(void)
 	this->setHitpoints(100);
 	this->setExperience(0);
 
+	this->setMaxLevelVisited(0);
+
 }
 
 void Player::setHitpoints(int hitpoints) {

@@ -12,6 +12,7 @@ public:
 	BaseItem* getItem(std::string itemString);
 	bool hasItem(std::string itemString);
 	std::string toString();
+	std::map<std::string, BaseItem*>* getItems();
 	~BaseInventory(void);
 private:
 	std::map<std::string, BaseItem*> items;

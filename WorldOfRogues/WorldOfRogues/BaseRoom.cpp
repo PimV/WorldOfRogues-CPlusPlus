@@ -5,6 +5,8 @@
 
 BaseRoom::BaseRoom(int level, int row, int column)
 {
+	this->trapped = false;
+
 	this->row = row;
 	this->column = column;
 	this->level = level;
@@ -176,6 +178,13 @@ void BaseRoom::disableWestDoor() {
 
 void BaseRoom::disableEastDoor() {
 	this->eastDoor = false;
+}
+
+bool BaseRoom::hasEnemies() {
+	if (enemies.empty()) {
+		return true;
+	}
+	return false;
 }
 
 bool BaseRoom::hasTrap() {

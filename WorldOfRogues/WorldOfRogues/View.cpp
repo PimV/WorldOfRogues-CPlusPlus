@@ -26,6 +26,7 @@ void View::receiveInput()
 	std::string usePrefix = "use ";
 	std::string unequipPrefix = "unequip ";
 	std::string takePrefix = "take ";
+	std::string attackPrefix = "attack ";
 
 	while (input != "quit")
 	{
@@ -43,11 +44,9 @@ void View::receiveInput()
 			std::cout << "- use [item]" << std::endl;
 			std::cout << "- unequip [equipment_item]" << std::endl;
 			std::cout << "- take [item_number]" << std::endl;
+			std::cout << "- attack [monster_number]" << std::endl;
 			if (Game::Instance()->getPlayer()->getRoom()->getSymbol() == "E") {
-				if (Game::Instance()->getPlayer()->getRoom()->getLevel() > 0) {
-					std::cout << "- descend" << std::endl;
-				}
-				if (Game::Instance()->getPlayer()->getRoom()->getLevel() < 3) { // max level in tower
+				if (Game::Instance()->getPlayer()->getRoom()->getLevel() <= Game::Instance()->getPlayer()->getMaxLevelVisited() &&  Game::Instance()->getPlayer()->getRoom()->getLevel() < 10) { // max level in tower
 					std::cout << "- ascend" << std::endl;
 				}
 			}
@@ -55,9 +54,6 @@ void View::receiveInput()
 			if (Game::Instance()->getPlayer()->getRoom()->getSymbol() == "S") {
 				if (Game::Instance()->getPlayer()->getRoom()->getLevel() > 0) {
 					std::cout << "- descend" << std::endl;
-				}
-				if (Game::Instance()->getPlayer()->getRoom()->getLevel() < Game::Instance()->getPlayer()->getMaxLevelVisited()) { 
-					std::cout << "- ascend" << std::endl;
 				}
 			}
 		}
@@ -80,6 +76,9 @@ void View::receiveInput()
 		else if (input == "player_stats") {
 			displayPlayerStatistics();
 		}
+		else if (input.substr(0, attackPrefix.size()) == attackPrefix) {
+			attack(attackPrefix, input);
+		}
 		else if (input.substr(0, usePrefix.size()) == usePrefix) {
 			useItem(usePrefix, input);
 		}
@@ -93,40 +92,12 @@ void View::receiveInput()
 		{
 			enterDoor(enterPrefix, input);
 		}
-		else if((Game::Instance()->getPlayer()->getRoom()->getSymbol() == "S" ||
-			Game::Instance()->getPlayer()->getRoom()->getSymbol() == "E") 
-			&& input == "descend") {
-				BaseRoom* newRoom = Game::Instance()->getRoomVector()
-					->at(Game::Instance()->getPlayer()->getRoom()->getLevel() - 1)
-					.at(Game::Instance()->getPlayer()->getRoom()->getRow())
-					.at(Game::Instance()->getPlayer()->getRoom()->getColumn());
-
-				if (newRoom == nullptr) {
-					std::cout << "SHOULD NOT HAPPEN" << std::endl;
-				}
-
-				Game::Instance()->getPlayer()->setRoom(newRoom);
-
+		else if(input == "descend") {
+			descend();
 		}
-
-		else if ((Game::Instance()->getPlayer()->getRoom()->getSymbol() == "S" ||
-			Game::Instance()->getPlayer()->getRoom()->getSymbol() == "E") 
-			&& input == "ascend") {
-				BaseRoom* newRoom = Game::Instance()->getRoomVector()
-					->at(Game::Instance()->getPlayer()->getRoom()->getLevel() + 1)
-					.at(Game::Instance()->getPlayer()->getRoom()->getRow())
-					.at(Game::Instance()->getPlayer()->getRoom()->getColumn());
-
-				if (newRoom == nullptr) {
-					newRoom = Game::Instance()->getRoomFactory()->createStartRoom(Game::Instance()->getPlayer()->getRoom());
-					Game::Instance()->getRoomVector()
-						->at(Game::Instance()->getPlayer()->getRoom()->getLevel() + 1)
-						.at(Game::Instance()->getPlayer()->getRoom()->getRow())
-						.at(Game::Instance()->getPlayer()->getRoom()->getColumn()) = newRoom;
-				}
-
-				Game::Instance()->getPlayer()->setRoom(newRoom);
-				Game::Instance()->getPlayer()->setMaxLevelVisited(newRoom->getLevel());
+		else if (input == "ascend")
+		{
+			ascend();
 		}
 		else
 		{
@@ -153,6 +124,85 @@ void View::gameOver() {
 		std::getline(std::cin, input2);
 	}
 }
+
+void View::attack(std::string prefix, std::string input) {
+	std::string monster_number = input.substr(prefix.size(), input.size());
+	int monster_number_value = atoi(monster_number.c_str()) - 1;
+	if (monster_number_value >= 0 && monster_number_value < Game::Instance()->getPlayer()->getRoom()->getEnemies().size()) {
+		BaseEntity* monster = Game::Instance()->getPlayer()->getRoom()->getEnemies().at(monster_number_value);
+		if (monster != nullptr) {
+			int monsterHPBefore = monster->getHitpoints();
+			int monsterHPAfter = Game::Instance()->getPlayer()->attack(monster);
+			if (monster->getHitpoints() <= 0) {
+				//Delete monster from room
+				std::cout << "You've dealt the finishing blow to " << monster->toString() << std::endl;
+				std::vector<BaseEntity*>& vec = Game::Instance()->getPlayer()->getRoom()->getEnemies();
+				vec.erase(std::remove(vec.begin(), vec.end(), monster), vec.end());
+				Game::Instance()->getPlayer()->getRoom()->setEnemies(vec);
+				return;
+			}
+			int playerHPBefore = Game::Instance()->getPlayer()->getHitpoints();
+			int playerHPAfter = monster->attack(Game::Instance()->getPlayer());
+
+			if (monsterHPBefore == monsterHPAfter) {
+				std::cout << "You've totally missed your target... Try it again with more precision!" << std::endl;
+			} else {
+				std::cout << "You've dealt " << monsterHPBefore - monsterHPAfter << " damage to " << monster->toString() << ". It has "<< monsterHPAfter << "HP left." << std::endl;
+			}
+
+			if (playerHPBefore == playerHPAfter) {
+				std::cout << "Because you were so agile, you dodged the attack of " << monster->toString() << ". You lost no HP!" << std::endl;
+			} else {
+				std::cout << "You took " << playerHPBefore-playerHPAfter<< " damage and currently have " << playerHPAfter << "HP left." << std::endl;
+			}
+
+		}
+	} else {
+		std::cout << "Invalid monster number given. Type 'examine room' to check the items again." << std::endl;
+	}
+}
+
+void View::ascend() {
+	if (Game::Instance()->getPlayer()->getRoom()->getSymbol() == "E" && Game::Instance()->getPlayer()->getRoom()->getLevel() <= Game::Instance()->getPlayer()->getMaxLevelVisited() && Game::Instance()->getPlayer()->getRoom()->getLevel() < 10) {
+		BaseRoom* newRoom = Game::Instance()->getRoomVector()
+			->at(Game::Instance()->getPlayer()->getRoom()->getLevel() + 1)
+			.at(Game::Instance()->getPlayer()->getRoom()->getRow())
+			.at(Game::Instance()->getPlayer()->getRoom()->getColumn());
+
+		if (newRoom == nullptr) {
+			newRoom = Game::Instance()->getRoomFactory()->createStartRoom(Game::Instance()->getPlayer()->getRoom());
+			Game::Instance()->getRoomVector()
+				->at(Game::Instance()->getPlayer()->getRoom()->getLevel() + 1)
+				.at(Game::Instance()->getPlayer()->getRoom()->getRow())
+				.at(Game::Instance()->getPlayer()->getRoom()->getColumn()) = newRoom;
+		}
+
+		Game::Instance()->getPlayer()->setRoom(newRoom);
+		Game::Instance()->getPlayer()->setMaxLevelVisited(newRoom->getLevel());
+		std::cout << "You've ascended to level " << Game::Instance()->getPlayer()->getLevel() << std::endl;
+	} else {
+		std::cout << "You can't ascend here!" << std::endl;
+	}
+}
+
+void View::descend() {
+	if (Game::Instance()->getPlayer()->getRoom()->getSymbol() == "S"  && Game::Instance()->getPlayer()->getRoom()->getLevel() > 0) {
+		BaseRoom* newRoom = Game::Instance()->getRoomVector()
+			->at(Game::Instance()->getPlayer()->getRoom()->getLevel() - 1)
+			.at(Game::Instance()->getPlayer()->getRoom()->getRow())
+			.at(Game::Instance()->getPlayer()->getRoom()->getColumn());
+
+		if (newRoom == nullptr) {
+			std::cout << "SHOULD NOT HAPPEN" << std::endl;
+		}
+
+		Game::Instance()->getPlayer()->setRoom(newRoom);
+		std::cout << "You've descended into level " << Game::Instance()->getPlayer()->getLevel() << std::endl;
+	} else {
+		std::cout << "You can't descend here!" << std::endl;
+	}
+}
+
 
 void View::unequipItem(std::string prefix, std::string input) {
 	std::string item = input.substr(prefix.size(), input.size());
