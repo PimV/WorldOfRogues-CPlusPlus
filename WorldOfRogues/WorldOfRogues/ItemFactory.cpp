@@ -36,23 +36,23 @@ std::vector<BaseItem*> ItemFactory::createRandomItems()
 		{
 		case 1:
 			std::cout << "Sword ";
-			itemsArray.push_back(createItem(item_strings[(int)ItemType::Sword]));
+			itemsArray.push_back(createItem(ItemType::Sword));
 			break;
 		case 2:
 			std::cout << "Shield ";
-			itemsArray.push_back(createItem(item_strings[(int)ItemType::Shield]));
+			itemsArray.push_back(createItem(ItemType::Shield));
 			break;
 		case 3:
 			std::cout << "Helmet ";
-			itemsArray.push_back(createItem(item_strings[(int)ItemType::Helmet]));
+			itemsArray.push_back(createItem(ItemType::Helmet));
 			break;
 		case 4:
 			std::cout << "Plate armour ";
-			itemsArray.push_back(createItem(item_strings[(int)ItemType::PlateArmour]));
+			itemsArray.push_back(createItem(ItemType::PlateArmour));
 			break;
 		case 5:
 			std::cout << "Plate legs ";
-			itemsArray.push_back(createItem(item_strings[(int)ItemType::PlateLegs]));
+			itemsArray.push_back(createItem(ItemType::PlateLegs));
 			break;
 		default:
 			break;
@@ -75,30 +75,27 @@ std::vector<BaseItem*> ItemFactory::createRandomItems()
 	return itemsArray;
 }
 
-BaseItem* ItemFactory::createItem(std::string item)
+BaseItem* ItemFactory::createItem(ItemType it)
 {
-	if (item == "Sword")
+	switch (it)
 	{
+	case ItemType::Sword:
 		return new Weapon();
-	}
-	else if (item == "Shield")
-	{
+		break;
+	case ItemType::Shield:
 		return new Shield();
-	}
-	else if (item == "Helmet")
-	{
+		break;
+	case ItemType::Helmet:
 		return new Helmet();
-	}
-	else if (item == "Platebody")
-	{
+		break;
+	case ItemType::PlateArmour:
 		return new Platebody();
-	}
-	else if (item == "Platelegs")
-	{
+		break;
+	case ItemType::PlateLegs:
 		return new Platelegs();
-	}
-	else 
-	{
+		break;
+	default:
 		return nullptr;
+		break;
 	}
 }
