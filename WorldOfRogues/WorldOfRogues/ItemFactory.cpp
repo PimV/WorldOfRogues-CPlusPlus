@@ -73,38 +73,6 @@ BaseItem* ItemFactory::createItem(WeaponType weaponType)
 {
 	BaseItem* item;
 
-	switch (it)
-	{
-	case ItemType::Sword:
-		item = new Weapon();
-		item->Name = "The Ripper";
-		dynamic_cast<Weapon*>(item)->attackpoints = 10;
-		break;
-	case ItemType::Shield:
-		item = new Shield();
-		item->Name = "Mirror Shield";
-		dynamic_cast<Shield*>(item)->defencepoints = 10;
-		break;
-	case ItemType::Helmet:
-		item = new Helmet();
-		item->Name = "Highmage Mask";
-		dynamic_cast<Helmet*>(item)->defencepoints = 10;
-		break;
-	case ItemType::Platebody:
-		item = new Platebody();
-		item->Name = "Steel armour";
-		dynamic_cast<Platebody*>(item)->defencepoints = 10;
-		break;
-	case ItemType::Platelegs:
-		item = new Platelegs();
-		item->Name = "Iron legs";
-		dynamic_cast<Platelegs*>(item)->defencepoints = 10;
-		break;
-	default:
-		return nullptr;
-		break;
-	}
-
 	switch (weaponType)
 	{
 	case WeaponType::Dagger:
@@ -163,25 +131,57 @@ BaseItem* ItemFactory::createItem(ArmourType armourType)
 {
 	BaseItem* item;
 
+	item->Name = armour_strings[(int)armourType];
+
 	switch (armourType)
 	{
 	case ArmourType::IronHelmet:
+		item = new Helmet();
+		dynamic_cast<Helmet*>(item)->defencepoints = 1;
 		break;
 	case ArmourType::SteelHelmet:
+		item = new Helmet();
+		dynamic_cast<Helmet*>(item)->defencepoints = 2;
 		break;
 	case ArmourType::MithrilHelmet:
+		item = new Helmet();
+		dynamic_cast<Helmet*>(item)->defencepoints = 3;
 		break;
 	case ArmourType::IronLegs:
+		item = new Platelegs();
+		dynamic_cast<Platelegs*>(item)->defencepoints = 1;
 		break;
 	case ArmourType::SteelLegs:
+		item = new Platelegs();
+		dynamic_cast<Platelegs*>(item)->defencepoints = 2;
 		break;
 	case ArmourType::MithrilLegs:
+		item = new Platelegs();
+		dynamic_cast<Platelegs*>(item)->defencepoints = 3;
 		break;
 	case ArmourType::IronBody:
+		item = new Platebody();
+		dynamic_cast<Platebody*>(item)->defencepoints = 1;
 		break;
 	case ArmourType::SteelBody:
+		item = new Platebody();
+		dynamic_cast<Platebody*>(item)->defencepoints = 2;
 		break;
 	case ArmourType::MithrilBody:
+		item = new Platebody();
+		dynamic_cast<Platebody*>(item)->defencepoints = 3;
+		break;
+	case ArmourType::IronShield:
+		item = new Shield();
+		dynamic_cast<Shield*>(item)->defencepoints = 1;
+		break;
+	case ArmourType::SteelShield:
+		item = new Shield();
+		dynamic_cast<Shield*>(item)->defencepoints = 2;
+		break;
+	case ArmourType::MithrilShield:
+		item = new Shield();
+		dynamic_cast<Shield*>(item)->defencepoints = 3;
 		break;
 	default:
 		break;

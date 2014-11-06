@@ -35,7 +35,10 @@ enum class ArmourType
 	MithrilLegs,
 	IronBody,
 	SteelBody,
-	MithrilBody
+	MithrilBody,
+	IronShield,
+	SteelShield,
+	MithrilShield
 };
 
 static const char* armour_strings[] = {
@@ -47,5 +50,8 @@ static const char* armour_strings[] = {
 	"Mithril Legs",
 	"Iron Body",
 	"Steel Body",
-	"Mithril Body"
+	"Mithril Body",
+	"Iron Shield",
+	"Steel Shield",
+	"Mithril Shield"
 };
