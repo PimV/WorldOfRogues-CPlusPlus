@@ -4,6 +4,14 @@
 #include "Player.h"
 #include "BaseRoom.h"
 #include "Direction.h"
+#include "Player_Equipment.h"
+#include "Player_Inventory.h"
+#include "BaseItem.h"
+#include "Weapon.h"
+#include "Shield.h"
+#include "Platebody.h"
+#include "Platelegs.h"
+#include "Helmet.h"
 
 View::View(Game* game)
 {
@@ -14,6 +22,8 @@ View::View(Game* game)
 void View::receiveInput()
 {
 	std::string enterPrefix = "enter door ";
+	std::string usePrefix = "use ";
+	std::string unequipPrefix = "unequip ";
 
 	while (input != "quit")
 	{
@@ -25,7 +35,13 @@ void View::receiveInput()
 			std::cout << "- quit" << std::endl;
 			std::cout << "- enter door" << std::endl;
 			std::cout << "- current_level" << std::endl;
-			if (Game::Instance()->getPlayer()->getRoom()->toString() == std::string("endroom")) {
+			std::cout << "- equipment" << std::endl;
+			std::cout << "- player_stats" << std::endl;
+			std::cout << "- inventory" << std::endl;
+			std::cout << "- use [item]" << std::endl;
+			std::cout << "- unequip [equipment_item]" << std::endl;
+			std::cout << "- addhelm" << std::endl;
+			if (Game::Instance()->getPlayer()->getRoom()->getSymbol() == "E") {
 				if (Game::Instance()->getPlayer()->getRoom()->getLevel() > 0) {
 					std::cout << "- descend" << std::endl;
 				}
@@ -34,7 +50,7 @@ void View::receiveInput()
 				}
 			}
 
-			if (Game::Instance()->getPlayer()->getRoom()->toString() == std::string("startroom")) {
+			if (Game::Instance()->getPlayer()->getRoom()->getSymbol() == "S") {
 				if (Game::Instance()->getPlayer()->getRoom()->getLevel() > 0) {
 					std::cout << "- descend" << std::endl;
 				}
@@ -50,12 +66,33 @@ void View::receiveInput()
 		{
 			displayMap();
 		}
+		else if (input == "equipment") {
+			displayEquipment();
+		}
+		else if (input == "inventory") {
+			displayInventory();
+		}
+		else if (input == "addhelm") {
+			Game::Instance()->getPlayer()->getInventory()->addItem(new Helmet(),-1);
+		} 
+		else if (input == "examine room") {
+			displayCurrentRoom();
+		}
+		else if (input == "player_stats") {
+			displayPlayerStatistics();
+		}
+		else if (input.substr(0, usePrefix.size()) == usePrefix) {
+			useItem(usePrefix, input);
+		}
+		else if (input.substr(0, unequipPrefix.size()) == unequipPrefix) {
+			unequipItem(unequipPrefix, input);
+		}
 		else if (input.substr(0, enterPrefix.size()) == enterPrefix)
 		{
 			enterDoor(enterPrefix, input);
 		}
-		else if((Game::Instance()->getPlayer()->getRoom()->toString() == std::string("startroom") ||
-			Game::Instance()->getPlayer()->getRoom()->toString() == std::string("endroom")) 
+		else if((Game::Instance()->getPlayer()->getRoom()->getSymbol() == "S" ||
+			Game::Instance()->getPlayer()->getRoom()->getSymbol() == "E") 
 			&& input == "descend") {
 				BaseRoom* newRoom = Game::Instance()->getRoomVector()
 					->at(Game::Instance()->getPlayer()->getRoom()->getLevel() - 1)
@@ -70,8 +107,8 @@ void View::receiveInput()
 
 		}
 
-		else if ((Game::Instance()->getPlayer()->getRoom()->toString() == std::string("startroom") ||
-			Game::Instance()->getPlayer()->getRoom()->toString() == std::string("endroom")) 
+		else if ((Game::Instance()->getPlayer()->getRoom()->getSymbol() == "S" ||
+			Game::Instance()->getPlayer()->getRoom()->getSymbol() == "E") 
 			&& input == "ascend") {
 				BaseRoom* newRoom = Game::Instance()->getRoomVector()
 					->at(Game::Instance()->getPlayer()->getRoom()->getLevel() + 1)
@@ -99,6 +136,47 @@ void View::receiveInput()
 		std::cout << "\n> ";
 
 		std::getline(std::cin, input);
+	}
+}
+
+void View::unequipItem(std::string prefix, std::string input) {
+	std::string item = input.substr(prefix.size(), input.size());
+	std::string itemFound = Game::Instance()->getPlayer()->getEquipment()->hasItem(item);
+
+	if (itemFound == "weapon") {
+		Game::Instance()->getPlayer()->getInventory()->addItem(dynamic_cast<BaseItem*>(Game::Instance()->getPlayer()->getEquipment()->getWeapon()), 1);
+		Game::Instance()->getPlayer()->getEquipment()->setWeapon(nullptr);
+		std::cout << "Unequipped weapon: " << item << ", it's back in your inventory now." << std::endl;
+	} else if (itemFound == "shield") {
+		Game::Instance()->getPlayer()->getInventory()->addItem(dynamic_cast<BaseItem*>(Game::Instance()->getPlayer()->getEquipment()->getShield()),1);
+		Game::Instance()->getPlayer()->getEquipment()->setShield(nullptr);
+		std::cout << "Unequipped shield: " << item << ", it's back in your inventory now." << std::endl;
+	} else if (itemFound == "platebody") {
+		Game::Instance()->getPlayer()->getInventory()->addItem(dynamic_cast<BaseItem*>(Game::Instance()->getPlayer()->getEquipment()->getPlatebody()),1);
+		Game::Instance()->getPlayer()->getEquipment()->setPlatebody(nullptr);
+		std::cout << "Unequipped platebody: " << item << ", it's back in your inventory now." << std::endl;
+	} else if (itemFound == "platelegs") {
+		Game::Instance()->getPlayer()->getInventory()->addItem(dynamic_cast<BaseItem*>(Game::Instance()->getPlayer()->getEquipment()->getPlatelegs()),1);
+		Game::Instance()->getPlayer()->getEquipment()->setPlatelegs(nullptr);
+		std::cout << "Unequipped platelegs: " << item << ", it's back in your inventory now." << std::endl;
+	} else if (itemFound == "helmet") {
+		Game::Instance()->getPlayer()->getInventory()->addItem(dynamic_cast<BaseItem*>(Game::Instance()->getPlayer()->getEquipment()->getHelmet()),1);
+		Game::Instance()->getPlayer()->getEquipment()->setHelmet(nullptr);
+		std::cout << "Unequipped helmet: " << item << ", it's back in your inventory now." << std::endl;
+	} else if (itemFound == "false") {
+		std::cout << "You are currently not wearing a(n) " << item << "." << std::endl;
+	}
+
+}
+
+void View::useItem(std::string prefix, std::string input) {
+	std::string item = input.substr(prefix.size(), input.size());
+
+	if (Game::Instance()->getPlayer()->getInventory()->hasItem(item)) {
+		Game::Instance()->getPlayer()->getInventory()->getItem(item)->use(Game::Instance()->getPlayer());
+		std::cout << "Used item: " << item << std::endl;
+	} else {
+		std::cout << "Item not found in inventory" << std::endl;
 	}
 }
 
@@ -199,33 +277,6 @@ void View::displayMap()
 			{
 				BaseRoom* currentRoom = Game::Instance()->getRoomVector()->at(currentLevel).at(i).at(j);
 
-				//if (currentRoom->hasWestDoor()) {
-				//	roomsAndDoors += "-";
-				//} else {
-				//	roomsAndDoors += " ";
-				//}
-				//roomsAndDoors += currentRoom->getSymbol();
-				////std::cout << this->game->roomVector[currentLevel][i][j]->getSymbol();
-				//if (currentRoom->hasEastDoor()) {
-				//	roomsAndDoors += "-";
-				//	//std::cout << "-";
-				//} else {
-				//	roomsAndDoors += " ";
-				//	//std::cout << " ";
-				//}
-
-				//if (currentRoom->hasSouthDoor()) {
-				//	southDoors += " | ";
-				//} else {
-				//	southDoors += "   ";
-				//}
-
-				//if (currentRoom->hasNorthDoor()) {
-				//	northDoors += " | ";
-				//} else {
-				//	northDoors += "   ";
-				//}
-
 				(currentRoom->hasWestDoor()) ? roomsAndDoors += "-" : roomsAndDoors += " ";
 				roomsAndDoors += currentRoom->getSymbol();
 				(currentRoom->hasEastDoor()) ? roomsAndDoors += "-" : roomsAndDoors += " ";
@@ -247,6 +298,29 @@ void View::displayMap()
 
 	}
 }
+
+void View::displayEquipment() {
+	std::cout << "Equipment: " << std::endl << std::endl;;
+	std::cout << Game::Instance()->getPlayer()->getEquipment()->toString() << std::endl;
+}
+
+void View::displayInventory() {
+	std::cout << "Inventory: " << std::endl << std::endl;;
+	std::cout << Game::Instance()->getPlayer()->getInventory()->toString() << std::endl;
+}
+
+void View::displayPlayerStatistics() {
+	std::cout << "Player statistics: " << std::endl << std::endl;
+
+	std::cout << Game::Instance()->getPlayer()->toString() << std::endl;
+}
+
+void View::displayCurrentRoom() {
+	std::cout << "Current room: " << std::endl << std::endl;;
+
+	std::cout << Game::Instance()->getPlayer()->getRoom()->toString() << std::endl;
+}
+
 
 
 View::~View()

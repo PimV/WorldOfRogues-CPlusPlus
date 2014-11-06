@@ -3,13 +3,12 @@
 
 Zombie::Zombie(void)
 {
+	this->setEntityType(EntityType::Zombie);
+	this->setName("Zombie");
 }
 
 std::string Zombie::toString() {
-	return std::string(
-		std::string("Zombie L") +
-		std::to_string(this->getLevel())
-		);
+	return	this->getName();
 }
 
 

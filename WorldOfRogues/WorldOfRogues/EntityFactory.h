@@ -8,10 +8,11 @@
 class EntityFactory
 {
 public:
+	//EntityFactory();
 	virtual ~EntityFactory();
-	
-	static BaseEntity* createEntity(EntityType et);
+	static std::string generateName(BaseEntity* entity);
 	static std::vector<BaseEntity*> createRandomEntities();
+	static BaseEntity* createEntity(EntityType et);
 private:
 };
 

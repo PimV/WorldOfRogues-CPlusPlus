@@ -3,13 +3,12 @@
 
 Rat::Rat(void)
 {
+	this->setEntityType(EntityType::Rat);
+	this->setName("Rat");
 }
 
 std::string Rat::toString() {
-	return std::string(
-		std::string("Rat L") +
-		std::to_string(this->getLevel())
-		);
+	return this->getName();
 }
 
 

@@ -79,6 +79,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="BaseArmour.h" />
+    <ClInclude Include="BaseEquipment.h" />
     <ClInclude Include="BaseItem.h" />
     <ClInclude Include="BaseWeapon.h" />
     <ClInclude Include="Boss.h" />
@@ -92,12 +93,15 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="Gold.h" />
     <ClInclude Include="Helmet.h" />
+    <ClInclude Include="BaseInventory.h" />
     <ClInclude Include="ItemFactory.h" />
     <ClInclude Include="ItemType.h" />
     <ClInclude Include="Platebody.h" />
     <ClInclude Include="Platelegs.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="BaseRoom.h" />
+    <ClInclude Include="Player_Equipment.h" />
+    <ClInclude Include="Player_Inventory.h" />
     <ClInclude Include="Rat.h" />
     <ClInclude Include="RoomFactory.h" />
     <ClInclude Include="Shield.h" />
@@ -110,6 +114,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BaseArmour.cpp" />
+    <ClCompile Include="BaseEquipment.cpp" />
     <ClCompile Include="BaseItem.cpp" />
     <ClCompile Include="BaseWeapon.cpp" />
     <ClCompile Include="Boss.cpp" />
@@ -121,11 +126,14 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Gold.cpp" />
     <ClCompile Include="Helmet.cpp" />
+    <ClCompile Include="BaseInventory.cpp" />
     <ClCompile Include="ItemFactory.cpp" />
     <ClCompile Include="Platebody.cpp" />
     <ClCompile Include="Platelegs.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="BaseRoom.cpp" />
+    <ClCompile Include="Player_Equipment.cpp" />
+    <ClCompile Include="Player_Inventory.cpp" />
     <ClCompile Include="Rat.cpp" />
     <ClCompile Include="RoomFactory.cpp" />
     <ClCompile Include="Shield.cpp" />

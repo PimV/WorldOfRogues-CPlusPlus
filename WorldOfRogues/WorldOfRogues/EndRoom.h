@@ -5,7 +5,6 @@ class EndRoom :
 {
 public:
 	EndRoom(int row, int column, int level);
-	std::string toString();
 	void generateDoors() override;
 	virtual ~EndRoom(void);
 };

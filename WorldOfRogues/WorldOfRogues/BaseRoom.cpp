@@ -245,15 +245,24 @@ std::vector<BaseItem*> BaseRoom::getItems()
 }
 
 std::string BaseRoom::toString() {
-	return std::string(
-		std::string("Base Room (") +
-		std::to_string(this->getRow()) +
-		std::string(",") +
-		std::to_string(this->getColumn()) + 
-		std::string(",") +
-		std::to_string(this->getLevel()) + 
-		std::string(")")
-		);
+	std::string currentRoom = "";
+	if (this->enemies.size() > 0) {
+		currentRoom.append("Enemies: \n");
+		int enemySelectionNumber = 1;
+		for(BaseEntity* e : this->enemies) {
+			currentRoom.append("\t" + std::to_string(enemySelectionNumber) + ". " +  e->toString() + " (lvl: " + std::to_string(e->getLevel()) + ") \n");
+			enemySelectionNumber++;
+		}
+	}
+
+	if (this->items.size() > 0) {
+		currentRoom.append("Items: \n");
+		for(BaseItem* e : this->items) {
+			currentRoom.append("\t" + e->toString() + "[" + std::to_string(e->getCount()) + "] \n");
+		}
+	}
+	return currentRoom;
+
 }
 
 BaseRoom::~BaseRoom(void)

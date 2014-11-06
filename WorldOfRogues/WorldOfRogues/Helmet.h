@@ -6,6 +6,12 @@ class Helmet :
 {
 public:
 	Helmet(void);
+
+	int getArmourRating();
+	void setArmourRating(int rating);
+
+	void use(Player* player);
+	//std::string toString();
 	virtual ~Helmet(void);
 
 };

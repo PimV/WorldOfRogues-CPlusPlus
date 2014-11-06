@@ -120,6 +120,17 @@
     <ClInclude Include="EntityType.h">
       <Filter>Header Files\Entities</Filter>
     </ClInclude>
+    <ClInclude Include="Player_Inventory.h">
+      <Filter>Header Files\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="Player_Equipment.h">
+      <Filter>Header Files\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseInventory.h">
+      <Filter>Header Files\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseEquipment.h">
+	</ClInclude>
     <ClInclude Include="ItemFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -206,6 +217,18 @@
     <ClCompile Include="EntityFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Player_Inventory.cpp">
+      <Filter>Source Files\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Player_Equipment.cpp">
+      <Filter>Source Files\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseInventory.cpp">
+      <Filter>Source Files\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseEquipment.cpp">
+      <Filter>Source Files\Items</Filter>
+	</ClCompile>
     <ClCompile Include="ItemFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

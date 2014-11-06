@@ -5,7 +5,6 @@ class BossRoom :
 {
 public:
 	BossRoom(int row, int column, int level);
-	std::string toString();
 	virtual ~BossRoom(void);
 };
 

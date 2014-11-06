@@ -5,7 +5,6 @@ class StartRoom :
 {
 public:
 	StartRoom(int row, int column, int level);
-	std::string toString();
 	virtual ~StartRoom(void);
 };
 
