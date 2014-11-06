@@ -23,9 +23,9 @@ void Shield::use(Player* player) {
 	player->getInventory()->removeItem(this,1);
 }
 
-std::string Shield::toString() {
-	return std::string("shield");
-}
+//std::string Shield::toString() {
+//	return std::string("shield");
+//}
 
 Shield::~Shield(void)
 {

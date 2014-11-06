@@ -24,3 +24,8 @@ void BaseItem::setCount(int count) {
 BaseItem::~BaseItem(void)
 {
 }
+
+std::string BaseItem::toString()
+{
+	return std::string(this->Name);
+}

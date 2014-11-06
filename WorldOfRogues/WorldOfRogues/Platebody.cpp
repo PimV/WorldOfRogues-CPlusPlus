@@ -24,9 +24,9 @@ void Platebody::use(Player* player) {
 	player->getInventory()->removeItem(this,1);
 }
 
-std::string Platebody::toString() {
-	return std::string("platebody");
-}
+//std::string Platebody::toString() {
+//	return std::string("platebody");
+//}
 
 Platebody::~Platebody(void)
 {

@@ -3,6 +3,7 @@
 #include "RoomFactory.h"
 #include "Direction.h"
 #include "Player.h"
+#include "EntityFactory.h"
 
 #include <iostream>
 

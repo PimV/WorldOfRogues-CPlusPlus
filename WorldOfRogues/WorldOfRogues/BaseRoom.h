@@ -48,7 +48,11 @@ public:
 	int getLevel();
 
 	void setEnemies(std::vector<BaseEntity*> enemies);
+	void setItems(std::vector<BaseItem*> items);
+	
 	std::vector<BaseEntity*> getEnemies();
+	std::vector<BaseItem*> getItems();
+
 	virtual std::string toString();
 
 	virtual void setSymbol(char* c);

@@ -2,12 +2,13 @@
 #include "baseitem.h"
 #include "baseweapon.h"
 class Weapon :
-	public BaseItem, public BaseWeapon
+	public BaseWeapon
 {
 public:
 	Weapon(void);
 	void use(Player* player);
-	std::string toString();
+	//std::string toString();
 	virtual ~Weapon(void);
+
 };
 

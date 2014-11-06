@@ -11,13 +11,14 @@ public:
 	int getCount();
 	void setCount(int count);
 
-	virtual std::string toString() = 0;
+	//virtual std::string toString() = 0;
 	virtual void use(Player* player) = 0;
 	virtual ~BaseItem(void);
-
-protected:
+	
+	virtual std::string toString();
 	std::string Name;
 	int count;
 
+protected:
 };
 

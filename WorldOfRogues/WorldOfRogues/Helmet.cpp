@@ -24,9 +24,9 @@ void Helmet::use(Player* player) {
 	player->getInventory()->removeItem(this,1);
 }
 
-std::string Helmet::toString() {
-	return std::string("helmet");
-}
+//std::string Helmet::toString() {
+//	return std::string("helmet");
+//}
 
 Helmet::~Helmet(void)
 {

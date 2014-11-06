@@ -1,6 +1,5 @@
 #include "BaseArmour.h"
 
-
 BaseArmour::BaseArmour(void)
 {
 }
@@ -24,3 +23,16 @@ int BaseArmour::getOffenseRating() {
 BaseArmour::~BaseArmour(void)
 {
 }
+
+std::string BaseArmour::toString()
+{
+	return std::string(
+		std::string("") +
+		std::string(this->Name) +
+		std::string(" (Def. ") +
+		std::to_string(this->defencepoints) +
+		std::string(")") 
+		);
+}
+
+

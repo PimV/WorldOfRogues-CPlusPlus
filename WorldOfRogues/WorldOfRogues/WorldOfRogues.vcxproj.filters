@@ -130,6 +130,11 @@
       <Filter>Header Files\Items</Filter>
     </ClInclude>
     <ClInclude Include="BaseEquipment.h">
+	</ClInclude>
+    <ClInclude Include="ItemFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemType.h">
       <Filter>Header Files\Items</Filter>
     </ClInclude>
   </ItemGroup>
@@ -223,6 +228,9 @@
     </ClCompile>
     <ClCompile Include="BaseEquipment.cpp">
       <Filter>Source Files\Items</Filter>
+	</ClCompile>
+    <ClCompile Include="ItemFactory.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -1,7 +1,7 @@
 #include "BaseWeapon.h"
 
 
-BaseWeapon::BaseWeapon(void)
+BaseWeapon::BaseWeapon(void) : BaseItem()
 {
 }
 
@@ -15,4 +15,15 @@ int BaseWeapon::getOffenseRating() {
 
 BaseWeapon::~BaseWeapon(void)
 {
+}
+
+std::string BaseWeapon::toString()
+{
+	return std::string(
+		std::string("") +
+		std::string(this->Name) +
+		std::string(" (Att. ") +
+		std::to_string(this->attackpoints) +
+		std::string(")")
+		);
 }

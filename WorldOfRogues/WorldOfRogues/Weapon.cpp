@@ -3,7 +3,7 @@
 #include "BaseInventory.h"
 #include "BaseEquipment.h"
 
-Weapon::Weapon(void)
+Weapon::Weapon(void) : BaseWeapon()
 {
 }
 
@@ -15,9 +15,9 @@ void Weapon::use(Player* player) {
 	player->getInventory()->removeItem(this, 1);
 }
 
-std::string Weapon::toString() {
-	return std::string("weapon");
-}
+//std::string Weapon::toString() {
+//	return std::string("weapon");
+//}
 
 
 Weapon::~Weapon(void)

@@ -9,3 +9,4 @@ Gold::Gold(void)
 Gold::~Gold(void)
 {
 }
+
