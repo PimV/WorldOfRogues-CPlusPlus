@@ -296,7 +296,7 @@ void View::displayMap()
 			}
 		}
 		// print doors:
-		std::cout << northDoors << std::endl << roomsAndDoors << currentRow << std::endl << southDoors << std::endl << std::endl;
+		std::cout << northDoors << std::endl << roomsAndDoors << currentRow << std::endl << southDoors << std::endl;
 
 		//std::cout << std::endl << southDoors << std::endl;
 
