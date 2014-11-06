@@ -3,6 +3,8 @@ class BaseArmour
 {
 public:
 	BaseArmour(void);
+
+
 	virtual ~BaseArmour(void);
 
 protected:

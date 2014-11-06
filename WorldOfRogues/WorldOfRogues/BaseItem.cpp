@@ -1,5 +1,5 @@
 #include "BaseItem.h"
-
+#include <string>
 
 BaseItem::BaseItem(void)
 {
