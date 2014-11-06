@@ -5,9 +5,10 @@ class BaseItem
 public:
 	BaseItem(void);
 	virtual ~BaseItem(void);
-
-protected:
+	
+	virtual std::string toString();
 	std::string Name;
 
+protected:
 };
 

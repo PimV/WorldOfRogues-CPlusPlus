@@ -1,5 +1,4 @@
 #pragma once
-#include "BaseRoom.h"
 #include "BaseEntity.h"
 #include "EntityType.h"
 
@@ -9,11 +8,10 @@
 class EntityFactory
 {
 public:
-	EntityFactory();
 	virtual ~EntityFactory();
-
-	std::vector<BaseEntity*> createEntitiesForRoom();
+	
+	static BaseEntity* createEntity(EntityType et);
+	static std::vector<BaseEntity*> createRandomEntities();
 private:
-	BaseEntity* createEntity(EntityType et);
 };
 

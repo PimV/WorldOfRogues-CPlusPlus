@@ -6,5 +6,6 @@ class Gold :
 public:
 	Gold(void);
 	virtual ~Gold(void);
+
 };
 

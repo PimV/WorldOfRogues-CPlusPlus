@@ -1,5 +1,6 @@
 #pragma once
 #include "BaseEntity.h"
+#include "BaseItem.h"
 
 #include <iostream>
 #include <string>
@@ -47,6 +48,10 @@ public:
 	int getLevel();
 
 	void setEnemies(std::vector<BaseEntity*> enemies);
+	void setItems(std::vector<BaseItem*> items);
+	
+	std::vector<BaseEntity*> getEnemies();
+	std::vector<BaseItem*> getItems();
 
 	virtual std::string toString();
 
@@ -70,6 +75,7 @@ private:
 	int level;
 
 	std::vector<BaseEntity*> enemies;
+	std::vector<BaseItem*> items;
 
 	char* symbol;
 };

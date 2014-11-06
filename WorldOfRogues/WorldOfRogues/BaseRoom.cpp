@@ -229,6 +229,20 @@ void BaseRoom::setEnemies(std::vector<BaseEntity*> enemies)
 	this->enemies = enemies;
 }
 
+void BaseRoom::setItems(std::vector<BaseItem*> items)
+{
+	this->items = items;
+}
+
+std::vector<BaseEntity*> BaseRoom::getEnemies()
+{
+	return this->enemies;
+}
+
+std::vector<BaseItem*> BaseRoom::getItems()
+{
+	return this->items;
+}
 
 std::string BaseRoom::toString() {
 	return std::string(

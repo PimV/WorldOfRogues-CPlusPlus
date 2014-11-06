@@ -2,7 +2,7 @@
 #include "baseitem.h"
 #include "basearmour.h"
 class Platelegs :
-	public BaseItem, public BaseArmour
+	public BaseArmour
 {
 public:
 	Platelegs(void);

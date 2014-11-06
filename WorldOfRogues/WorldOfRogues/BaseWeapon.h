@@ -1,10 +1,16 @@
 #pragma once
-class BaseWeapon
+#include "BaseItem.h"
+
+class BaseWeapon :
+	public BaseItem
 {
 public:
 	BaseWeapon(void);
 	virtual ~BaseWeapon(void);
-protected:
+
+	std::string toString();
 	int attackpoints;
+
+protected:
 };
 
