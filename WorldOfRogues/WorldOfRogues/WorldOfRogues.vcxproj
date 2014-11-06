@@ -92,6 +92,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="Gold.h" />
     <ClInclude Include="Helmet.h" />
+    <ClInclude Include="ItemFactory.h" />
     <ClInclude Include="Platebody.h" />
     <ClInclude Include="Platelegs.h" />
     <ClInclude Include="Player.h" />
@@ -119,6 +120,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Gold.cpp" />
     <ClCompile Include="Helmet.cpp" />
+    <ClCompile Include="ItemFactory.cpp" />
     <ClCompile Include="Platebody.cpp" />
     <ClCompile Include="Platelegs.cpp" />
     <ClCompile Include="Player.cpp" />

@@ -7,11 +7,10 @@
 class ItemFactory
 {
 public:
-	ItemFactory();
 	virtual ~ItemFactory();
-
-	std::vector<BaseItem*> createRandomItems();
+	
+	static BaseItem* createItem(std::string *item);
+	static std::vector<BaseItem*> createRandomItems();
 private:
-	BaseItem* createItem(std::string *item);
 };
 

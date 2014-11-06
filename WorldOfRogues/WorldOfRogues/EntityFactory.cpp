@@ -20,7 +20,7 @@ EntityFactory::~EntityFactory()
 {
 }
 
-std::vector<BaseEntity*> EntityFactory::createEntitiesForRoom()
+std::vector<BaseEntity*> EntityFactory::createRandomEntities()
 {
 	std::vector<BaseEntity*> entityArray;
 

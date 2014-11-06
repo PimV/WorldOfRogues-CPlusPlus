@@ -4,9 +4,12 @@
 #include <iostream>
 #include <time.h>
 #include "Game.h"
+#include "ItemFactory.h"
+#include "EntityFactory.h"
+
+
 RoomFactory::RoomFactory()
 {
-	entityFactory = new EntityFactory();
 }
 RoomFactory::~RoomFactory(void)
 {
@@ -88,7 +91,9 @@ BaseRoom* RoomFactory::createRoom(BaseRoom* prevRoom, Direction to) {
 	br->generateDoors();
 
 	std::cout << "Generating enemies: " << std::endl;
-	br->setEnemies(entityFactory->createEntitiesForRoom());
+	br->setEnemies(EntityFactory::createEntitiesForRoom());
+	br->setItems(ItemFactory::createRandomItems());
+	
 
 	return br;
 }
@@ -119,8 +124,6 @@ StartRoom* RoomFactory::createStartRoom(BaseRoom* prevRoom) {
 		row = prevRoom->getRow();
 	}
 	StartRoom* sr = new StartRoom(level, row, column);
-
-
 
 	//Generate Doors
 	sr->generateDoors();
