@@ -27,18 +27,18 @@ static const char* weapon_strings[] = {
 
 enum class ArmourType
 {
-	IronHelmet = 0,
-	SteelHelmet,
-	MithrilHelmet,
-	IronLegs,
-	SteelLegs,
-	MithrilLegs,
-	IronBody,
-	SteelBody,
-	MithrilBody,
-	IronShield,
-	SteelShield,
-	MithrilShield
+	IronHelmet = 9,
+	SteelHelmet = 10,
+	MithrilHelmet = 11,
+	IronLegs = 12,
+	SteelLegs = 13,
+	MithrilLegs = 14,
+	IronBody = 15,
+	SteelBody = 16,
+	MithrilBody = 17,
+	IronShield = 18,
+	SteelShield = 19,
+	MithrilShield = 20
 };
 
 static const char* armour_strings[] = {
