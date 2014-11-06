@@ -234,6 +234,16 @@ void BaseRoom::setItems(std::vector<BaseItem*> items)
 	this->items = items;
 }
 
+void BaseRoom::addEnemies(std::vector<BaseEntity*> enemies)
+{
+	this->enemies.insert(this->enemies.end(), enemies.begin(), enemies.end());
+}
+
+void BaseRoom::addItems(std::vector<BaseItem*> items)
+{
+	this->items.insert(this->items.end(), items.begin(), items.end());
+}
+
 std::vector<BaseEntity*> BaseRoom::getEnemies()
 {
 	return this->enemies;
@@ -243,6 +253,18 @@ std::vector<BaseItem*> BaseRoom::getItems()
 {
 	return this->items;
 }
+
+void BaseRoom::addEnemy(BaseEntity* entity)
+{
+	this->enemies.push_back(entity);
+}
+
+void BaseRoom::addItem(BaseItem* item)
+{
+	this->items.push_back(item);
+}
+
+
 
 std::string BaseRoom::toString() {
 	std::string currentRoom = "";
