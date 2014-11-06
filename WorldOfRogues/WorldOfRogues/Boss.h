@@ -5,6 +5,7 @@ class Boss :
 {
 public:
 	Boss(void);
+	std::string toString();
 	virtual ~Boss(void);
 };
 

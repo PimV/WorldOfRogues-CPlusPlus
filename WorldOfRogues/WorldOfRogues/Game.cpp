@@ -14,6 +14,7 @@ Game::Game()
 
 	roomFactory = new RoomFactory();
 	this->player = new Player();
+	this->player->setLevel(1);
 
 	view = new View(this);
 

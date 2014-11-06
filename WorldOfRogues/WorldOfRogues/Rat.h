@@ -5,6 +5,8 @@ class Rat :
 {
 public:
 	Rat(void);
+	std::string toString();
+
 	virtual ~Rat(void);
 };
 
