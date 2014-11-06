@@ -14,9 +14,9 @@ std::string BaseArmour::toString()
 	return std::string(
 		std::string("") +
 		std::string(this->Name) +
-		std::string(" with ") +
+		std::string(" (Def. ") +
 		std::to_string(this->defencepoints) +
-		std::string(" defence points.") 
+		std::string(")") 
 		);
 }
 
