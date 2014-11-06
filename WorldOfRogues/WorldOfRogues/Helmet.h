@@ -2,7 +2,7 @@
 #include "baseitem.h"
 #include "basearmour.h"
 class Helmet :
-	public BaseItem, public BaseArmour
+	public BaseArmour
 {
 public:
 	Helmet(void);
