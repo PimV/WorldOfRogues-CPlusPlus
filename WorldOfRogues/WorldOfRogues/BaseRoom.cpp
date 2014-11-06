@@ -238,8 +238,17 @@ std::string BaseRoom::toString() {
 	std::string currentRoom = "";
 	if (this->enemies.size() > 0) {
 		currentRoom.append("Enemies: \n");
+		int enemySelectionNumber = 1;
 		for(BaseEntity* e : this->enemies) {
-			currentRoom.append("\t" + e->toString() + "(" + std::to_string(e->getLevel()) + ") \n");
+			currentRoom.append("\t" + std::to_string(enemySelectionNumber) + ". " +  e->toString() + " (lvl: " + std::to_string(e->getLevel()) + ") \n");
+			enemySelectionNumber++;
+		}
+	}
+
+	if (this->items.size() > 0) {
+		currentRoom.append("Items: \n");
+		for(BaseItem* e : this->items) {
+			currentRoom.append("\t" + e->toString() + "[" + std::to_string(e->getCount()) + "] \n");
 		}
 	}
 	return currentRoom;

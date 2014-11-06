@@ -9,3 +9,12 @@ enum class EntityType
 	Boss,
 	Player
 };
+
+static const char* entity_strings[] = {
+	"Rat",
+	"Zombie",
+	"Skeleton",
+	"Dwarf",
+	"Boss",
+	"Player"
+};

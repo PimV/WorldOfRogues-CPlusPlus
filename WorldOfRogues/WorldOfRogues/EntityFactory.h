@@ -9,11 +9,12 @@
 class EntityFactory
 {
 public:
-	EntityFactory();
+	//EntityFactory();
 	virtual ~EntityFactory();
-
-	std::vector<BaseEntity*> createEntitiesForRoom();
+	static std::string generateName(BaseEntity* entity);
+	static std::vector<BaseEntity*> createEntitiesForRoom();
+	static BaseEntity* createEntity(EntityType et);
 private:
-	BaseEntity* createEntity(EntityType et);
+
 };
 

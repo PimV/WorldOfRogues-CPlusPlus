@@ -73,9 +73,9 @@ void View::receiveInput()
 			displayInventory();
 		}
 		else if (input == "addhelm") {
-			Game::Instance()->getPlayer()->getInventory()->addItem(new Helmet());
+			Game::Instance()->getPlayer()->getInventory()->addItem(new Helmet(),-1);
 		} 
-		else if (input == "search") {
+		else if (input == "examine room") {
 			displayCurrentRoom();
 		}
 		else if (input == "player_stats") {
@@ -144,23 +144,23 @@ void View::unequipItem(std::string prefix, std::string input) {
 	std::string itemFound = Game::Instance()->getPlayer()->getEquipment()->hasItem(item);
 
 	if (itemFound == "weapon") {
-		Game::Instance()->getPlayer()->getInventory()->addItem(dynamic_cast<BaseItem*>(Game::Instance()->getPlayer()->getEquipment()->getWeapon()));
+		Game::Instance()->getPlayer()->getInventory()->addItem(dynamic_cast<BaseItem*>(Game::Instance()->getPlayer()->getEquipment()->getWeapon()), 1);
 		Game::Instance()->getPlayer()->getEquipment()->setWeapon(nullptr);
 		std::cout << "Unequipped weapon: " << item << ", it's back in your inventory now." << std::endl;
 	} else if (itemFound == "shield") {
-		Game::Instance()->getPlayer()->getInventory()->addItem(dynamic_cast<BaseItem*>(Game::Instance()->getPlayer()->getEquipment()->getShield()));
+		Game::Instance()->getPlayer()->getInventory()->addItem(dynamic_cast<BaseItem*>(Game::Instance()->getPlayer()->getEquipment()->getShield()),1);
 		Game::Instance()->getPlayer()->getEquipment()->setShield(nullptr);
 		std::cout << "Unequipped shield: " << item << ", it's back in your inventory now." << std::endl;
 	} else if (itemFound == "platebody") {
-		Game::Instance()->getPlayer()->getInventory()->addItem(dynamic_cast<BaseItem*>(Game::Instance()->getPlayer()->getEquipment()->getPlatebody()));
+		Game::Instance()->getPlayer()->getInventory()->addItem(dynamic_cast<BaseItem*>(Game::Instance()->getPlayer()->getEquipment()->getPlatebody()),1);
 		Game::Instance()->getPlayer()->getEquipment()->setPlatebody(nullptr);
 		std::cout << "Unequipped platebody: " << item << ", it's back in your inventory now." << std::endl;
 	} else if (itemFound == "platelegs") {
-		Game::Instance()->getPlayer()->getInventory()->addItem(dynamic_cast<BaseItem*>(Game::Instance()->getPlayer()->getEquipment()->getPlatelegs()));
+		Game::Instance()->getPlayer()->getInventory()->addItem(dynamic_cast<BaseItem*>(Game::Instance()->getPlayer()->getEquipment()->getPlatelegs()),1);
 		Game::Instance()->getPlayer()->getEquipment()->setPlatelegs(nullptr);
 		std::cout << "Unequipped platelegs: " << item << ", it's back in your inventory now." << std::endl;
 	} else if (itemFound == "helmet") {
-		Game::Instance()->getPlayer()->getInventory()->addItem(dynamic_cast<BaseItem*>(Game::Instance()->getPlayer()->getEquipment()->getHelmet()));
+		Game::Instance()->getPlayer()->getInventory()->addItem(dynamic_cast<BaseItem*>(Game::Instance()->getPlayer()->getEquipment()->getHelmet()),1);
 		Game::Instance()->getPlayer()->getEquipment()->setHelmet(nullptr);
 		std::cout << "Unequipped helmet: " << item << ", it's back in your inventory now." << std::endl;
 	} else if (itemFound == "false") {

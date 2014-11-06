@@ -6,7 +6,6 @@
 #include "Game.h"
 RoomFactory::RoomFactory()
 {
-	entityFactory = new EntityFactory();
 }
 RoomFactory::~RoomFactory(void)
 {
@@ -88,7 +87,7 @@ BaseRoom* RoomFactory::createRoom(BaseRoom* prevRoom, Direction to) {
 	br->generateDoors();
 
 	std::cout << "Generating enemies: " << std::endl;
-	br->setEnemies(entityFactory->createEntitiesForRoom());
+	br->setEnemies(EntityFactory::createEntitiesForRoom());
 
 	return br;
 }

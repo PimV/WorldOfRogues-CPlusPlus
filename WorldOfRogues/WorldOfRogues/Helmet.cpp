@@ -18,10 +18,10 @@ int Helmet::getArmourRating() {
 
 void Helmet::use(Player* player) {
 	if (player->getEquipment()->hasHelmet()) {
-		player->getInventory()->addItem(player->getEquipment()->getHelmet());
+		player->getInventory()->addItem(player->getEquipment()->getHelmet(),1);
 	}
 	player->getEquipment()->setHelmet(this);
-	player->getInventory()->removeItem(this);
+	player->getInventory()->removeItem(this,1);
 }
 
 std::string Helmet::toString() {

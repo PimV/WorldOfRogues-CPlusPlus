@@ -1,5 +1,6 @@
 #pragma once
 #include "BaseEntity.h"
+#include "BaseItem.h"
 
 #include <iostream>
 #include <string>
@@ -70,6 +71,7 @@ private:
 	int level;
 
 	std::vector<BaseEntity*> enemies;
+	std::vector<BaseItem*> items;
 
 	char* symbol;
 };

@@ -13,7 +13,8 @@ Game::Game()
 	createVector();
 
 	roomFactory = new RoomFactory();
-	this->player = new Player();
+	//this->player = new Player();
+	this->player = dynamic_cast<Player*>(EntityFactory::createEntity(EntityType::Player));
 	this->player->setLevel(1);
 
 	view = new View(this);

@@ -19,21 +19,35 @@ public:
 	void setInventory(BaseInventory* inventory);
 	BaseInventory* getInventory();
 
+	void setName(std::string name);
+	std::string getName();
+
 	void setHitpoints(int hitpoints);
 	int getHitpoints();
+
+	void setExperience(int experience);
+	int getExperience();
 
 	void setLevel(int level);
 	int getLevel();
 
+	void setAttackPoints(int attackPoints);
+	int getAttackPoints();
+
+	void setEntityType(EntityType type);
+	EntityType getEntityType();
+
 	virtual std::string toString() = 0;
 
 	virtual ~BaseEntity(void);
-protected:
-	std::string Name;
+private:
+	std::string name;
 	int level;
 	int hitpoints;
+	int experience;
 	int attackpoints;
 	BaseRoom* room;
+	EntityType type;
 	//Inventory
 	BaseEquipment* equipment;
 	BaseInventory* inventory;

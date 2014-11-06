@@ -8,12 +8,14 @@
 #include "Boss.h"
 #include "Player.h"
 
+#include "BaseEquipment.h"
+#include "BaseInventory.h"
+
+#include "Game.h"
+
 #include <random>
 
 
-EntityFactory::EntityFactory()
-{
-}
 
 
 EntityFactory::~EntityFactory()
@@ -68,7 +70,7 @@ std::vector<BaseEntity*> EntityFactory::createEntitiesForRoom()
 		std::cout << std::endl;
 	}
 
-	// random entity level
+	// random entity level + name
 	for (BaseEntity *e : entityArray)
 	{
 		std::uniform_int_distribution<int> dist3(1, 5);
@@ -77,6 +79,7 @@ std::vector<BaseEntity*> EntityFactory::createEntitiesForRoom()
 
 		// change: (CurrentPlayer->getLevel() + randomEntityLevel);
 		e->setLevel(randomEntityLevel);
+		e->setName(EntityFactory::generateName(e));
 	}
 
 	return entityArray;
@@ -108,4 +111,41 @@ BaseEntity* EntityFactory::createEntity(EntityType et)
 		return nullptr;
 		break;
 	}
+}
+
+std::string EntityFactory::generateName(BaseEntity* entity) {
+	std::string name = "";
+
+	switch( entity->getLevel() - Game::Instance()->getPlayer()->getLevel()) {
+	case -5:
+	case -4:
+	case -3:
+	case -2:
+	case -1:
+		name.append("A weak ");
+		break;
+	case 1:
+	case 2:
+		name.append("An angry ");
+		break;
+	case 3:
+	case 4:
+		name.append("A mighty ");
+		break;
+	case 5:
+	case 6:
+		name.append("A giant ");
+		break;
+	case 7:
+	case 8:
+		name.append("A super-sized ");
+		break;
+	default:
+		name.append("A regular ");
+		break;
+	}
+
+	name.append(entity_strings[(int)entity->getEntityType()]);
+
+	return name;
 }

@@ -3,6 +3,8 @@
 
 Dwarf::Dwarf(void)
 {
+	this->setEntityType(EntityType::Dwarf);
+	this->setName("Dwarf");
 }
 
 std::string Dwarf::toString() {

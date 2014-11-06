@@ -23,7 +23,6 @@ public:
 
 	virtual ~RoomFactory();
 private:
-	EntityFactory *entityFactory;
 
 };
 

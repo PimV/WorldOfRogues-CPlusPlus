@@ -17,10 +17,10 @@ int Shield::getArmourRating() {
 
 void Shield::use(Player* player) {
 	if (player->getEquipment()->hasShield()) {
-		player->getInventory()->addItem(player->getEquipment()->getShield());
+		player->getInventory()->addItem(player->getEquipment()->getShield(),1);
 	}
 	player->getEquipment()->setShield(this);
-	player->getInventory()->removeItem(this);
+	player->getInventory()->removeItem(this,1);
 }
 
 std::string Shield::toString() {

@@ -3,10 +3,12 @@
 
 Rat::Rat(void)
 {
+	this->setEntityType(EntityType::Rat);
+	this->setName("Rat");
 }
 
 std::string Rat::toString() {
-	return std::string("Rat");
+	return this->getName();
 }
 
 

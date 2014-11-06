@@ -17,7 +17,11 @@ int Platebody::getArmourRating() {
 }
 
 void Platebody::use(Player* player) {
-
+	if (player->getEquipment()->hasPlatebody()) {
+		player->getInventory()->addItem(player->getEquipment()->getPlatebody(),1);
+	}
+	player->getEquipment()->setPlatebody(this);
+	player->getInventory()->removeItem(this,1);
 }
 
 std::string Platebody::toString() {

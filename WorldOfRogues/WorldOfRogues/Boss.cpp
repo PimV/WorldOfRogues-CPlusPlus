@@ -3,10 +3,12 @@
 
 Boss::Boss(void)
 {
+	this->setEntityType(EntityType::Boss);
+	this->setName("Boss");
 }
 
 std::string Boss::toString() {
-	return std::string("Boss");
+	return this->getName();
 }
 
 
