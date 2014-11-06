@@ -13,6 +13,6 @@ static const char* item_strings[] = {
 	"Sword",
 	"Shield",
 	"Helmet",
-	"PlateArmour",
-	"PlateLegs"
+	"Platebody",
+	"Platelegs"
 };

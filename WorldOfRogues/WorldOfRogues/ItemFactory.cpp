@@ -1,4 +1,12 @@
 #include "ItemFactory.h"
+#include "ItemType.h"
+
+#include "Weapon.h"
+#include "Shield.h"
+#include "Platelegs.h"
+#include "Platebody.h"
+#include "Helmet.h"
+
 #include <random>
 
 ItemFactory::~ItemFactory()
@@ -23,34 +31,34 @@ std::vector<BaseItem*> ItemFactory::createRandomItems()
 		std::uniform_int_distribution<int> dist2(1, 5);
 		int randomItemSpawn = dist2(dre);
 
-		//std::cout << "Created: ";
-		//switch (randomItemSpawn)
-		//{
-		//case 1:
-		//	std::cout << "Dragon Helmet ";
-		//	itemsArray.push_back(createEntity(EntityType::Rat));
-		//	break;
-		//case 2:
-		//	std::cout << "Dragon Plate Armour ";
-		//	itemsArray.push_back(createEntity(EntityType::Skeleton));
-		//	break;
-		//case 3:
-		//	std::cout << "Dragon Plate legs ";
-		//	itemsArray.push_back(createItem(EntityType::Zombie));
-		//	break;
-		//case 4:
-		//	std::cout << "Dragon sword";
-		//	itemsArray.push_back(createItem(EntityType::Dwarf));
-		//	break;
-		//case 5:
-		//	std::cout << "Dragon shield ";
-		//	itemsArray.push_back(createItem(EntityType::Boss));
-		//	break;
-		//default:
-		//	break;
-		//}
+		std::cout << "Created: ";
+		switch (randomItemSpawn)
+		{
+		case 1:
+			std::cout << "Sword ";
+			itemsArray.push_back(createItem(item_strings[(int)ItemType::Sword]));
+			break;
+		case 2:
+			std::cout << "Shield ";
+			itemsArray.push_back(createItem(item_strings[(int)ItemType::Shield]));
+			break;
+		case 3:
+			std::cout << "Helmet ";
+			itemsArray.push_back(createItem(item_strings[(int)ItemType::Helmet]));
+			break;
+		case 4:
+			std::cout << "Plate armour ";
+			itemsArray.push_back(createItem(item_strings[(int)ItemType::PlateArmour]));
+			break;
+		case 5:
+			std::cout << "Plate legs ";
+			itemsArray.push_back(createItem(item_strings[(int)ItemType::PlateLegs]));
+			break;
+		default:
+			break;
+		}
 
-	//	std::cout << std::endl;
+		std::cout << std::endl;
 	}
 
 	//// random entity level
@@ -69,30 +77,28 @@ std::vector<BaseItem*> ItemFactory::createRandomItems()
 
 BaseItem* ItemFactory::createItem(std::string item)
 {
-	/*switch (et)
+	if (item == "Sword")
 	{
-	case EntityType::Rat:
-		return new Rat();
-		break;
-	case EntityType::Zombie:
-		return new Zombie();
-		break;
-	case EntityType::Skeleton:
-		return new Skeleton();
-		break;
-	case EntityType::Dwarf:
-		return new Dwarf();
-		break;
-	case EntityType::Boss:
-		return new Boss();
-		break;
-	case EntityType::Player:
-		return new Player();
-		break;
-	default:
+		return new Weapon();
+	}
+	else if (item == "Shield")
+	{
+		return new Shield();
+	}
+	else if (item == "Helmet")
+	{
+		return new Helmet();
+	}
+	else if (item == "Platebody")
+	{
+		return new Platebody();
+	}
+	else if (item == "Platelegs")
+	{
+		return new Platelegs();
+	}
+	else 
+	{
 		return nullptr;
-		break;
-	}*/
-
-	return nullptr;
+	}
 }
