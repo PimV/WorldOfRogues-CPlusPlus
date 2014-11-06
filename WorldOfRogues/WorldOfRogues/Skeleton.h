@@ -5,6 +5,8 @@ class Skeleton :
 {
 public:
 	Skeleton(void);
+	std::string toString();
+
 	virtual ~Skeleton(void);
 };
 

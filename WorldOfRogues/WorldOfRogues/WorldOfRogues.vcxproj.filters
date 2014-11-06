@@ -114,6 +114,12 @@
     <ClInclude Include="RegularRoom.h">
       <Filter>Header Files\Rooms</Filter>
     </ClInclude>
+    <ClInclude Include="EntityFactory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityType.h">
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
     <ClInclude Include="Player_Inventory.h">
       <Filter>Header Files\Items</Filter>
     </ClInclude>
@@ -202,6 +208,9 @@
     </ClCompile>
     <ClCompile Include="RegularRoom.cpp">
       <Filter>Source Files\Rooms</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityFactory.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Player_Inventory.cpp">
       <Filter>Source Files\Items</Filter>

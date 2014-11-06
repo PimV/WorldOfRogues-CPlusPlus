@@ -4,6 +4,7 @@
 #include "EndRoom.h"
 #include "BossRoom.h"
 #include "StartRoom.h"
+#include "EntityFactory.h"
 #include <vector>
 
 enum class Direction;
@@ -22,5 +23,7 @@ public:
 
 	virtual ~RoomFactory();
 private:
+	EntityFactory *entityFactory;
+
 };
 

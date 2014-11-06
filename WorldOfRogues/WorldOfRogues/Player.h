@@ -16,7 +16,8 @@ public:
 
 	void setMaxLevelVisited(int maxLevelVisited);
 	int getMaxLevelVisited();
-	
+
+	std::string toString();
 
 	virtual ~Player(void);
 
