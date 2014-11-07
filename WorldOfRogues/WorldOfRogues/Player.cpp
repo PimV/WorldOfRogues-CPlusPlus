@@ -31,6 +31,11 @@ Player::Player(void)
 	this->getInventory()->addItem(new HealthPotion());
 	this->getInventory()->addItem(new ExperiencePotion());
 	this->getInventory()->addItem(new ExperiencePotion());
+	this->getInventory()->addItem(new ExperiencePotion());
+	this->getInventory()->addItem(new ExperiencePotion());
+	this->getInventory()->addItem(new ExperiencePotion());
+	this->getInventory()->addItem(new ExperiencePotion());
+
 	this->getInventory()->addItem(ItemFactory::createItem(WeaponType::Sword));
 	this->getInventory()->addItem(new HolyHandGrenade());
 
@@ -104,12 +109,13 @@ void Player::setExperience(int experience) {
 	while (experience > getXpTillNextLevel()) {
 		experience = experience - this->getLevel() * 100;
 		this->setLevel(this->getLevel() + 1);
-		this->setExperience(experience);
+		BaseEntity::setExperience(experience);
 		this->setMaxHitpoints(this->getMaxHitpoints() + 10);
 		this->setSkillPoints(this->getSkillPoints() + 1);
 		std::cout << "Congratulations! You have just levelled up to level " << this->getLevel() << ". Enter 'strength', 'agility' or 'defence' to use your newly acquired skillpoint." << std::endl;
 	}
 	BaseEntity::setExperience(experience);
+
 }
 
 BaseRoom* Player::getPreviousRoom() {

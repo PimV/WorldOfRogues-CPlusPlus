@@ -78,6 +78,7 @@ BaseEntity* EntityFactory::createEntity(EntityType et, int level)
 {
 	BaseEntity* baseEntity = createEntity(et);
 	baseEntity->setLevel(level);
+	baseEntity->generateExperience();
 	return baseEntity;
 }
 

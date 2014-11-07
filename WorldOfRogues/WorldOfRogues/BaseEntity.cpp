@@ -8,9 +8,9 @@ using namespace std;
 
 BaseEntity::BaseEntity(void)
 {
-	this->attackpoints = 1;
+	this->attackpoints = 3;
 	this->defencepoints = 1;
-	this->agility = 1;
+	this->setAgility(1);
 	this->setInventory(new BaseInventory());
 	this->setEquipment(new BaseEquipment());
 
@@ -34,8 +34,8 @@ int BaseEntity::attack(BaseEntity* entity) {
 	int hitChance = dist1(dre);
 	int healthLeft = entity->getHitpoints();
 	if (hitChance > 10) {
-		healthLeft -= this->getAttackPoints();
-		healthLeft += entity->getEquipment()->getArmourRating() / 2;
+		healthLeft -= (this->getAttackPoints() + this->getEquipment()->getOffenseRating());
+		healthLeft += (entity->getEquipment()->getArmourRating() / 2) + this->getDefencePoints();
 		if (healthLeft >= entity->getHitpoints()) {
 			healthLeft = entity->getHitpoints();
 		} 
@@ -131,9 +131,6 @@ int BaseEntity::getExperience() {
 }
 
 void BaseEntity::setExperience(int experience) {
-	//Keep levelling till experience is up
-
-
 	this->experience = experience;
 }
 
