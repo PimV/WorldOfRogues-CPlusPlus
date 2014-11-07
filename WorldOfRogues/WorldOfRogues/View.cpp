@@ -25,21 +25,23 @@ View::View(Game* game)
 
 void View::receiveInput()
 {
-	std::string enterPrefix = "enter door ";
+	std::string enterPrefix = "go ";
 	std::string usePrefix = "use ";
 	std::string unequipPrefix = "unequip ";
 	std::string takePrefix = "take ";
 	std::string attackPrefix = "attack ";
+	std::string levelupPrefix = "levelup ";
+	std::string renamePrefix = "setHeroName ";
 
 	while (input != "quit")
 	{
 		if (input == "help")
 		{
 			std::cout << "Please use one of the following commands:" << std::endl;
+			std::cout << "- setHeroName [name]" << std::endl;
 			std::cout << "- map" << std::endl;
-			std::cout << "- examine room" << std::endl;
-			std::cout << "- quit" << std::endl;
-			std::cout << "- enter door" << std::endl;
+			std::cout << "- recon_room"<< std::endl;
+			std::cout << "- search" << std::endl;
 			std::cout << "- current_level" << std::endl;
 			std::cout << "- equipment" << std::endl;
 			std::cout << "- player_stats" << std::endl;
@@ -48,6 +50,9 @@ void View::receiveInput()
 			std::cout << "- unequip [equipment_item]" << std::endl;
 			std::cout << "- take [item_number]" << std::endl;
 			std::cout << "- attack [monster_number]" << std::endl;
+			std::cout << "- levelup [skill]" << std::endl;
+			std::cout << "- rest" << std::endl;
+			std::cout << "- quit" << std::endl;
 			if (Game::Instance()->getPlayer()->getRoom()->getSymbol() == "E") {
 				if (Game::Instance()->getPlayer()->getRoom()->getLevel() <= Game::Instance()->getPlayer()->getMaxLevelVisited() &&  Game::Instance()->getPlayer()->getRoom()->getLevel() < 10) { // max level in tower
 					std::cout << "- ascend" << std::endl;
@@ -67,17 +72,32 @@ void View::receiveInput()
 		{
 			displayMap();
 		}
+		else if (input == "flee") {
+			flee();
+		}
+		else if (input == "recon_room") {
+			displayRoomDescription();
+		}
+		else if (input == "rest") {
+			rest();
+		}
 		else if (input == "equipment") {
 			displayEquipment();
 		}
 		else if (input == "inventory") {
 			displayInventory();
 		}
-		else if (input == "examine room") {
+		else if (input == "search") {
 			displayCurrentRoom();
 		}
 		else if (input == "player_stats") {
 			displayPlayerStatistics();
+		}
+		else if (input.substr(0, renamePrefix.size()) == renamePrefix) {
+			rename(renamePrefix, input);
+		} 
+		else if (input.substr(0, levelupPrefix.size()) == levelupPrefix) {
+			levelup(levelupPrefix, input);
 		}
 		else if (input.substr(0, attackPrefix.size()) == attackPrefix) {
 			attack(attackPrefix, input);
@@ -120,11 +140,69 @@ void View::gameOver() {
 		if (input2 == "restart") {
 			Game::Instance()->init();
 		} else if (input2 == "quit") {
-
+			exit(0);
 		}
 
 
 		std::getline(std::cin, input2);
+	}
+}
+
+void View::rename(std::string prefix, std::string input) {
+	std::string name = input.substr(prefix.size(), input.size());
+	if (name.length() > 3) {
+		std::cout << "Hero renamed from '" << Game::Instance()->getPlayer()->getName() << "' to '" << name << "'." << std::endl;
+		Game::Instance()->getPlayer()->setName(name);
+	} else {
+		std::cout << "Name must be longer than three characters." << std::endl;
+	}
+
+}
+
+void View::levelup(std::string prefix, std::string input) {
+	if (Game::Instance()->getPlayer()->getSkillPoints() <= 0) {
+		std::cout << "You can't level up a skill without skillpoints! Go train some more, adventurer!" << std::endl;
+	} else {
+		std::string skill = input.substr(prefix.size(), input.size());
+		if (skill == "agility") {
+			Game::Instance()->getPlayer()->setAgility(Game::Instance()->getPlayer()->getAgility() + 1);
+			Game::Instance()->getPlayer()->setSkillPoints(Game::Instance()->getPlayer()->getSkillPoints() - 1);
+			std::cout << "You leveled up Agility from " << Game::Instance()->getPlayer()->getAgility() - 1 << " to " << Game::Instance()->getPlayer()->getAgility()  << "!" << std::endl;
+		} else if (skill == "strength") {
+			Game::Instance()->getPlayer()->setAttackPoints(Game::Instance()->getPlayer()->getAttackPoints() + 1);
+			Game::Instance()->getPlayer()->setSkillPoints(Game::Instance()->getPlayer()->getSkillPoints() - 1);
+			std::cout << "You leveled up Strength from " << Game::Instance()->getPlayer()->getAttackPoints() - 1 << " to " << Game::Instance()->getPlayer()->getAttackPoints()   << "!"<< std::endl;
+		} else if (skill == "defence") {
+			Game::Instance()->getPlayer()->setDefencePoints(Game::Instance()->getPlayer()->getDefencePoints() + 1);
+			Game::Instance()->getPlayer()->setSkillPoints(Game::Instance()->getPlayer()->getSkillPoints() - 1);
+			std::cout << "You leveled up Defence from " << Game::Instance()->getPlayer()->getDefencePoints() - 1 << " to " << Game::Instance()->getPlayer()->getDefencePoints()  << "!" << std::endl;
+		} else {
+			std::cout << "Skill unknown. Skills: 'agility', 'strength' or 'defence'." << std::endl;
+		}
+	}
+}
+
+void View::rest() {
+	if (Game::Instance()->getPlayer()->getRoom()->hasEnemies()) {
+		std::cout << "You can't rest in a room full of enemies!" << std::endl;
+	} else {
+		if (Game::Instance()->getPlayer()->rest()) {
+			std::cout << "After a well deserved rest, you restored 15HP." << std::endl;
+		} else {
+			std::cout << "You tried to rest, but the haunted tower kept you awake. At one point, it scared you so much, you jumped up against the lamp hanging right above you, resulting in a headache. You've lost 10HP. Better watch out next time!" << std::endl;
+		}
+	}
+}
+
+void View::flee() {
+	if (!Game::Instance()->getPlayer()->getRoom()->hasEnemies()) {
+		std::cout << "There's no point in fleeing from an empty room... or is there?" << std::endl;
+	} else {
+		if (Game::Instance()->getPlayer()->flee()) {
+			std::cout << "You successfully fled!" << std::endl;
+		} else {
+			std::cout << "You failed to flee and got attacked by some monsters. Some hurt you, some didn't. At the end of the fight, you have " << Game::Instance()->getPlayer()->getHitpoints() << "HP left." << std::endl;
+		}
 	}
 }
 
@@ -270,6 +348,11 @@ void View::takeItem(std::string prefix, std::string input) {
 }
 
 void View::enterDoor(std::string prefix, std::string input) {
+	if(Game::Instance()->getPlayer()->getRoom()->hasEnemies()) {
+		std::cout << "You can't just walk away. Either try to 'flee' or kill all the enemies in the room!" << std::endl;
+		return;
+	}
+
 	std::string direction = input.substr(prefix.size(), input.size());
 
 	BaseRoom* currentRoom = this->game->getPlayer()->getRoom();
@@ -389,15 +472,20 @@ void View::displayMap()
 	}
 	std::cout << std::endl << "Level " << currentLevel << std::endl;
 	std::cout << "Information: " << std::endl 
-			<< "R - Regular Room" << std::endl 
-			<< "B - Boss room" << std::endl 
-			<< "E - End room" << std::endl 
-			<< "S - Start room" << std::endl;
+		<< "R - Regular Room" << std::endl 
+		<< "B - Boss room" << std::endl 
+		<< "E - End room" << std::endl 
+		<< "S - Start room" << std::endl;
 }
 
 void View::displayEquipment() {
 	std::cout << "Equipment: " << std::endl << std::endl;;
 	std::cout << Game::Instance()->getPlayer()->getEquipment()->toString() << std::endl;
+}
+void View::displayRoomDescription() {
+	std::cout << "Room Description: " << std::endl << std::endl;
+	std::cout << Game::Instance()->getPlayer()->getRoom()->getDescription() << std::endl;
+
 }
 
 void View::displayInventory() {

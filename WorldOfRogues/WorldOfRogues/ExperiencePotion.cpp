@@ -4,7 +4,7 @@
 ExperiencePotion::ExperiencePotion(void)
 {
 	this->setName("XP Potion");
-	this->setExperience(600);
+	this->setExperience(25);
 }
 
 

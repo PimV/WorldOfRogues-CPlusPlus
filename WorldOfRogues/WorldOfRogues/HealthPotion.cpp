@@ -4,7 +4,7 @@
 HealthPotion::HealthPotion(void)
 {
 	this->setName("Health Potion");
-	this->setHealth(-100);
+	this->setHealth(50);
 }
 
 

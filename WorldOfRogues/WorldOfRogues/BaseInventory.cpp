@@ -72,6 +72,10 @@ std::map<std::string, BaseItem*>* BaseInventory::getItems() {
 	return &this->items;
 }
 
+std::string BaseInventory::itemInformation(BaseItem* item) {
+	return "todo";
+	//return item->getInformation();
+}
 
 
 BaseInventory::~BaseInventory(void)

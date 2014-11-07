@@ -54,8 +54,6 @@ std::vector<BaseEntity*> EntityFactory::createRandomEntities()
 		default:
 			break;
 		}
-
-		std::cout << std::endl;
 	}
 
 	// random entity level + name
@@ -68,7 +66,9 @@ std::vector<BaseEntity*> EntityFactory::createRandomEntities()
 		// change: (CurrentPlayer->getLevel() + randomEntityLevel);
 		e->setLevel(randomEntityLevel);
 		e->setName(EntityFactory::generateName(e));
+		e->generateExperience();
 	}
+
 
 	return entityArray;
 

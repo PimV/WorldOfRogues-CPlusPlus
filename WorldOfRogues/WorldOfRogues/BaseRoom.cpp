@@ -181,7 +181,7 @@ void BaseRoom::disableEastDoor() {
 }
 
 bool BaseRoom::hasEnemies() {
-	if (enemies.empty()) {
+	if (!enemies.empty()) {
 		return true;
 	}
 	return false;
@@ -206,7 +206,7 @@ bool BaseRoom::trapPlayer(BaseEntity* entity) {
 		std::default_random_engine dre(dev());
 
 		// random amount
-		std::uniform_int_distribution<int> dist1(1, 10);
+		std::uniform_int_distribution<int> dist1(entity->getAgility(), 15);
 		int randomTrapNumber = dist1(dre);
 
 		switch(randomTrapNumber) {
@@ -224,6 +224,12 @@ bool BaseRoom::trapPlayer(BaseEntity* entity) {
 		case 4:
 			std::cout << "The first step in the room triggered a trap, hitting you with darts. You lost 15HP." << std::endl;
 			entity->setHitpoints(entity->getHitpoints() - 15);
+			return true;
+		case 5:
+			std::cout << "Upon entering this room, you are washed over with water, followed by a flour-cannon. All the flour in your eyes hurt, making you lose 8HP." << std::endl;
+			return true;
+		case 6:
+			std::cout << "As you walk toward the middle of the room, you step on a pressure plate, allowing lava to flow into the chamber. You're not fast enough and burnt your leg, causing a 50HP loss." << std::endl;
 			return true;
 		}
 	}
@@ -334,7 +340,7 @@ std::string BaseRoom::toString() {
 		currentRoom.append("Enemies: \n");
 		int enemySelectionNumber = 1;
 		for(BaseEntity* e : this->enemies) {
-			currentRoom.append("\t" + std::to_string(enemySelectionNumber) + ". " +  e->toString() + " (lvl: " + std::to_string(e->getLevel()) + ") \n");
+			currentRoom.append("\t" + std::to_string(enemySelectionNumber) + ". " +  e->toString() + " (lvl: " + std::to_string(e->getLevel()) + ", HP: " + std::to_string(e->getHitpoints()) + ", XP: " + std::to_string(e->getExperience()) + ") \n");
 			enemySelectionNumber++;
 		}
 	}

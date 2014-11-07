@@ -10,7 +10,9 @@ class BaseEntity
 {
 public:
 	BaseEntity(void);
-	void setRoom(BaseRoom* room);
+	void generateExperience();
+
+	virtual void setRoom(BaseRoom* room);
 	BaseRoom* getRoom();
 
 	void setEquipment(BaseEquipment* equipment);
@@ -30,7 +32,7 @@ public:
 	virtual void setHitpoints(int hitpoints);
 	int getHitpoints();
 
-	void setExperience(int experience);
+	virtual void setExperience(int experience);
 	int getExperience();
 
 	void setLevel(int level);
@@ -41,6 +43,10 @@ public:
 
 	void setAttackPoints(int attackPoints);
 	int getAttackPoints();
+
+
+	void setDefencePoints(int defencepoints);
+	int getDefencePoints();
 
 	int attack(BaseEntity* entity);
 
@@ -58,6 +64,7 @@ private:
 	int agility;
 	int experience;
 	int attackpoints;
+	int defencepoints;
 	BaseRoom* room;
 	EntityType type;
 	//Inventory

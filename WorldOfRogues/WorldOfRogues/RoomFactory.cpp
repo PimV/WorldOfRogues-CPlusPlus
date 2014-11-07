@@ -106,19 +106,16 @@ BaseRoom* RoomFactory::createRoom(BaseRoom* prevRoom, Direction to) {
 	br->addEnemies(EntityFactory::createRandomEntities());
 	br->addItems(ItemFactory::createRandomItems());
 
-	br->setDescription(generateDescription(br));
+	br->setDescription(this->generateDescription(br));
+
 
 	return br;
 }
 
 std::string RoomFactory::generateDescription(BaseRoom* room) {
 	std::string description = "In this room, there's ";
-
-
 	std::random_device dev;
 	std::default_random_engine dre(dev());
-
-	// random amount
 
 
 	std::uniform_int_distribution<int> dist1(1, 5);
@@ -131,18 +128,18 @@ std::string RoomFactory::generateDescription(BaseRoom* room) {
 		where = "in the middle";
 		break;
 	case 2:
-		where = " in the left corner";
+		where = "in the left corner";
 		break;
 	case 3:
-		where = " in front of you";
+		where = "in front of you";
 		break;
 	case 4:
-		where = " in the right corner";
+		where = "in the right corner";
 		break;
 
 	}
 
-	std::uniform_int_distribution<int> dist2(1, 5);
+	std::uniform_int_distribution<int> dist2(1, 11);
 	int objectNumber = dist2(dre);
 	std::string object = "";
 
@@ -162,6 +159,39 @@ std::string RoomFactory::generateDescription(BaseRoom* room) {
 	case 5:
 		object = "a strange locked chest";
 		break;
+	case 6: 
+		object = "some sort of pumpkin";
+		break;
+	case 7: 
+		object = "a rusty old bed";
+		break;
+	case 8:
+		object = "a pile of... sand";
+		break;
+	case 9: 
+		object = "a rubber chicken staring at you";
+		break;
+	case 10:
+		object = "a dusty Harry Potter book on an oak table";
+		break;
+	case 11:
+		object = "a hologram of yourself";
+		break;
+	case 12:
+		object = "a huge mirror";
+		break;
+	case 13:
+		object = "...a tree";
+		break;
+	case 14:
+		object = "a chandelier";
+		break;
+	case 15:
+		object = "a table with four chairs";
+		break;
+	case 16: 
+		object = "a painting of a foul demon";
+		break;
 	}
 
 	std::uniform_int_distribution<int> dist3(1, 5);
@@ -171,18 +201,57 @@ std::string RoomFactory::generateDescription(BaseRoom* room) {
 
 	switch(additiveNumber) {
 	case 1:
-	case 2:
-	case 3:
 		additive = ".";
 		break;
+	case 2:
+		additive = ". The room itself seems quite dusty, too.";
+		break;
+	case 3:
+		additive = ", with a haunting ghost circling around it.";
+		break;
 	case 4:
-		additive = ", with a corpse next to it";
+		additive = ", with a corpse next to it.";
 		break;
 	case 5:
-		additive = ", with pools of blood on the floor";
+		additive = ", with pools of blood on the floor.";
+		break;
 	}
 
-	description.append(object + " " + where + additive);
+	std::uniform_int_distribution<int> dist4(1, 3);
+	int wallColorNumber = dist4(dre);
+
+	std::string wallcolor = "The walls are colored in ";
+
+	switch(wallColorNumber) {
+	case 1:
+		wallcolor.append("red-blueish colors, which are in your opinion very, VERY ugly.");
+		break;
+	case 2:
+		wallcolor.append("a brownish color... or is it.. nevermind...");
+		break;
+	case 3:
+		wallcolor.append("something that looks like red paint, but perhaps it is blood. Who knows?");
+	}
+
+	std::uniform_int_distribution<int> dist5(1, 4);
+	int atmosphereNumber = dist5(dre);
+
+	std::string atmosphere = "";
+	switch(atmosphereNumber) {
+	case 1:
+		atmosphere = "Furthermore, this is a very dampy room, making you start to sweat.";
+		break;
+	case 2:
+		atmosphere = "You also get shivers down your spine, not just because of fear, but also because it's freezing cold in this room.";
+		break;
+	case 3:
+		atmosphere = "The 'feeling' in this room reminds you of home... but different.";
+		break;
+	case 4:
+		atmosphere = "Besides all this, it seems like this room is haunted, just like the rest of the tower.";
+		break;
+	}
+	description.append(object + " " + where + additive + " " + wallcolor + " " + atmosphere);
 
 	return description;
 }
@@ -216,6 +285,7 @@ StartRoom* RoomFactory::createStartRoom(BaseRoom* prevRoom) {
 
 	//Generate Doors
 	sr->generateDoors();
+	sr->setDescription(generateDescription(sr));
 	return sr;
 }
 

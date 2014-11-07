@@ -19,6 +19,7 @@ public:
 	void displayEquipment();
 	void displayPlayerStatistics();
 	void displayCurrentRoom();
+	void displayRoomDescription();
 
 	//Actions
 	void enterDoor(std::string prefix, std::string input);
@@ -31,6 +32,10 @@ public:
 	void descend();
 
 	void attack(std::string prefix, std::string input);
+	void flee();
+	void rest();
+	void levelup(std::string prefix, std::string input);
+	void rename(std::string prefix, std::string input);
 private:
 	Game* game;
 	std::string input;

@@ -9,9 +9,22 @@ using namespace std;
 BaseEntity::BaseEntity(void)
 {
 	this->attackpoints = 1;
+	this->defencepoints = 1;
 	this->agility = 1;
 	this->setInventory(new BaseInventory());
 	this->setEquipment(new BaseEquipment());
+
+	this->generateExperience();
+}
+
+void BaseEntity::generateExperience() {
+	int experience = 0;
+
+	experience += 15*this->getLevel();
+	experience += this->getAttackPoints();
+	experience += this->getHitpoints() / 10;
+
+	this->setExperience(experience);
 }
 
 int BaseEntity::attack(BaseEntity* entity) {
@@ -22,8 +35,13 @@ int BaseEntity::attack(BaseEntity* entity) {
 	int healthLeft = entity->getHitpoints();
 	if (hitChance > 10) {
 		healthLeft -= this->getAttackPoints();
-
+		healthLeft += entity->getEquipment()->getArmourRating() / 2;
+		if (healthLeft >= entity->getHitpoints()) {
+			healthLeft = entity->getHitpoints();
+		} 
 		entity->setHitpoints(healthLeft);
+
+
 	}
 
 	if (entity->getHitpoints() <= 0) {
@@ -103,8 +121,9 @@ int BaseEntity::getHitpoints() {
 void BaseEntity::setHitpoints(int hitpoints) {
 	if (hitpoints > this->getMaxHitpoints()) {
 		this->hitpoints = this->getMaxHitpoints();
+	} else {
+		this->hitpoints = hitpoints;
 	}
-	this->hitpoints = hitpoints;
 }
 
 int BaseEntity::getExperience() {
@@ -113,20 +132,21 @@ int BaseEntity::getExperience() {
 
 void BaseEntity::setExperience(int experience) {
 	//Keep levelling till experience is up
-	while (experience > getXpTillNextLevel()) {
-		experience = experience - this->getLevel() * 100;
-		this->setLevel(this->getLevel() + 1);
-		this->experience = experience;
-		this->setMaxHitpoints(this->getMaxHitpoints() + 10);
-		this->agility = this->getLevel();
-		std::cout << "Congratulations! You have just levelled up to level " << this->getLevel() << std::endl;
-	}
+
 
 	this->experience = experience;
 }
 
+int BaseEntity::getDefencePoints() {
+	return this->defencepoints;
+}
+
+void BaseEntity::setDefencePoints(int defencepoints) {
+	this->defencepoints = defencepoints;
+}
+
 int BaseEntity::getAttackPoints() {
-	return this->attackpoints * (2*this->getLevel()) + this->getEquipment()->getOffenseRating();
+	return this->attackpoints ;
 }
 
 void BaseEntity::setAttackPoints(int attackpoints) {

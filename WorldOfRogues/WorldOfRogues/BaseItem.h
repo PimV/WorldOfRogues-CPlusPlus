@@ -14,9 +14,11 @@ public:
 	//virtual std::string toString() = 0;
 	virtual void use(Player* player) = 0;
 	virtual ~BaseItem(void);
-	
+
 	void setName(std::string name);
 	std::string getName();
+
+	virtual std::string getInformation();
 
 	virtual std::string toString();
 	std::string name;
