@@ -46,5 +46,5 @@ BaseItem::~BaseItem(void)
 
 std::string BaseItem::toString()
 {
-	return std::string(this->getName());
+	return this->getName();
 }

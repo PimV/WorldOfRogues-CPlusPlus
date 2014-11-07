@@ -11,6 +11,7 @@ class RoomFactory
 {
 public:
 	RoomFactory();
+	std::string generateDescription(BaseRoom* room);
 	BaseRoom* createRoom(BaseRoom* prevRoom, Direction to);
 	StartRoom* createStartRoom(BaseRoom* prevRoom);
 	void fixDoors(BaseRoom* newRoom);

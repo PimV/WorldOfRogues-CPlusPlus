@@ -2,16 +2,70 @@
 #include "BaseRoom.h"
 #include "BaseInventory.h"
 #include "BaseEquipment.h"
+#include <random>
 using namespace std;
 
 
 BaseEntity::BaseEntity(void)
 {
+	this->attackpoints = 1;
+	this->defencepoints = 1;
+	this->agility = 1;
 	this->setInventory(new BaseInventory());
 	this->setEquipment(new BaseEquipment());
+
+	this->generateExperience();
+}
+
+void BaseEntity::generateExperience() {
+	int experience = 0;
+
+	experience += 15*this->getLevel();
+	experience += this->getAttackPoints();
+	experience += this->getHitpoints() / 10;
+
+	this->setExperience(experience);
+}
+
+int BaseEntity::attack(BaseEntity* entity) {
+	std::random_device dev;
+	std::default_random_engine dre(dev());
+	std::uniform_int_distribution<int> dist1(this->getAgility(), 50);
+	int hitChance = dist1(dre);
+	int healthLeft = entity->getHitpoints();
+	if (hitChance > 10) {
+		healthLeft -= this->getAttackPoints();
+		healthLeft += entity->getEquipment()->getArmourRating() / 2;
+		if (healthLeft >= entity->getHitpoints()) {
+			healthLeft = entity->getHitpoints();
+		} 
+		entity->setHitpoints(healthLeft);
+
+
+	}
+
+	if (entity->getHitpoints() <= 0) {
+		this->setExperience(this->getExperience() + entity->getExperience());
+
+		for(auto it = entity->getInventory()->getItems()->begin(); it != entity->getInventory()->getItems()->end(); ++it) {
+			this->getInventory()->addItem(it->second);
+		}
+	}
+	return healthLeft;
+}
+
+void BaseEntity::setAgility(int agility) {
+	this->agility = agility;
+}
+
+int BaseEntity::getAgility() {
+	return this->agility;
 }
 
 void BaseEntity::setRoom(BaseRoom* room) {
+
+	room->trapPlayer(this);
+
 	this->room = room;
 }
 
@@ -42,7 +96,22 @@ void BaseEntity::setLevel(int level)
 
 int BaseEntity::getLevel()
 {
+	if (this->level < 1) {
+		this->level = 1;
+	}
 	return this->level;
+}
+
+int BaseEntity::getXpTillNextLevel() {
+	return this->getLevel() * 100 - this->getExperience();
+}
+
+int BaseEntity::getMaxHitpoints() {
+	return this->maxHitpoints;
+}
+
+void BaseEntity::setMaxHitpoints(int maxHitpoints) {
+	this->maxHitpoints = maxHitpoints;
 }
 
 int BaseEntity::getHitpoints() {
@@ -50,7 +119,11 @@ int BaseEntity::getHitpoints() {
 }
 
 void BaseEntity::setHitpoints(int hitpoints) {
-	this->hitpoints = hitpoints;
+	if (hitpoints > this->getMaxHitpoints()) {
+		this->hitpoints = this->getMaxHitpoints();
+	} else {
+		this->hitpoints = hitpoints;
+	}
 }
 
 int BaseEntity::getExperience() {
@@ -58,11 +131,22 @@ int BaseEntity::getExperience() {
 }
 
 void BaseEntity::setExperience(int experience) {
+	//Keep levelling till experience is up
+
+
 	this->experience = experience;
 }
 
+int BaseEntity::getDefencePoints() {
+	return this->defencepoints;
+}
+
+void BaseEntity::setDefencePoints(int defencepoints) {
+	this->defencepoints = defencepoints;
+}
+
 int BaseEntity::getAttackPoints() {
-	return this->attackpoints;
+	return this->attackpoints ;
 }
 
 void BaseEntity::setAttackPoints(int attackpoints) {
@@ -88,5 +172,13 @@ void BaseEntity::setName(std::string name) {
 
 BaseEntity::~BaseEntity(void)
 {
+	delete this->room;
+
+	delete this->equipment;
+	this->equipment = nullptr;
+
+
+	delete this->inventory;
+	this->inventory = nullptr;
 }
 

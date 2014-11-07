@@ -1,3 +1,4 @@
+
 #include "Game.h"
 #include "BaseRoom.h"
 #include "RoomFactory.h"
@@ -11,10 +12,25 @@ Game Game::game_singleton;
 
 Game::Game()
 {
+	init();
+}
+
+void Game::cleanup() {
+	delete this->roomFactory;
+	delete this->player;
+	delete this->view;
+
+	for(auto itr = this->roomVector.begin(); itr != this->roomVector.end(); itr++)	{
+		itr = this->roomVector.erase(itr);
+	}
+
+}
+
+void Game::init() {
+	cleanup();
 	createVector();
 
 	roomFactory = new RoomFactory();
-	//this->player = new Player();
 	this->player = dynamic_cast<Player*>(EntityFactory::createEntity(EntityType::Player));
 	this->player->setLevel(1);
 
@@ -61,13 +77,18 @@ bool Game::hasEnd(int level) {
 		for (size_t j = 0; j < Game::Instance()->getRoomVector()->at(level).at(i).size(); j++)
 		{
 			BaseRoom* br = Game::Instance()->getRoomVector()->at(level).at(i).at(j);
-			if (br != nullptr && br->toString() == std::string("endroom"))
+			if (br != nullptr && br->getSymbol() == "E")
 			{
 				return true;
 			}
 		}
 	}
 	return false;
+}
+
+void Game::gameOver() {
+	std::cout << "Oh dear, you are dead! Type 'restart' in order to replay, or 'quit' to exit game." << std::endl;
+	view->gameOver();
 }
 
 
@@ -83,7 +104,6 @@ int Game::getRoomCount() {
 		{
 			if (Game::Instance()->getRoomVector()->at(currentLevel).at(i).at(j) != nullptr)
 			{
-				std::cout << "ROOM FOUND" << std::endl;
 				count++;
 			}
 		}
@@ -99,5 +119,6 @@ int Game::getRoomCount() {
 
 Game::~Game(void)
 {
-	delete roomFactory;
+	cleanup();
+	delete this;
 }

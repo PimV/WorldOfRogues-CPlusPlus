@@ -7,6 +7,10 @@
 #include "Helmet.h"
 #include "Game.h"
 
+#include "HealthPotion.h"
+//#include "ManaPotion.h"
+#include "ExperiencePotion.h"
+
 #include <random>
 
 ItemFactory::~ItemFactory()
@@ -93,50 +97,70 @@ void ItemFactory::setNameAndLevel(BaseArmour* item) {
 		name.append("Broken ");
 		(item->getLevel() - 4 >= 1) ? item->setLevel(item->getLevel() - 4) : item->setLevel(1);
 		item->setDefencePoints(1);
+		item->setArmourRating(1);
+		item->setOffenseRating(0);
 		break;
 	case 2:
 		name.append("Worn-out ");
 		(item->getLevel() - 3 >= 1) ? item->setLevel(item->getLevel() - 3) : item->setLevel(1);
 		item->setDefencePoints(2);
+		item->setArmourRating(2);
+		item->setOffenseRating(0);
 		break;
 	case 3:
 		name.append("Rusty ");
 		(item->getLevel() - 2 >= 1) ? item->setLevel(item->getLevel() - 2) : item->setLevel(1);
 		item->setDefencePoints(3);
+		item->setArmourRating(3);
+		item->setOffenseRating(0);
 		break;
 	case 4:
 		name.append("Used ");
 		(item->getLevel() - 1 >= 1) ? item->setLevel(item->getLevel() - 1) : item->setLevel(1);
 		item->setDefencePoints(4);
+		item->setArmourRating(4);
+		item->setOffenseRating(0);
 		break;
 	case 5:
 		name.append("Common ");
 		item->setDefencePoints(5);
+		item->setArmourRating(5);
+		item->setOffenseRating(0);
 		break;
 	case 6:
 		name.append("Sturdy ");
 		item->setLevel(item->getLevel() + 1);
 		item->setDefencePoints(6);
+		item->setArmourRating(6);
+		item->setOffenseRating(0);
 		break;
 	case 7:
 		name.append("Excellent ");
 		item->setLevel(item->getLevel() + 2);
 		item->setDefencePoints(7);
+		item->setArmourRating(7);
+		item->setOffenseRating(1);
 		break;
 	case 8:
 		name.append("Enchanted ");
 		item->setLevel(item->getLevel() + 3);
 		item->setDefencePoints(8);
+		item->setArmourRating(7);
+		item->setOffenseRating(1);
 		break;
 	case 9:
 		name.append("Unique ");
 		item->setLevel(item->getLevel() + 4);
 		item->setDefencePoints(9);
+		item->setArmourRating(9);
+		item->setOffenseRating(2);
 		break;
 	case 10:
 		name.append("Royal ");
 		item->setLevel(item->getLevel() + 5);
 		item->setDefencePoints(10);
+		item->setArmourRating(10);
+		item->setOffenseRating(2);
 		break;
 	default:
 		break;
@@ -151,26 +175,36 @@ void ItemFactory::setNameAndLevel(BaseArmour* item) {
 		name.append("Bronze ");
 		item->setLevel(item->getLevel() + 1);
 		item->setDefencePoints(item->getDefencePoints() + 1);
+		item->setArmourRating(item->getArmourRating() + 1);
+		item->setOffenseRating(item->getOffenseRating() + 0);
 		break;
 	case 2:
 		name.append("Iron ");
 		item->setLevel(item->getLevel() + 2);
 		item->setDefencePoints(item->getDefencePoints() + 2);
+		item->setArmourRating(item->getArmourRating() + 2);
+		item->setOffenseRating(item->getOffenseRating() + 0);
 		break;
 	case 3:
 		name.append("Steel ");
 		item->setLevel(item->getLevel() + 3);
 		item->setDefencePoints(item->getDefencePoints() + 3);
+		item->setArmourRating(item->getArmourRating() + 3);
+		item->setOffenseRating(item->getOffenseRating() + 0);
 		break;
 	case 4:
 		name.append("Mithril ");
 		item->setLevel(item->getLevel() + 4);
 		item->setDefencePoints(item->getDefencePoints() + 4);
+		item->setArmourRating(item->getArmourRating() + 4);
+		item->setOffenseRating(item->getOffenseRating() + 1);
 		break;
 	case 5:
 		name.append("Adamantium ");
 		item->setLevel(item->getLevel() + 5);
 		item->setDefencePoints(item->getDefencePoints() + 5);
+		item->setArmourRating(item->getArmourRating() + 5);
+		item->setOffenseRating(item->getOffenseRating() + 2);
 		break;
 	default:
 		break;
@@ -194,50 +228,60 @@ void ItemFactory::setNameAndLevel(BaseWeapon* item) {
 		name.append("Broken ");
 		(item->getLevel() - 4 >= 1) ? item->setLevel(item->getLevel() - 4) : item->setLevel(1);
 		item->setAttackPoints(1);
+		item->setOffenseRating(1);
 		break;
 	case 2:
 		name.append("Worn-out ");
 		(item->getLevel() - 3 >= 1) ? item->setLevel(item->getLevel() - 3) : item->setLevel(1);
 		item->setAttackPoints(2);
+		item->setOffenseRating(2);
 		break;
 	case 3:
 		name.append("Rusty ");
 		(item->getLevel() - 2 >= 1) ? item->setLevel(item->getLevel() - 2) : item->setLevel(1);
 		item->setAttackPoints(3);
+		item->setOffenseRating(3);
 		break;
 	case 4:
 		name.append("Used ");
 		(item->getLevel() - 1 >= 1) ? item->setLevel(item->getLevel() - 1) : item->setLevel(1);
 		item->setAttackPoints(4);
+		item->setOffenseRating(4);
 		break;
 	case 5:
 		name.append("Common ");
 		item->setAttackPoints(5);
+		item->setOffenseRating(5);
 		break;
 	case 6:
 		name.append("Sturdy ");
 		item->setLevel(item->getLevel() + 1);
 		item->setAttackPoints(6);
+		item->setOffenseRating(6);
 		break;
 	case 7:
 		name.append("Excellent ");
 		item->setLevel(item->getLevel() + 2);
 		item->setAttackPoints(7);
+		item->setOffenseRating(7);
 		break;
 	case 8:
 		name.append("Enchanted ");
 		item->setLevel(item->getLevel() + 3);
 		item->setAttackPoints(8);
+		item->setOffenseRating(8);
 		break;
 	case 9:
 		name.append("Unique ");
 		item->setLevel(item->getLevel() + 4);
 		item->setAttackPoints(9);
+		item->setOffenseRating(9);
 		break;
 	case 10:
 		name.append("Royal ");
 		item->setLevel(item->getLevel() + 5);
 		item->setAttackPoints(10);
+		item->setOffenseRating(10);
 		break;
 	default:
 		break;
@@ -252,26 +296,31 @@ void ItemFactory::setNameAndLevel(BaseWeapon* item) {
 		name.append("Bronze ");
 		item->setLevel(item->getLevel() + 1);
 		item->setAttackPoints(item->getAttackPoints() + 1);
+		item->setOffenseRating(item->getOffenseRating() + 1);
 		break;
 	case 2:
 		name.append("Iron ");
 		item->setLevel(item->getLevel() + 2);
 		item->setAttackPoints(item->getAttackPoints() + 2);
+		item->setOffenseRating(item->getOffenseRating() + 2);
 		break;
 	case 3:
 		name.append("Steel ");
 		item->setLevel(item->getLevel() + 3);
 		item->setAttackPoints(item->getAttackPoints() + 3);
+		item->setOffenseRating(item->getOffenseRating() + 3);
 		break;
 	case 4:
 		name.append("Mithril ");
 		item->setLevel(item->getLevel() + 4);
 		item->setAttackPoints(item->getAttackPoints() + 4);
+		item->setOffenseRating(item->getOffenseRating() + 4);
 		break;
 	case 5:
 		name.append("Adamantium ");
 		item->setLevel(item->getLevel() + 5);
 		item->setAttackPoints(item->getAttackPoints() + 5);
+		item->setOffenseRating(item->getOffenseRating() + 5);
 		break;
 	default:
 		break;
@@ -288,7 +337,13 @@ void ItemFactory::calculateLevel(BaseItem* item)
 	std::uniform_int_distribution<int> dist1(-3, 3);
 	int randomDifferenceInLevel = dist1(dre);
 
-	int level = Game::Instance()->getPlayer()->getLevel() - randomDifferenceInLevel;
+	Player *player = Game::Instance()->getPlayer();
+	int level = 1 - randomDifferenceInLevel;
+
+
+	if (player != nullptr) {
+		level = Game::Instance()->getPlayer()->getLevel() - randomDifferenceInLevel;
+	}
 
 	if (level >= 1) {
 		item->setLevel(level);

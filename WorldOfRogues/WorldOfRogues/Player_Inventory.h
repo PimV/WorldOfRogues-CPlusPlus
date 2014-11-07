@@ -5,6 +5,6 @@ class Player_Inventory
 {
 public:
 	Player_Inventory(void);
-	~Player_Inventory(void);
+	virtual ~Player_Inventory(void);
 };
 

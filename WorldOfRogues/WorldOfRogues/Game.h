@@ -13,10 +13,14 @@ class Game
 {
 public:
 	Game();
+	void init();
+	void cleanup();
 	Player* getPlayer();
 	void createVector();
 	std::vector<std::vector<std::vector<BaseRoom*>>>* getRoomVector();
 	RoomFactory* getRoomFactory();
+
+	void gameOver();
 
 	bool hasEnd(int level);
 

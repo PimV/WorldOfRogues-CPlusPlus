@@ -1,10 +1,13 @@
 #include "BaseRoom.h"
 #include <time.h>
 #include "Game.h"
+#include <random>
 #include <vector>
 
 BaseRoom::BaseRoom(int level, int row, int column)
 {
+	this->trapped = false;
+
 	this->row = row;
 	this->column = column;
 	this->level = level;
@@ -178,6 +181,63 @@ void BaseRoom::disableEastDoor() {
 	this->eastDoor = false;
 }
 
+bool BaseRoom::hasEnemies() {
+	if (!enemies.empty()) {
+		return true;
+	}
+	return false;
+}
+
+bool BaseRoom::hasTrap() {
+	return trapped;
+}
+
+void BaseRoom::enableTrap() {
+	trapped = true;
+}
+
+void BaseRoom::disableTrap() {
+	trapped = false;
+}
+
+bool BaseRoom::trapPlayer(BaseEntity* entity) {
+	if (this->hasTrap() && this->getSymbol() != "S") {
+		this->disableTrap();
+		std::random_device dev;
+		std::default_random_engine dre(dev());
+
+		// random amount
+		std::uniform_int_distribution<int> dist1(entity->getAgility(), 15);
+		int randomTrapNumber = dist1(dre);
+
+		switch(randomTrapNumber) {
+		case 1:
+			std::cout << "You search the room for traps and found one. You were handy enough to disable it without taking any damage." << std::endl;
+			return true;
+		case 2:
+			std::cout << "You couldn't open the door, so tried to kick it in. Doing so hurt your ankle, losing you 5HP." << std::endl;
+			entity->setHitpoints(entity->getHitpoints() - 5);
+			return true;
+		case 3:
+			std::cout << "When entering the room, you stumble upon a trap. A razor-sharp blade comes down and hits your arm. You lost 10HP." << std::endl;
+			entity->setHitpoints(entity->getHitpoints() - 10);
+			return true;
+		case 4:
+			std::cout << "The first step in the room triggered a trap, hitting you with darts. You lost 15HP." << std::endl;
+			entity->setHitpoints(entity->getHitpoints() - 15);
+			return true;
+		case 5:
+			std::cout << "Upon entering this room, you are washed over with water, followed by a flour-cannon. All the flour in your eyes hurt, making you lose 8HP." << std::endl;
+			return true;
+		case 6:
+			std::cout << "As you walk toward the middle of the room, you step on a pressure plate, allowing lava to flow into the chamber. You're not fast enough and burnt your leg, causing a 50HP loss." << std::endl;
+			return true;
+		}
+	}
+	return false;
+}
+
+
 int BaseRoom::getDoorCount() {
 	int doorCount = 0;
 	if (this->northDoor) {
@@ -221,6 +281,14 @@ std::string BaseRoom::getAvailableDoorString() {
 
 	doors += ")";
 	return doors;
+}
+
+void BaseRoom::setDescription(std::string description) {
+	this->description = description;
+}
+
+std::string BaseRoom::getDescription() {
+	return this->description;
 }
 
 #pragma endregion
@@ -272,15 +340,17 @@ std::string BaseRoom::toString() {
 		currentRoom.append("Enemies: \n");
 		int enemySelectionNumber = 1;
 		for(BaseEntity* e : this->enemies) {
-			currentRoom.append("\t" + std::to_string(enemySelectionNumber) + ". " +  e->toString() + " (lvl: " + std::to_string(e->getLevel()) + ") \n");
+			currentRoom.append("\t" + std::to_string(enemySelectionNumber) + ". " +  e->toString() + " (lvl: " + std::to_string(e->getLevel()) + ", HP: " + std::to_string(e->getHitpoints()) + ", XP: " + std::to_string(e->getExperience()) + ") \n");
 			enemySelectionNumber++;
 		}
 	}
 
 	if (this->items.size() > 0) {
 		currentRoom.append("Items: \n");
+		int itemSelectionNumber = 1;
 		for(BaseItem* e : this->items) {
-			currentRoom.append("\t" + e->toString() + "[" + std::to_string(e->getCount()) + "] \n");
+			currentRoom.append("\t" + std::to_string(itemSelectionNumber) + ". " + e->toString() + "[" + std::to_string(e->getCount()) + "] \n");
+			itemSelectionNumber++;
 		}
 	}
 	return currentRoom;
@@ -289,4 +359,13 @@ std::string BaseRoom::toString() {
 
 BaseRoom::~BaseRoom(void)
 {
+	for(auto itr = items.begin(); itr != items.end(); itr++)
+	{
+		delete *itr;
+	}
+
+	for(auto itr2 = enemies.begin(); itr2 != enemies.end(); itr2++)
+	{
+		delete *itr2;
+	}
 }

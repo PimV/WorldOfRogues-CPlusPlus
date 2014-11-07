@@ -14,7 +14,7 @@ public:
 	//virtual std::string toString() = 0;
 	virtual void use(Player* player) = 0;
 	virtual ~BaseItem(void);
-	
+
 	virtual std::string toString();
 	int count;
 

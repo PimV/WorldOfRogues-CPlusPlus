@@ -19,7 +19,12 @@ void SetWindow(int Width, int Height)
 }
 
 void main() 
-{
-	SetWindow(1000,500);
+{ 
+
+	//SetWindow(1000,800);
 	Game game;
+	HWND console = GetConsoleWindow();
+
+	//MoveWindow(window_handle, x, y, width, height, redraw_window);
+	//MoveWindow(console, 800, 800, 800, 800, TRUE);
 }

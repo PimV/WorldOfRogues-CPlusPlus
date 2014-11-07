@@ -68,7 +68,20 @@ std::string BaseInventory::toString() {
 	return inventory;
 }
 
+std::map<std::string, BaseItem*>* BaseInventory::getItems() {
+	return &this->items;
+}
+
+std::string BaseInventory::itemInformation(BaseItem* item) {
+	return "todo";
+	//return item->getInformation();
+}
+
+
 BaseInventory::~BaseInventory(void)
 {
-	this->items.clear();
+	for(auto itr = items.begin(); itr != items.end(); itr++)
+	{
+		delete itr->second;
+	}
 }

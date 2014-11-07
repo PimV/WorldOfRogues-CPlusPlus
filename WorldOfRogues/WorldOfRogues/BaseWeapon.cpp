@@ -39,11 +39,5 @@ WeaponType BaseWeapon::getType()
 
 std::string BaseWeapon::toString()
 {
-	return std::string(
-		std::string("") +
-		std::string(this->getName()) +
-		std::string(" (Att. ") +
-		std::to_string(this->attackpoints) +
-		std::string(")")
-		);
+	return this->getName();
 }

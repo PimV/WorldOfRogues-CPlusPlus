@@ -45,13 +45,7 @@ BaseArmour::~BaseArmour(void)
 
 std::string BaseArmour::toString()
 {
-	return std::string(
-		std::string("") +
-		std::string(this->getName()) +
-		std::string(" (Def. ") +
-		std::to_string(this->defencepoints) +
-		std::string(")") 
-		);
+	return this->getName();
 }
 
 
