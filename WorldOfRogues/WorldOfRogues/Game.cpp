@@ -25,9 +25,11 @@ void Game::cleanup() {
 			for (auto itr3 = itr2->begin(); itr3 != itr2->end(); ++itr3) {
 				*itr3 = nullptr;
 				delete *itr3;
+				itr3 = itr2->erase(itr3);
 			}
+			itr2 = itr->erase(itr2);
 		}
-		//itr = this->roomVector.erase(itr);
+		itr = this->roomVector.erase(itr);
 	}
 
 }

@@ -140,6 +140,7 @@ void View::gameOver() {
 		if (input2 == "restart") {
 			Game::Instance()->init();
 		} else if (input2 == "quit") {
+			Game::Instance()->cleanup();
 			exit(0);
 		}
 
