@@ -18,7 +18,6 @@ public:
 	void setName(std::string name);
 	std::string getName();
 
-	virtual std::string getInformation();
 
 	virtual std::string toString();
 	std::string name;

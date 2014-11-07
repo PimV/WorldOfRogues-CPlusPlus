@@ -3,6 +3,7 @@
 #include "BaseEquipment.h"
 #include <string>
 
+
 Helmet::Helmet(void)
 {
 	this->setArmourRating(5);

@@ -97,6 +97,7 @@
     <ClInclude Include="HealthPotion.h" />
     <ClInclude Include="Helmet.h" />
     <ClInclude Include="BaseInventory.h" />
+    <ClInclude Include="HolyHandGrenade.h" />
     <ClInclude Include="ItemFactory.h" />
     <ClInclude Include="ItemType.h" />
     <ClInclude Include="Platebody.h" />
@@ -133,6 +134,7 @@
     <ClCompile Include="HealthPotion.cpp" />
     <ClCompile Include="Helmet.cpp" />
     <ClCompile Include="BaseInventory.cpp" />
+    <ClCompile Include="HolyHandGrenade.cpp" />
     <ClCompile Include="ItemFactory.cpp" />
     <ClCompile Include="Platebody.cpp" />
     <ClCompile Include="Platelegs.cpp" />

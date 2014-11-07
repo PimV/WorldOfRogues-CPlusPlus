@@ -5,6 +5,7 @@
 #include "ExperiencePotion.h"
 #include "Weapon.h"
 #include "Platebody.h"
+#include "HolyHandGrenade.h"
 #include "Platelegs.h"
 #include "Shield.h"
 #include "Helmet.h"
@@ -31,6 +32,7 @@ Player::Player(void)
 	this->getInventory()->addItem(new ExperiencePotion());
 	this->getInventory()->addItem(new ExperiencePotion());
 	this->getInventory()->addItem(ItemFactory::createItem(WeaponType::Greatsword));
+	this->getInventory()->addItem(new HolyHandGrenade());
 
 	this->setMaxHitpoints(100);
 	this->setHitpoints(100);

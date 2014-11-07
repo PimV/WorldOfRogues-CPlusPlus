@@ -141,11 +141,14 @@
     <ClInclude Include="RoomFactory.h">
       <Filter>Header Files\Rooms</Filter>
     </ClInclude>
+    <ClInclude Include="HolyHandGrenade.h">
+      <Filter>Header Files\Items</Filter>
+    </ClInclude>
     <ClInclude Include="ExperiencePotion.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Items</Filter>
     </ClInclude>
     <ClInclude Include="HealthPotion.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Items</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -249,6 +252,9 @@
       <Filter>Source Files\Items</Filter>
     </ClCompile>
     <ClCompile Include="ExperiencePotion.cpp">
+      <Filter>Source Files\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="HolyHandGrenade.cpp">
       <Filter>Source Files\Items</Filter>
     </ClCompile>
   </ItemGroup>
