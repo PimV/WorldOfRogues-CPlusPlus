@@ -17,11 +17,31 @@ BaseWeapon::~BaseWeapon(void)
 {
 }
 
+void BaseWeapon::setType(WeaponType weaponType)
+{
+	this->weaponType = weaponType;
+}
+
+void BaseWeapon::setAttackPoints(int attackpoints)
+{
+	this->attackpoints = attackpoints;
+}
+
+int BaseWeapon::getAttackPoints()
+{
+	return this->attackpoints;
+}
+
+WeaponType BaseWeapon::getType()
+{
+	return this->weaponType;
+}
+
 std::string BaseWeapon::toString()
 {
 	return std::string(
 		std::string("") +
-		std::string(this->Name) +
+		std::string(this->getName()) +
 		std::string(" (Att. ") +
 		std::to_string(this->attackpoints) +
 		std::string(")")
