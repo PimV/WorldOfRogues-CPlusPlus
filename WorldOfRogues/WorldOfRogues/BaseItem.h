@@ -15,14 +15,17 @@ public:
 	virtual void use(Player* player) = 0;
 	virtual ~BaseItem(void);
 
+	virtual std::string toString();
+	int count;
+
+	void setLevel(int level);
+	int getLevel();
+
 	void setName(std::string name);
 	std::string getName();
 
-
-	virtual std::string toString();
-	std::string name;
-	int count;
-
 protected:
+	int level;
+	std::string name;
 };
 

@@ -19,6 +19,25 @@ int BaseArmour::getOffenseRating() {
 	return this->offenseRating;
 }
 
+void BaseArmour::setDefencePoints(int defencepoints)
+{
+	this->defencepoints = defencepoints;
+}
+
+int BaseArmour::getDefencePoints()
+{
+	return this->defencepoints;
+}
+
+void BaseArmour::setType(ArmourType armourType)
+{
+	this->armourType = armourType;
+}
+
+ArmourType BaseArmour::getType()
+{
+	return this->armourType;
+}
 
 BaseArmour::~BaseArmour(void)
 {

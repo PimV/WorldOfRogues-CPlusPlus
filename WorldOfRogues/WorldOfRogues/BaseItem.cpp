@@ -20,14 +20,25 @@ void BaseItem::setCount(int count) {
 	}
 }
 
-void BaseItem::setName(std::string name) {
+void BaseItem::setLevel(int level)
+{
+	this->level = level;
+}
+
+int BaseItem::getLevel()
+{
+	return this->level;
+}
+
+void BaseItem::setName(std::string name)
+{
 	this->name = name;
 }
 
-std::string BaseItem::getName() {
+std::string BaseItem::getName()
+{
 	return this->name;
 }
-
 
 BaseItem::~BaseItem(void)
 {
