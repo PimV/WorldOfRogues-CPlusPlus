@@ -1,5 +1,4 @@
 #pragma once
-#include <vld.h> 
 #include "View.h"
 
 #include <string>
