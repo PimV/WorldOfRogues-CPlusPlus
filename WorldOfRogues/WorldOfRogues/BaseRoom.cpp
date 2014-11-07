@@ -228,9 +228,11 @@ bool BaseRoom::trapPlayer(BaseEntity* entity) {
 			return true;
 		case 5:
 			std::cout << "Upon entering this room, you are washed over with water, followed by a flour-cannon. All the flour in your eyes hurt, making you lose 8HP." << std::endl;
+			entity->setHitpoints(entity->getHitpoints() - 8);
 			return true;
 		case 6:
 			std::cout << "As you walk toward the middle of the room, you step on a pressure plate, allowing lava to flow into the chamber. You're not fast enough and burnt your leg, causing a 50HP loss." << std::endl;
+			entity->setHitpoints(entity->getHitpoints() - 50);
 			return true;
 		}
 	}

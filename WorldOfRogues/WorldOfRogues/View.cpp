@@ -17,7 +17,7 @@
 View::View(Game* game)
 {
 	this->game = game;
-	
+
 	displayIntroMessage();
 
 	input = "help";
@@ -244,6 +244,10 @@ void View::attack(std::string prefix, std::string input) {
 }
 
 void View::ascend() {
+	if(Game::Instance()->getPlayer()->getRoom()->hasEnemies()) {
+		std::cout << "You can't just walk away. Either try to 'flee' or kill all the enemies in the room!" << std::endl;
+		return;
+	}
 	if (Game::Instance()->getPlayer()->getRoom()->getSymbol() == "E" && Game::Instance()->getPlayer()->getRoom()->getLevel() <= Game::Instance()->getPlayer()->getMaxLevelVisited() && Game::Instance()->getPlayer()->getRoom()->getLevel() < 10) {
 		BaseRoom* newRoom = Game::Instance()->getRoomVector()
 			->at(Game::Instance()->getPlayer()->getRoom()->getLevel() + 1)
@@ -267,6 +271,10 @@ void View::ascend() {
 }
 
 void View::descend() {
+	if(Game::Instance()->getPlayer()->getRoom()->hasEnemies()) {
+		std::cout << "You can't just walk away. Either try to 'flee' or kill all the enemies in the room!" << std::endl;
+		return;
+	}
 	if (Game::Instance()->getPlayer()->getRoom()->getSymbol() == "S"  && Game::Instance()->getPlayer()->getRoom()->getLevel() > 0) {
 		BaseRoom* newRoom = Game::Instance()->getRoomVector()
 			->at(Game::Instance()->getPlayer()->getRoom()->getLevel() - 1)
