@@ -20,8 +20,14 @@ void Game::cleanup() {
 	delete this->player;
 	delete this->view;
 
-	for(auto itr = this->roomVector.begin(); itr != this->roomVector.end(); itr++)	{
-		itr = this->roomVector.erase(itr);
+	for(auto itr = this->roomVector.begin(); itr != this->roomVector.end(); ++itr)	{
+		for (auto itr2 = itr->begin(); itr2 != itr->end(); ++itr2) {
+			for (auto itr3 = itr2->begin(); itr3 != itr2->end(); ++itr3) {
+				*itr3 = nullptr;
+				delete *itr3;
+			}
+		}
+		//itr = this->roomVector.erase(itr);
 	}
 
 }
