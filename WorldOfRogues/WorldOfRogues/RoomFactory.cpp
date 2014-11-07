@@ -137,7 +137,6 @@ std::string RoomFactory::generateDescription(BaseRoom* room) {
 	case 4:
 		where = "in the right corner";
 		break;
-
 	}
 
 	std::uniform_int_distribution<int> dist2(1, 11);
