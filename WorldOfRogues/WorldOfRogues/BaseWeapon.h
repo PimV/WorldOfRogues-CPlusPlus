@@ -15,10 +15,10 @@ public:
 	int attackpoints;
 	int offenseRating;
 
-	void setType(WeaponType* weaponType);
-	WeaponType* getType();
+	void setType(WeaponType weaponType);
+	WeaponType getType();
 
 protected:
-	WeaponType* weaponType;
+	WeaponType weaponType;
 };
 

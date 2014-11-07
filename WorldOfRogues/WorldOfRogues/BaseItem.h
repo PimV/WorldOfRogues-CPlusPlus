@@ -19,7 +19,10 @@ public:
 	std::string Name;
 	int count;
 
-protected:
+	void setLevel(int level);
+	int getLevel();
 
+protected:
+	int level;
 };
 

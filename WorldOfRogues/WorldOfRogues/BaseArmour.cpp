@@ -19,12 +19,12 @@ int BaseArmour::getOffenseRating() {
 	return this->offenseRating;
 }
 
-void BaseArmour::setType(ArmourType* armourType)
+void BaseArmour::setType(ArmourType armourType)
 {
 	this->armourType = armourType;
 }
 
-ArmourType* BaseArmour::getType()
+ArmourType BaseArmour::getType()
 {
 	return this->armourType;
 }

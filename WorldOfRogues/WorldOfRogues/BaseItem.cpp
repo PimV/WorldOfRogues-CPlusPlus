@@ -20,6 +20,15 @@ void BaseItem::setCount(int count) {
 	}
 }
 
+void BaseItem::setLevel(int level)
+{
+	this->level = level;
+}
+
+int BaseItem::getLevel()
+{
+	return this->level;
+}
 
 BaseItem::~BaseItem(void)
 {

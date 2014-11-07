@@ -21,10 +21,10 @@ public:
 	int armourRating;
 	int offenseRating;
 
-	void setType(ArmourType* armourType);
-	ArmourType* getType();
+	void setType(ArmourType armourType);
+	ArmourType getType();
 
 protected:
-	ArmourType* armourType;
+	ArmourType armourType;
 };
 

@@ -1,6 +1,8 @@
 #pragma once
 #include "BaseItem.h"
 #include "ItemType.h"
+#include "BaseWeapon.h"
+#include "BaseArmour.h"
 
 #include <vector>
 #include <iostream>
@@ -14,7 +16,8 @@ public:
 	static BaseItem* createItem(ArmourType armourType);
 	static std::vector<BaseItem*> createRandomItems();
 private:
-	std::string generateName(BaseWeapon* item);
-	std::string generateName(BaseArmour* item);
+	static void calculateLevel(BaseItem* item);
+	static std::string generateName(BaseWeapon* item);
+	static std::string generateName(BaseArmour* item);
 };
 

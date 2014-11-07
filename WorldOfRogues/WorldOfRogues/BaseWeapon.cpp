@@ -17,12 +17,12 @@ BaseWeapon::~BaseWeapon(void)
 {
 }
 
-void BaseWeapon::setType(WeaponType* weaponType)
+void BaseWeapon::setType(WeaponType weaponType)
 {
 	this->weaponType = weaponType;
 }
 
-WeaponType* BaseWeapon::getType()
+WeaponType BaseWeapon::getType()
 {
 	return this->weaponType;
 }
