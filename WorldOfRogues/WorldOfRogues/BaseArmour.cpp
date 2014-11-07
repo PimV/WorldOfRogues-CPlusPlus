@@ -19,6 +19,16 @@ int BaseArmour::getOffenseRating() {
 	return this->offenseRating;
 }
 
+void BaseArmour::setDefencePoints(int defencepoints)
+{
+	this->defencepoints = defencepoints;
+}
+
+int BaseArmour::getDefencePoints()
+{
+	return this->defencepoints;
+}
+
 void BaseArmour::setType(ArmourType armourType)
 {
 	this->armourType = armourType;
@@ -37,7 +47,7 @@ std::string BaseArmour::toString()
 {
 	return std::string(
 		std::string("") +
-		std::string(this->Name) +
+		std::string(this->getName()) +
 		std::string(" (Def. ") +
 		std::to_string(this->defencepoints) +
 		std::string(")") 

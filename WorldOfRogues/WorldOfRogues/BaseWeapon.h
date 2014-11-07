@@ -9,16 +9,21 @@ public:
 	BaseWeapon(void);
 	void setOffenseRating(int rating);
 	int getOffenseRating();
+
+	void setAttackPoints(int attackpoints);
+	int getAttackPoints();
+
 	virtual ~BaseWeapon(void);
 
 	std::string toString();
-	int attackpoints;
-	int offenseRating;
+
 
 	void setType(WeaponType weaponType);
 	WeaponType getType();
 
 protected:
 	WeaponType weaponType;
+	int attackpoints;
+	int offenseRating;
 };
 

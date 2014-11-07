@@ -39,62 +39,16 @@ std::vector<BaseItem*> ItemFactory::createRandomItems()
 		}
 	}
 
-	// set level
-	// set name
-
 	return itemsArray;
 }
 
 BaseItem* ItemFactory::createItem(WeaponType weaponType)
 {
-	BaseWeapon *item;
+	BaseWeapon *item = new Weapon();
 	item->setType(weaponType);
 	calculateLevel(item);
-	generateName(item);
+	setNameAndLevel(item);
 	return item;
-
-	//switch (weaponType)
-	//{
-	//case WeaponType::Dagger:
-	//	item->Name = "The Ripper";
-	//	item->attackpoints = 1;
-	//	return item;
-	//case WeaponType::Sword:
-	//	item->Name = "The Slicer";
-	//	item->attackpoints = 2;
-	//	return item;
-	//case WeaponType::Axe:
-	//	item->Name = "The Chopper";
-	//	item->attackpoints = 3;
-	//	return item;
-	//case WeaponType::Hammer:
-	//	item->Name = "The Squasher";
-	//	item->attackpoints = 4;
-	//	return item;
-	//case WeaponType::Spear:
-	//	item->Name = "The Stabber";
-	//	item->attackpoints = 5;
-	//	return item;
-	//case WeaponType::Mace:
-	//	item->Name = "The Stunner";
-	//	item->attackpoints = 6;
-	//	return item;
-	//case WeaponType::Longsword:
-	//	item->Name = "The Executer";
-	//	item->attackpoints = 7;
-	//	return item;
-	//case WeaponType::Battleaxe:
-	//	item->Name = "The Cleaver";
-	//	item->attackpoints = 8;
-	//	return item;
-	//case WeaponType::Greatsword:
-	//	item->Name = "The Destroyer";
-	//	item->attackpoints = 9;
-	//	return item;
-	//default:
-	//	return nullptr;
-	//	break;
-	//}
 }
 
 BaseItem* ItemFactory::createItem(ArmourType armourType)
@@ -104,87 +58,28 @@ BaseItem* ItemFactory::createItem(ArmourType armourType)
 	switch (armourType)
 	{
 	case ArmourType::Helmet:
+		item = new Helmet();
 		break;
 	case ArmourType::Legs:
+		item = new Platelegs();
 		break;
 	case ArmourType::Body:
+		item = new Platebody();
 		break;
 	case ArmourType::Shield:
+		item = new Shield();
 		break;
 	default:
 		return nullptr;
 	}
 
-	/*switch (armourType)
-	{
-	case ArmourType::IronHelmet:
-		item = new Helmet();
-		item->Name = item_strings[(int)armourType];
-		item->defencepoints = 1;
-		return item;
-	case ArmourType::SteelHelmet:
-		item = new Helmet();
-		item->Name = item_strings[(int)armourType];
-		item->defencepoints = 2;
-		return item;
-	case ArmourType::MithrilHelmet:
-		item = new Helmet();
-		item->Name = item_strings[(int)armourType];
-		item->defencepoints = 3;
-		return item;
-	case ArmourType::IronLegs:
-		item = new Platelegs();
-		item->Name = item_strings[(int)armourType];
-		item->defencepoints = 1;
-		return item;
-	case ArmourType::SteelLegs:
-		item = new Platelegs();
-		item->Name = item_strings[(int)armourType];
-		item->defencepoints = 2;
-		return item;
-	case ArmourType::MithrilLegs:
-		item = new Platelegs();
-		item->Name = item_strings[(int)armourType];
-		item->defencepoints = 3;
-		return item;
-	case ArmourType::IronBody:
-		item = new Platebody();
-		item->Name = item_strings[(int)armourType];
-		item->defencepoints = 1;
-		return item;
-	case ArmourType::SteelBody:
-		item = new Platebody();
-		item->Name = item_strings[(int)armourType];
-		item->defencepoints = 2;
-		return item;
-	case ArmourType::MithrilBody:
-		item = new Platebody();
-		item->Name = item_strings[(int)armourType];
-		item->defencepoints = 3;
-		return item;
-	case ArmourType::IronShield:
-		item = new Shield();
-		item->Name = item_strings[(int)armourType];
-		item->defencepoints = 1;
-		return item;
-	case ArmourType::SteelShield:
-		item = new Shield();
-		item->Name = item_strings[(int)armourType];
-		item->defencepoints = 2;
-		return item;
-	case ArmourType::MithrilShield:
-		item = new Shield();
-		item->Name = item_strings[(int)armourType];
-		item->defencepoints = 3;
-		return item;
-	default:
-		return nullptr;
-		break;
-	}*/
-
+	item->setType(armourType);
+	calculateLevel(item);
+	setNameAndLevel(item);
+	return item;
 }
 
-std::string ItemFactory::generateName(BaseArmour* item) {
+void ItemFactory::setNameAndLevel(BaseArmour* item) {
 	std::random_device dev;
 	std::default_random_engine dre(dev());
 	std::uniform_int_distribution<int> dist1(1, 10);
@@ -196,34 +91,52 @@ std::string ItemFactory::generateName(BaseArmour* item) {
 	{
 	case 1:
 		name.append("Broken ");
-		// set level
+		(item->getLevel() - 4 >= 1) ? item->setLevel(item->getLevel() - 4) : item->setLevel(1);
+		item->setDefencePoints(1);
 		break;
 	case 2:
 		name.append("Worn-out ");
+		(item->getLevel() - 3 >= 1) ? item->setLevel(item->getLevel() - 3) : item->setLevel(1);
+		item->setDefencePoints(2);
 		break;
 	case 3:
 		name.append("Rusty ");
+		(item->getLevel() - 2 >= 1) ? item->setLevel(item->getLevel() - 2) : item->setLevel(1);
+		item->setDefencePoints(3);
 		break;
 	case 4:
 		name.append("Used ");
+		(item->getLevel() - 1 >= 1) ? item->setLevel(item->getLevel() - 1) : item->setLevel(1);
+		item->setDefencePoints(4);
 		break;
 	case 5:
 		name.append("Common ");
+		item->setDefencePoints(5);
 		break;
 	case 6:
 		name.append("Sturdy ");
+		item->setLevel(item->getLevel() + 1);
+		item->setDefencePoints(6);
 		break;
 	case 7:
 		name.append("Excellent ");
+		item->setLevel(item->getLevel() + 2);
+		item->setDefencePoints(7);
 		break;
 	case 8:
 		name.append("Enchanted ");
+		item->setLevel(item->getLevel() + 3);
+		item->setDefencePoints(8);
 		break;
 	case 9:
 		name.append("Unique ");
+		item->setLevel(item->getLevel() + 4);
+		item->setDefencePoints(9);
 		break;
 	case 10:
 		name.append("Royal ");
+		item->setLevel(item->getLevel() + 5);
+		item->setDefencePoints(10);
 		break;
 	default:
 		break;
@@ -236,30 +149,38 @@ std::string ItemFactory::generateName(BaseArmour* item) {
 	{
 	case 1:
 		name.append("Bronze ");
-		// set level
+		item->setLevel(item->getLevel() + 1);
+		item->setDefencePoints(item->getDefencePoints() + 1);
 		break;
 	case 2:
 		name.append("Iron ");
+		item->setLevel(item->getLevel() + 2);
+		item->setDefencePoints(item->getDefencePoints() + 2);
 		break;
 	case 3:
 		name.append("Steel ");
+		item->setLevel(item->getLevel() + 3);
+		item->setDefencePoints(item->getDefencePoints() + 3);
 		break;
 	case 4:
 		name.append("Mithril ");
+		item->setLevel(item->getLevel() + 4);
+		item->setDefencePoints(item->getDefencePoints() + 4);
 		break;
 	case 5:
 		name.append("Adamantium ");
+		item->setLevel(item->getLevel() + 5);
+		item->setDefencePoints(item->getDefencePoints() + 5);
 		break;
 	default:
 		break;
 	}
 
 	name.append(item_strings[(int)item->getType()]);
-
-	return name;
+	item->setName(name);
 }
 
-std::string ItemFactory::generateName(BaseWeapon* item) {
+void ItemFactory::setNameAndLevel(BaseWeapon* item) {
 	std::random_device dev;
 	std::default_random_engine dre(dev());
 	std::uniform_int_distribution<int> dist1(1, 10);
@@ -272,41 +193,51 @@ std::string ItemFactory::generateName(BaseWeapon* item) {
 	case 1:
 		name.append("Broken ");
 		(item->getLevel() - 4 >= 1) ? item->setLevel(item->getLevel() - 4) : item->setLevel(1);
+		item->setAttackPoints(1);
 		break;
 	case 2:
 		name.append("Worn-out ");
 		(item->getLevel() - 3 >= 1) ? item->setLevel(item->getLevel() - 3) : item->setLevel(1);
+		item->setAttackPoints(2);
 		break;
 	case 3:
 		name.append("Rusty ");
 		(item->getLevel() - 2 >= 1) ? item->setLevel(item->getLevel() - 2) : item->setLevel(1);
+		item->setAttackPoints(3);
 		break;
 	case 4:
 		name.append("Used ");
 		(item->getLevel() - 1 >= 1) ? item->setLevel(item->getLevel() - 1) : item->setLevel(1);
+		item->setAttackPoints(4);
 		break;
 	case 5:
 		name.append("Common ");
+		item->setAttackPoints(5);
 		break;
 	case 6:
 		name.append("Sturdy ");
-		(item->getLevel() + 1);
+		item->setLevel(item->getLevel() + 1);
+		item->setAttackPoints(6);
 		break;
 	case 7:
 		name.append("Excellent ");
-		(item->getLevel() + 2);
+		item->setLevel(item->getLevel() + 2);
+		item->setAttackPoints(7);
 		break;
 	case 8:
 		name.append("Enchanted ");
-		(item->getLevel() + 3);
+		item->setLevel(item->getLevel() + 3);
+		item->setAttackPoints(8);
 		break;
 	case 9:
 		name.append("Unique ");
-		(item->getLevel() + 4);
+		item->setLevel(item->getLevel() + 4);
+		item->setAttackPoints(9);
 		break;
 	case 10:
 		name.append("Royal ");
-		(item->getLevel() + 5);
+		item->setLevel(item->getLevel() + 5);
+		item->setAttackPoints(10);
 		break;
 	default:
 		break;
@@ -319,31 +250,35 @@ std::string ItemFactory::generateName(BaseWeapon* item) {
 	{
 	case 1:
 		name.append("Bronze ");
-		(item->getLevel() + 1);
+		item->setLevel(item->getLevel() + 1);
+		item->setAttackPoints(item->getAttackPoints() + 1);
 		break;
 	case 2:
 		name.append("Iron ");
-		(item->getLevel() + 2);
+		item->setLevel(item->getLevel() + 2);
+		item->setAttackPoints(item->getAttackPoints() + 2);
 		break;
 	case 3:
 		name.append("Steel ");
-		(item->getLevel() + 3);
+		item->setLevel(item->getLevel() + 3);
+		item->setAttackPoints(item->getAttackPoints() + 3);
 		break;
 	case 4:
 		name.append("Mithril ");
-		(item->getLevel() + 4);
+		item->setLevel(item->getLevel() + 4);
+		item->setAttackPoints(item->getAttackPoints() + 4);
 		break;
 	case 5:
 		name.append("Adamantium ");
-		(item->getLevel() + 5);
+		item->setLevel(item->getLevel() + 5);
+		item->setAttackPoints(item->getAttackPoints() + 5);
 		break;
 	default:
 		break;
 	}
 
 	name.append(item_strings[(int)item->getType()]);
-
-	return name;
+	item->setName(name);
 }
 
 void ItemFactory::calculateLevel(BaseItem* item) 

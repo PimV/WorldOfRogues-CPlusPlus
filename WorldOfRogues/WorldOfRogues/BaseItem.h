@@ -16,13 +16,16 @@ public:
 	virtual ~BaseItem(void);
 	
 	virtual std::string toString();
-	std::string Name;
 	int count;
 
 	void setLevel(int level);
 	int getLevel();
 
+	void setName(std::string name);
+	std::string getName();
+
 protected:
 	int level;
+	std::string name;
 };
 

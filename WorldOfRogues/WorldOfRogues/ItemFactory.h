@@ -16,8 +16,9 @@ public:
 	static BaseItem* createItem(ArmourType armourType);
 	static std::vector<BaseItem*> createRandomItems();
 private:
+
 	static void calculateLevel(BaseItem* item);
-	static std::string generateName(BaseWeapon* item);
-	static std::string generateName(BaseArmour* item);
+	static void setNameAndLevel(BaseWeapon* item);
+	static void setNameAndLevel(BaseArmour* item);
 };
 
