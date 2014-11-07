@@ -17,6 +17,16 @@ BaseWeapon::~BaseWeapon(void)
 {
 }
 
+void BaseWeapon::setType(WeaponType* weaponType)
+{
+	this->weaponType = weaponType;
+}
+
+WeaponType* BaseWeapon::getType()
+{
+	return this->weaponType;
+}
+
 std::string BaseWeapon::toString()
 {
 	return std::string(

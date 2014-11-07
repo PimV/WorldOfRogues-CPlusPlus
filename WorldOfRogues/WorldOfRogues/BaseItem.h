@@ -20,5 +20,6 @@ public:
 	int count;
 
 protected:
+
 };
 

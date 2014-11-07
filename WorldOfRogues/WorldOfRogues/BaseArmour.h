@@ -1,5 +1,6 @@
 #pragma once
 #include "BaseItem.h"
+#include "ItemType.h"
 
 class BaseArmour : 
 	public BaseItem
@@ -20,6 +21,10 @@ public:
 	int armourRating;
 	int offenseRating;
 
+	void setType(ArmourType* armourType);
+	ArmourType* getType();
+
 protected:
+	ArmourType* armourType;
 };
 

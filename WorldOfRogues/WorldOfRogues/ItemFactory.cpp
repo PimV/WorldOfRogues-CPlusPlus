@@ -160,3 +160,78 @@ BaseItem* ItemFactory::createItem(ArmourType armourType)
 	}
 
 }
+
+std::string ItemFactory::generateName(BaseWeapon* item) {
+	std::random_device dev;
+	std::default_random_engine dre(dev());
+	std::uniform_int_distribution<int> dist2(1, 10);
+	int randomNumberForNames = dist2(dre);
+	
+	std::string name = "";
+
+	switch (randomNumberForNames)
+	{
+	case 1:
+		name.append("Broken ");
+		// set level
+		break;
+	case 2:
+		name.append("Worn-out ");
+		break;
+	case 3:
+		name.append("Rusty ");
+		break;
+	case 4:
+		name.append("Used ");
+		break;
+	case 5:
+		name.append("Common ");
+		break;
+	case 6:
+		name.append("Sturdy ");
+		break;
+	case 7:
+		name.append("Excellent ");
+		break;
+	case 8:
+		name.append("Enchanted ");
+		break;
+	case 9:
+		name.append("Unique ");
+		break;
+	case 10:
+		name.append("Royal ");
+		break;
+	default:
+		break;
+	}
+
+	std::uniform_int_distribution<int> dist3(1, 5);
+	int randomNumberForType = dist3(dre);
+
+	switch (randomNumberForType)
+	{
+	case 1:
+		name.append("Bronze ");
+		// set level
+		break;
+	case 2:
+		name.append("Iron ");
+		break;
+	case 3:
+		name.append("Steel ");
+		break;
+	case 4:
+		name.append("Mithril ");
+		break;
+	case 5:
+		name.append("Adamantium ");
+		break;
+	default:
+		break;
+	}
+
+	name.append(item_strings[(int)item->getType()]);
+
+	return name;
+}

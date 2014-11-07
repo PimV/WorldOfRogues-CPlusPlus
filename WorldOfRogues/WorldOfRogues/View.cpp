@@ -16,7 +16,7 @@
 View::View(Game* game)
 {
 	this->game = game;
-
+	
 	displayIntroMessage();
 
 	input = "help";
